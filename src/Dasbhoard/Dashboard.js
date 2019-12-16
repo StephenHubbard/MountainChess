@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
+import './Dashboard.css'
 
 class Dashboard extends Component {
-  constructor() {
-    super ()
-  }
+  // constructor() {
+  //   super ()
+  // }
 
 
   render() {
     return(
-      <p>Dashboard</p>
+      <h1 className="title"> Mountain Chess </h1>
+
     )
   }
 }
