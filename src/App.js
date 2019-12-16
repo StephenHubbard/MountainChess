@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import './App.css';
-import Chessboard from 'chessboardjsx';
-import Chess from 'chess.js';
-import Demo from "../src/Components/GameView/Chessboard/Demo";
+// import Chessboard from 'chessboardjsx';
+// import Chess from 'chess.js';
+// import Demo from "../src/Components/GameView/Chessboard/Demo";
 import GameView from "../src/Components/GameView/GameView";
 
 
@@ -24,10 +24,9 @@ export default class App extends Component {
       <div className="App">
         <header className="App-header">
         <h1>Mountain Chess</h1>
-        </header>
+        </header> 
 
         {/* <Chessboard position="start"/> */}
-        <Demo />
         <GameView />
       </div>
     )

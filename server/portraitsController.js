@@ -1,3 +1,4 @@
+
 module.exports = {
     getPortraits: (req, res) => {
         const db = req.app.get("db");
@@ -15,4 +16,6 @@ module.exports = {
             res.status(200).send(req.session.user)
         })
     }
+
+
 }

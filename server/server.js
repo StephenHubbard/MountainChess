@@ -3,8 +3,9 @@ const express = require('express');
 const session = require('express-session');
 const authCtrl = require('./authController');
 const portraitsCtrl = require('./portraitsController');
+const gameCtrl = require('./gameController');
 const massive = require('massive');
-const {SERVER_PORT, SESSION_SECRET} = process.env;
+const {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env;
 
 const app = express()
 
@@ -23,6 +24,8 @@ app.use(session({
 }))
 
 // **** ENDPOINTS ****
+
+app.post('/game/newMove', gameCtrl.newMove)
 
 // REGISTERING, LOGGING IN AND LOGGING OUT
 app.post('/auth/register', authCtrl.register)
