@@ -3,10 +3,11 @@ import './App.css';
 import Chessboard from 'chessboardjsx';
 import Chess from 'chess.js';
 import Demo from "../src/Components/GameView/Chessboard/Demo";
+import GameView from "../src/Components/GameView/GameView";
 
 
 
-export default class ChessExample extends Component {
+export default class App extends Component {
   
   render() {
     // random chess game
@@ -27,7 +28,7 @@ export default class ChessExample extends Component {
 
         {/* <Chessboard position="start"/> */}
         <Demo />
-        <Demo />
+        <GameView />
       </div>
     )
   }
