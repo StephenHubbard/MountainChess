@@ -6,8 +6,10 @@ DROP TABLE IF EXISTS games;
 
 CREATE TABLE chess_users (
     user_id SERIAL PRIMARY KEY,
-    username VARCHAR(40),
-    hash_id TEXT
+    email VARCHAR
+    username VARCHAR(100),
+    hash_id TEXT,
+    portrait TEXT
 );
 
 CREATE TABLE games (
@@ -36,6 +38,12 @@ CREATE TABLE games_junction(
     user_id INT REFERENCES chess_users(user_id),
     g_id INT REFERENCES games(g_id),
     accepted BOOLEAN DEFAULT FALSE
+);
+
+CREATE TABLE portraits (
+    picture_id SERIAL PRIMARY KEY,
+    image TEXT,
+    user_id INT REFERENCES chess_users(user_id)
 );
 
 INSERT INTO chess_hash (hash)
