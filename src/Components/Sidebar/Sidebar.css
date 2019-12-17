@@ -1,6 +1,64 @@
-.sidebar {
-  height: 100%;
-  width: 10%;
-  background-color: yellow;
-  position: fixed;
+* { 
+  color: white;
 }
+
+
+.sidebar {
+  display: flex;
+  height: 95%;
+  width: 250px;
+  border: 1px solid yellow;
+  position: fixed;
+  top: 5%;
+  
+  left: -250px; 
+}
+
+.sidebar.open {
+  height: 95%;
+  width: 250px;
+  border: 1px solid yellow;
+  position: fixed;
+  top: 5%;
+  transition: right 0.2s ease-in-out;
+  left: 0;
+}
+
+
+/* .sidebar .open {
+  left: 0
+} */
+
+/* .fa-bars {
+  display: flex;
+  margin-left: 10px;
+  font-size: 30px;
+  color: white;
+  position: fixed;
+  
+} */
+
+.hamburger {
+  display: flex;
+  margin-top: 5px;
+}
+
+.profile-picture {
+  max-height: 50px;
+  max-height: 50px;
+}
+
+.friends-list {
+  display: block;
+  height: 100px;
+  width: 100%;
+}
+
+.top-users {
+  display: block;
+  height: 100px;  
+  width: 100%;
+}
+
+
+
