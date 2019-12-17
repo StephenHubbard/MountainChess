@@ -3,11 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "main": "server/server.js",
-<<<<<<< HEAD
   "proxy": "http://localhost:4030",
-=======
-  "proxy": "http://localhost:7777",
->>>>>>> master
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",

@@ -2,25 +2,16 @@ import React, {Component} from 'react';
 import './App.css';
 // import Chessboard from 'chessboardjsx';
 // import Chess from 'chess.js';
-<<<<<<< HEAD
 // import Demo from "../src/Components/GameView/Chessboard/Demo";
 import GameView from "../src/Components/GameView/GameView";
-=======
 import Login from './Components/Auth/Login';
 import Register from './Components/Auth/Register';
 import Demo from "../src/Components/GameView/Chessboard/Demo";
 import { connect } from 'react-redux';
->>>>>>> master
 
 import {withRouter} from 'react-router-dom'
 
-
-<<<<<<< HEAD
-export default class App extends Component {
-=======
-
 class App extends Component {
->>>>>>> master
   
   render() {
     // random chess game
@@ -40,14 +31,11 @@ class App extends Component {
         </header> 
 
         {/* <Chessboard position="start"/> */}
-<<<<<<< HEAD
         <GameView />
-=======
         <Login />
         <Register />
         <Demo />
         <Demo />
->>>>>>> master
       </div>
     )
   }

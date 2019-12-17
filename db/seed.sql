@@ -1,12 +1,7 @@
 DROP TABLE IF EXISTS games_junction;
 DROP TABLE IF EXISTS moves;
-<<<<<<< HEAD
-DROP TABLE IF EXISTS fen;
-DROP TABLE IF EXISTS chess_users;
-=======
 DROP TABLE IF EXISTS portraits;
 DROP TABLE IF EXISTS fen;
->>>>>>> master
 DROP TABLE IF EXISTS chess_hash;
 DROP TABLE IF EXISTS chess_users;
 DROP TABLE IF EXISTS games;
