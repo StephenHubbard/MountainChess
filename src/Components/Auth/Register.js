@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Register.css';
 import { updateUserInfo } from './../../ducks/reducer';
@@ -57,9 +57,31 @@ class Register extends Component {
                         placeholder="Username"
                         type="text"
                         />
+                        <input id="password1"
+                        value={this.state.password1}
+                        onChange={e => this.handleChange('password1', e.target.value)}
+                        placeholder="Password"
+                        type="password"
+                        />
+                        <input id="password2"
+                        value={this.setState.password2}
+                        onChange={e => this.handleChange('password2', e.target.value)}
+                        placeholder="Retype password"
+                        type="password"
+                        />
                     </div>
+                        <button className="register-submit" onClick={this.register}>Register</button>
                 </div>
             </div>
         )
     }
 }
+
+function mapSttateToProps(reduxState) {
+    return reduxState
+}
+const mapDispatchToProps = {
+    updateUserInfo
+}
+
+export default connect(mapSttateToProps, mapDispatchToProps)(Register)

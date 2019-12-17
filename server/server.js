@@ -4,7 +4,7 @@ const session = require('express-session');
 const authCtrl = require('./authController');
 const portraitsCtrl = require('./portraitsController');
 const massive = require('massive');
-const {SERVER_PORT, SESSION_SECRET} = process.env;
+const {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env;
 
 const app = express()
 
