@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './Login.css';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { updateUserInfo } from './../../ducks/reducer';
 import { connect } from 'react-redux';
@@ -55,10 +55,6 @@ class Login extends Component {
                     type="password"
                     />
                     <button className="login-submit" onClick={this.login}>Login!</button>
-
-                    <Link to="/register">
-                        <h4>Need an account? Register here!</h4>
-                    </Link>
                 </div>
             </div>
         )

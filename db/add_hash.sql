@@ -1,2 +1,2 @@
-INSERT INTO users_hash(hash)
-VALUES (${hash})
+INSERT INTO chess_hash(hash, user_id)
+VALUES (${hash}, ${user_id})

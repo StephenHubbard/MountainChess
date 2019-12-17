@@ -1,15 +1,20 @@
 DROP TABLE IF EXISTS games_junction;
 DROP TABLE IF EXISTS moves;
+<<<<<<< HEAD
 DROP TABLE IF EXISTS fen;
 DROP TABLE IF EXISTS chess_users;
+=======
+DROP TABLE IF EXISTS portraits;
+DROP TABLE IF EXISTS fen;
+>>>>>>> master
 DROP TABLE IF EXISTS chess_hash;
+DROP TABLE IF EXISTS chess_users;
 DROP TABLE IF EXISTS games;
 
 CREATE TABLE chess_users (
     user_id SERIAL PRIMARY KEY,
-    email VARCHAR
+    email VARCHAR,
     username VARCHAR(100),
-    hash_id TEXT,
     portrait TEXT
 );
 
@@ -17,14 +22,18 @@ CREATE TABLE games (
     g_id SERIAL PRIMARY KEY
 );
 
-CREATE TABLE chess_hash (
-    hash_id SERIAL PRIMARY KEY,
-    hash TEXT
+CREATE TABLE fen (
+    fen_id SERIAL PRIMARY KEY,
+    fen_string TEXT,
+    g_id INT REFERENCES games(g_id),
+    user_id INT REFERENCES chess_users(user_id)
 );
 
-ALTER TABLE chess_users DROP COLUMN hash_id;
-
-ALTER TABLE chess_users ADD COLUMN hash_id INT REFERENCES chess_hash(hash_id);
+CREATE TABLE chess_hash (
+    hash_id SERIAL PRIMARY KEY,
+    hash TEXT,
+    user_id INT REFERENCES chess_users(user_id)
+);
 
 CREATE TABLE moves (
     move_id SERIAL PRIMARY KEY,
@@ -54,15 +63,16 @@ CREATE TABLE portraits (
     user_id INT REFERENCES chess_users(user_id)
 );
 
-INSERT INTO chess_hash (hash)
-VALUES ('hash1'),
-('hash2'),
-('hash3');
+INSERT INTO chess_users (email, username)
+VALUES ('user1', 'username1'),
+('user2', 'username2'),
+('user3', 'username3');
 
-INSERT INTO chess_users (username, hash_id)
-VALUES ('user1', 1),
-('user2', 2),
-('user3', 3);
+INSERT INTO chess_hash (hash, user_id)
+VALUES ('password', 1),
+('s3cret', 2),
+('hash', 3);
+
 
 INSERT INTO games (g_id)
 VALUES(1),
