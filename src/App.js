@@ -2,14 +2,14 @@ import React, {Component} from 'react';
 import './App.css';
 // import Chessboard from 'chessboardjsx';
 // import Chess from 'chess.js';
+// import Demo from "../src/Components/GameView/Chessboard/Demo";
+import GameView from "../src/Components/GameView/GameView";
 import Login from './Components/Auth/Login';
 import Register from './Components/Auth/Register';
 import Demo from "../src/Components/GameView/Chessboard/Demo";
 import { connect } from 'react-redux';
 
 import {withRouter} from 'react-router-dom'
-
-
 
 class App extends Component {
   
@@ -28,9 +28,10 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
         <h1>Mountain Chess</h1>
-        </header>
+        </header> 
 
         {/* <Chessboard position="start"/> */}
+        <GameView />
         <Login />
         <Register />
         <Demo />
