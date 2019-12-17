@@ -18,7 +18,7 @@ class Sidebar extends Component {
             className="fas fa-bars"
             onClick={() => {
               this.setState({ open: !open });
-              console.log(this.state.open);
+              
             }}
           />
         </div>
