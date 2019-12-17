@@ -1,0 +1,31 @@
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  display: inline-block;
+  margin-left: 875px;
+}
+
+.fa-bars {
+  display: flex;
+  margin-left: 10px;
+  font-size: 30px;
+  color: white;
+}
+
+.top {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  margin-top: 10px;
+}
+
+.sidebar {
+  left: -250px;
+}
+
+.sidebaropen {
+  left: 0
+}
+

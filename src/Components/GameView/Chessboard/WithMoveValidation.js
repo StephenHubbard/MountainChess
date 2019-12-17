@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Chess from "chess.js"; // import Chess from  "chess.js"(default) if recieving an error about new Chess() not being a constructor
-
 import Chessboard from "chessboardjsx";
+import axios from 'axios';
+
 
 class HumanVsHuman extends Component {
     static propTypes = { children: PropTypes.func };
@@ -23,6 +24,7 @@ class HumanVsHuman extends Component {
 
     componentDidMount() {
         this.game = new Chess();
+        
     }
 
     // keep clicked square style and remove hint squares
@@ -66,14 +68,18 @@ class HumanVsHuman extends Component {
         to: targetSquare,
         promotion: "q" // always promote to a queen for example simplicity
         });
-
+        // console.log(move)
+        
         // illegal move
         if (move === null) return;
         this.setState(({ history, pieceSquare }) => ({
-        fen: this.game.fen(),
-        history: this.game.history({ verbose: true }),
-        squareStyles: squareStyling({ pieceSquare, history })
+            fen: this.game.fen(),
+            history: this.game.history({ verbose: true }),
+            squareStyles: squareStyling({ pieceSquare, history })
         }));
+        // * function added to both drag and drop and click
+        this.newMoveFn();
+        this.updateFen()
     };
 
     onMouseOverSquare = square => {
@@ -106,7 +112,7 @@ class HumanVsHuman extends Component {
         });
     };
 
-    onSquareClick = square => {
+    onSquareClick = async square => {
         this.setState(({ history }) => ({
         squareStyles: squareStyling({ pieceSquare: square, history }),
         pieceSquare: square
@@ -121,12 +127,48 @@ class HumanVsHuman extends Component {
         // illegal move
         if (move === null) return;
 
-        this.setState({
+        this.setState(({ history, pieceSquare }) => ({
+            fen: this.game.fen(),
+            history: this.game.history({ verbose: true }),
+            squareStyles: squareStyling({ pieceSquare, history })
+        }));
+        // * changed to an async function so state was updating correctly
+        await this.setState({
         fen: this.game.fen(),
         history: this.game.history({ verbose: true }),
         pieceSquare: ""
         });
+        await this.newMoveFn()
+        await this.updateFen()
+        // console.log(this.game.history)
+        
     };
+
+    // * function is adding moves to the db
+    newMoveFn() {
+        console.log(this.state)
+        console.log(this.game)
+        // console.log(this.game)
+        let history = this.state.history
+        axios
+        .post('/game/newMove', {history})
+        .then(res => {
+            console.log("move inserted to db.moves")
+        })
+        .catch(err => console.log(err))
+    }
+    
+    
+    // * updating state of the board for both players
+    updateFen() {
+        let fen = this.state.fen
+        axios
+        .post('/game/updateFen', {fen})
+        .then(res => {
+            console.log(res.data)
+        })
+        .catch(err => console.log(err))
+    }
 
     onSquareRightClick = square =>
         this.setState({
@@ -134,6 +176,8 @@ class HumanVsHuman extends Component {
         });
 
     render() {
+
+
         const { fen, dropSquareStyle, squareStyles } = this.state;
 
         return this.props.children({
@@ -167,7 +211,7 @@ class HumanVsHuman extends Component {
             }) => (
             <Chessboard
                 id="humanVsHuman"
-                width={320}
+                width={600}
                 position={position}
                 onDrop={onDrop}
                 onMouseOverSquare={onMouseOverSquare}
