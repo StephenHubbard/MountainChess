@@ -24,6 +24,7 @@ class HumanVsHuman extends Component {
 
     componentDidMount() {
         this.game = new Chess();
+        
     }
 
     // keep clicked square style and remove hint squares
@@ -78,6 +79,7 @@ class HumanVsHuman extends Component {
         }));
         // * function added to both drag and drop and click
         this.newMoveFn();
+        this.updateFen()
     };
 
     onMouseOverSquare = square => {
@@ -137,19 +139,33 @@ class HumanVsHuman extends Component {
         pieceSquare: ""
         });
         await this.newMoveFn()
-        console.log(this.game.history)
+        await this.updateFen()
+        // console.log(this.game.history)
         
     };
 
+    // * function is adding moves to the db
     newMoveFn() {
-        // * function is adding moves to the db
         console.log(this.state)
         console.log(this.game)
+        // console.log(this.game)
         let history = this.state.history
         axios
         .post('/game/newMove', {history})
         .then(res => {
             console.log("move inserted to db.moves")
+        })
+        .catch(err => console.log(err))
+    }
+    
+    
+    // * updating state of the board for both players
+    updateFen() {
+        let fen = this.state.fen
+        axios
+        .post('/game/updateFen', {fen})
+        .then(res => {
+            console.log(res.data)
         })
         .catch(err => console.log(err))
     }
