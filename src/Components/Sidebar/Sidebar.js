@@ -27,12 +27,14 @@ class Sidebar extends Component {
             </div> */}
         <div className="sidebar-toggle">
           <div className={`sidebar ${open ? "open" : ""}`}>
-            <img
-              src="https://engineering.mit.edu/wp-content/uploads/blank-profile-picture.png"
-              className="profile-picture"
-            />
-            <div>
-              <ul className="friends-list">
+            <div className="profile-pic-container">
+              <img
+                src="https://engineering.mit.edu/wp-content/uploads/blank-profile-picture.png"
+                className="profile-picture"/>
+                <h4 className="username">Carter</h4>
+            </div>
+            <div className="friends-list">
+              <ul>
                 <li>Friend1</li>
                 <li>Friend2</li>
                 <li>Friend3</li>
@@ -41,12 +43,14 @@ class Sidebar extends Component {
                 <li>Friend6</li>
               </ul>
             </div>
-            <ul className="top-users">
-              <li>User1</li>
-              <li>User2</li>
-              <li>User3</li>
-              <li>User4</li>
-            </ul>
+            <div className="top-users">
+              <ul>
+                <li>User1</li>
+                <li>User2</li>
+                <li>User3</li>
+                <li>User4</li>
+              </ul>
+            </div>
           </div>
         </div>
       </>
@@ -54,4 +58,4 @@ class Sidebar extends Component {
   }
 }
 
-export default Sidebar 
+export default Sidebar;
