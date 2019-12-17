@@ -66,4 +66,9 @@ table {
 }
 
 .App {
-	font-family: 'Passion One', cursive;}
+	font-family: 'Slabo 27px', serif;
+}
+
+input {
+	color: black;
+}

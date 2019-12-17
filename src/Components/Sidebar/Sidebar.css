@@ -40,8 +40,10 @@
 } */
 
 .hamburger {
+  margin-left: 2px;
   display: flex;
-  margin-top: 5px;
+  margin-top: 7px;
+  position: fixed;
 }
 
 .profile-picture-container {
