@@ -3,6 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const authCtrl = require('./authController');
 const portraitsCtrl = require('./portraitsController');
+const userCtrl = require('./userController')
 const gameCtrl = require('./gameController');
 const massive = require('massive');
 const socket = require('socket.io')
@@ -68,6 +69,9 @@ app.get('/auth/getUser', authCtrl.getUser)
 app.get('/api/portraits', portraitsCtrl.getPortraits)
 app.put('/api/portraits', portraitsCtrl.updatePortrait)
 
+// GETTING FRIENDS LIST USERS 
+app.get('/api/users', userCtrl.getUser)
+
 // MASSIVE
 massive(CONNECTION_STRING)
 .then(dbInstance => {
@@ -76,3 +80,4 @@ massive(CONNECTION_STRING)
     
 })
 .catch(err => console.log(err))
+
