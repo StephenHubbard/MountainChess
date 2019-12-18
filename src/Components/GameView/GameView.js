@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 // import Chessboard from 'chessboardjsx';
 // import Chess from 'chess.js';
 import Demo from "../GameView/Chessboard/Demo";
+import "./GameView.css";
+
 
 
 
@@ -23,7 +25,6 @@ export default class GameView extends Component {
                     <h1>Game View Page</h1>
                 </header>
 
-                {/* <Chessboard position="start"/> */}
                 <Demo />
             </div>
             )
