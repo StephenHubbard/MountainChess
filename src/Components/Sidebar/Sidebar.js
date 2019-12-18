@@ -63,14 +63,14 @@ class Sidebar extends Component {
   };
 
   getUsers() {
-    console.log('hit')
+    // console.log('hit')
     axios 
       .get('/api/users')
       .then(res => {
         this.setState({
           users: res.data
         })
-        console.log(this.state.users)
+        // console.log(this.state.users)
       })
       .catch(err => {
         console.log(err)

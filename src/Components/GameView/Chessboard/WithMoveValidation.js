@@ -4,6 +4,10 @@ import Chess from "chess.js"; // import Chess from  "chess.js"(default) if recie
 import Chessboard from "chessboardjsx";
 import axios from 'axios';
 import io from 'socket.io-client'
+import { connect } from 'react-redux';
+import {withRouter} from 'react-router-dom'
+import { updateUserInfo } from "./../../../ducks/reducer";
+
 
 
 
@@ -31,6 +35,7 @@ class HumanVsHuman extends Component {
     }
         
     async componentDidMount() {
+        console.log(this.props)
         this.game = new Chess();
         this.socket.emit('new game', {g_id: 1})
 
@@ -86,7 +91,6 @@ class HumanVsHuman extends Component {
         // this.game.remove(data.state.history[data.state.history.length - 1].from)
 
         // console.log(data.state.history[data.state.history.length - 1])
-        console.log(this.game.history ({ verbose: true }))
         
 
     }
@@ -253,7 +257,7 @@ class HumanVsHuman extends Component {
 
     render() {
 
-
+        console.log(this.props)
         const { fen, dropSquareStyle, squareStyles } = this.state;
 
         return this.props.children({
@@ -267,10 +271,12 @@ class HumanVsHuman extends Component {
         onSquareClick: this.onSquareClick,
         onSquareRightClick: this.onSquareRightClick
         });
+        
     }
     }
 
-    export default function WithMoveValidation() {
+    function WithMoveValidation() {
+
     return (
         <div>
         <HumanVsHuman>
@@ -326,3 +332,9 @@ class HumanVsHuman extends Component {
         })
     };
     };
+
+function mapStateToProps(reduxState) {
+    return reduxState
+    }
+    
+export default withRouter(connect(mapStateToProps, {updateUserInfo})(WithMoveValidation, HumanVsHuman))
