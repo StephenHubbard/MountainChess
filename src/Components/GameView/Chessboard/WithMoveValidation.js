@@ -77,10 +77,17 @@ class HumanVsHuman extends Component {
         // console.log(this.game.move({ from: 'g2', to: 'g3' }))
         // this.game = "test"
         // this.game = data.socketGame
-        this.game.put({ type: data.state.history[data.state.history.length - 1].piece, color: data.state.history[data.state.history.length - 1].color }, data.state.history[data.state.history.length - 1].to)
-        this.game.remove(data.state.history[data.state.history.length - 1].from)
+        this.game.move({
+            from: data.state.history[data.state.history.length - 1].from,
+            to: data.state.history[data.state.history.length - 1].to,
+            promotion: 'q'
+        });
+        // this.game.put({ type: data.state.history[data.state.history.length - 1].piece, color: data.state.history[data.state.history.length - 1].color }, data.state.history[data.state.history.length - 1].to)
+        // this.game.remove(data.state.history[data.state.history.length - 1].from)
 
-        console.log(data.state.history[data.state.history.length - 1])
+        // console.log(data.state.history[data.state.history.length - 1])
+        console.log(this.game.history ({ verbose: true }))
+        
 
     }
 
