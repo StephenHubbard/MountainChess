@@ -1,9 +1,9 @@
 .logo {
-  position: absolute;
+  position: relative;
   width: 600px;
   height: 100px;
-  left: 30%;
-  margin-top: -560px;
+  left: 0%;
+  margin-top: 0px;
   background-image: url("/assets/Logos/Mountain-Chess-word.png");
   background-size: 100%;
   background-repeat: no-repeat;
@@ -13,6 +13,7 @@
   color: white;
   display: inline-block;
   border: 1px blue solid;
+  z-index: 10;
 }
 
 .fa-bars {

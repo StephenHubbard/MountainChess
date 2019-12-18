@@ -16,13 +16,15 @@ class Sidebar extends Component {
       username: "",
       user_id: "",
       loginModalActivate: false,
-      registerModalActivate: false
+      registerModalActivate: false,
+      users: [],
     };
     this.getUser = this.getUser.bind(this);
   }
 
   componentDidMount() {
     this.getUser();
+    this.getUsers()
   }
 
   getUser = () => {
@@ -60,6 +62,20 @@ class Sidebar extends Component {
     });
   };
 
+  getUsers() {
+    console.log('hit')
+    axios 
+      .get('/api/users')
+      .then(res => {
+        this.setState({
+          users: res.data
+        })
+        console.log(this.state.users)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
   render() {
     // console.log(this.props)
     const { open } = this.state;
@@ -164,13 +180,16 @@ class Sidebar extends Component {
             </div>
             <div className="friends-list">
               <ul>
-                <li>Friend1</li>
-                <li>Friend2</li>
-                <li>Friend3</li>
-                <li>Friend4</li>
-                <li>Friend5</li>
-                <li>Friend6</li>
+                {this.state.users.map(el =>  (
+                  <li><div className="friend">{el.username}<button className="invite-btn">Invite</button></div></li>
+                ))}
               </ul>
+                {/* <li><div className="offline-online"></div>Friend1<button>Challenge</button></li>
+                <li><div className="offline-online"></div>Friend2<button>Challenge</button></li>
+                <li><div className="offline-online"></div>Friend3<button>Challenge</button></li>
+                <li><div className="offline-online"></div>Friend4<button>Challenge</button></li>
+                <li><div className="offline-online"></div>Friend5<button>Challenge</button></li>
+                <li><div className="offline-online"></div>Friend6<button>Challenge</button></li> */}
             </div>
             <div className="top-users">
               <ul>

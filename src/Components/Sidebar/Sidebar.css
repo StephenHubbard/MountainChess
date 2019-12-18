@@ -2,12 +2,20 @@
   margin: 0;
 }
 
+li {
+  font-size: 20px;
+}
+
+button {
+  color: black;
+}
+
 
 .sidebar {
   height: 95%;
   width: 250px;
   /* border: 1px solid yellow; */
-  position: relative;
+  position: fixed;
   top: 5%;
   left: -250px; 
   display: flex;
@@ -44,8 +52,10 @@
 } */
 
 .hamburger {
+  margin-left: 2px;
   display: flex;
-  margin-top: 5px;
+  margin-top: 7px;
+  position: fixed;
 }
 
 .profile-div {
@@ -95,13 +105,37 @@ h4 {
 }
 
 .friends-list{
-  display: block;
-  height: 35%;
+  /* display: block; */
+  height: 50%;
   width: 100%;
   margin-top: 0px;
-  margin-bottom: 0px;
   color: white;
   border: 1px red solid;
+  position: relative;
+  font-size: 25px;
+}
+
+/* .friends-list{
+  height: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 100px;
+} */
+
+.offline-online {
+  height: 9px;
+  width: 9px;
+  border-radius: 50%;
+  background-color: green;
+  display: flex;  
+  margin: 0 10px 2px 10px;
+  display: inline-block;
+}
+
+.friends-list button {
+  margin-left: 10;
 }
 
 .friends-list li {
