@@ -40,8 +40,6 @@ class App extends Component {
         <GameView />
         <Login />
         <Register />
-        <Demo />
-        <Demo />
       </div>
     )
   }
