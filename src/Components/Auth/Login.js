@@ -17,7 +17,7 @@ class Login extends Component {
     }
 
     login = () => {
-        //console.log(this.state.username, this.state.password)
+        console.log(this.state.username, this.state.password)
         const { username, password } = this.state
         axios
         .post('/auth/login', { username, password })

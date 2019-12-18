@@ -27,3 +27,9 @@ class LoggedInUser extends Component {
         )
     }
 }
+
+function mapStateToProps(reduxState) {
+    return reduxState
+}
+
+export default connect(mapStateToProps, {updateUserInfo})(LoggedInUser)

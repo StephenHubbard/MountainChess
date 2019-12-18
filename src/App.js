@@ -6,7 +6,6 @@ import Dashboard from './Components/Dasbhoard/Dashboard';
 // import Chess from 'chess.js';
 // import Chessboard from 'chessboardjsx';
 // import Chess from 'chess.js';
-// import Demo from "../src/Components/GameView/Chessboard/Demo";
 import GameView from "../src/Components/GameView/GameView";
 import Login from './Components/Auth/Login';
 import Register from './Components/Auth/Register';
@@ -35,12 +34,10 @@ class App extends Component {
         {/* <Chessboard position="start"/> */}
         {/* <Sidebar /> */}
         <Dashboard />
-        <h1>Mountain Chess</h1>
+        {/* <h1>Mountain Chess</h1> */}
         </header> 
         {/* <Chessboard position="start"/> */}
-        <GameView />
-        <Login />
-        <Register />
+        {/* <GameView /> */}
         <Profile/>
       </div>
     )
