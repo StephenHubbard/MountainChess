@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
-import Dashboard from './Dasbhoard/Dashboard';
+import Dashboard from './Components/Dasbhoard/Dashboard';
 // import Sidebar from './Components/Sidebar/Sidebar'
 // import Chessboard from 'chessboardjsx';
 // import Chess from 'chess.js';
@@ -13,7 +13,7 @@ import Register from './Components/Auth/Register';
 import Demo from "../src/Components/GameView/Chessboard/Demo";
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom'
-
+import Profile from './Components/Profile/Profile';
 class App extends Component {
   
   render() {
@@ -40,6 +40,7 @@ class App extends Component {
         <GameView />
         <Login />
         <Register />
+        <Profile/>
       </div>
     )
   }

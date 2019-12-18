@@ -10,11 +10,9 @@ class Sidebar extends Component {
       users: [],
     };
   }
-
   componentDidMount() {
     this.getUsers()
   }
-
   getUsers() {
     console.log('hit')
     axios 
@@ -29,7 +27,6 @@ class Sidebar extends Component {
         console.log(err)
       })
   }
-
   render() {
     const { open } = this.state;
     return (
@@ -81,5 +78,4 @@ class Sidebar extends Component {
     );
   }
 }
-
 export default Sidebar;
