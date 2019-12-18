@@ -26,7 +26,7 @@ class HumanVsHuman extends Component {
             // array of past game moves
             history: [],
         };
-        this.socket = io.connect(':4030')
+        this.socket = io.connect(':7777')
         this.socket.on('game response', data => this.updateGame(data))
     }
         
