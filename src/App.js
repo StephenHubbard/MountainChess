@@ -13,6 +13,7 @@ import Register from './Components/Auth/Register';
 // import Demo from "../src/Components/GameView/Chessboard/Demo";
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom'
+import Profile from "../src/Components/Profile/Profile"
 
 class App extends Component { 
   
