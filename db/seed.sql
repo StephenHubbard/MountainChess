@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS portraits;
 DROP TABLE IF EXISTS games_junction;
+DROP TABLE IF EXISTS friends;
 DROP TABLE IF EXISTS moves;
 DROP TABLE IF EXISTS chess_hash;
 DROP TABLE IF EXISTS games;
@@ -32,13 +33,6 @@ CREATE TABLE moves (
     user_id INT REFERENCES chess_users(user_id)
 );
 
-CREATE TABLE fen (
-    fen_id SERIAL PRIMARY KEY,
-    fen_string TEXT,
-    g_id INT REFERENCES games(g_id),
-    user_id INT REFERENCES chess_users(user_id)
-);
-
 CREATE TABLE games_junction(
     j_id SERIAL PRIMARY KEY,
     user_id INT REFERENCES chess_users(user_id),
@@ -50,6 +44,11 @@ CREATE TABLE portraits (
     picture_id SERIAL PRIMARY KEY,
     image TEXT,
     user_id INT REFERENCES chess_users(user_id)
+);
+
+CREATE TABLE friends (
+    user_1 INT REFERENCES chess_users(user_id),
+    user_2 INT REFERENCES chess_users(user_id)
 );
 
 INSERT INTO chess_users (email, username)
@@ -71,9 +70,12 @@ INSERT INTO moves (before, after, g_id, user_id)
 VALUES ('WPA2', 'WPA3', 1, 2),
 ('BPD7', 'BPD6', 1, 3);
 
-
 INSERT INTO games_junction (user_id, g_id, accepted)
 VALUES (2, 1, true),
 (3, 1, true),
 (1, 2, true),
 (2, 2, false);
+
+
+
+
