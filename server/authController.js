@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs')
 
 module.exports = {
     register: async (req, res) => {
-        console.log(req.body)
+        // console.log(req.body)
         const db = req.app.get('db')
         const { email, username, password1, password2 } = req.body
 
@@ -20,6 +20,7 @@ module.exports = {
     },
 
     login: async (req, res) => {
+        // console.log(req.body)
         const db = req.app.get('db')
         const { username, password } = req.body
         const found = await db.get_chess_user([username])

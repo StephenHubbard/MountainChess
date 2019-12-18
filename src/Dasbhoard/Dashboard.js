@@ -13,7 +13,7 @@ class Dashboard extends Component {
       <div>
         <Sidebar />
         <div className="logo">
-          <h1 className="title"> Mountain Chess </h1>
+          {/* <h1 className="title"> Mountain Chess </h1> */}
         </div>
       </div>
     )
