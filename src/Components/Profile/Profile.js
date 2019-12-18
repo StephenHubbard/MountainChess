@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import axios from "axios";
+// import { connect } from "react-redux";
+// import axios from "axios";
 import { Line } from "react-chartjs-2";
 import "./Profile.css";
 //import redux functions

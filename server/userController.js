@@ -4,7 +4,7 @@ module.exports = {
       db.get_user()
       .then(result => {
         res.status(200).send(result)
-        console.log(result)
+        // console.log(result)
       })
   }
 }
