@@ -35,7 +35,6 @@ class HumanVsHuman extends Component {
     }
         
     async componentDidMount() {
-        console.log(this.props)
         this.game = new Chess();
         this.socket.emit('new game', {g_id: 1})
 
@@ -65,7 +64,6 @@ class HumanVsHuman extends Component {
     }
 
     updateGame(data) { 
-        console.log(data)
         this.setState({
             fen: data.state.fen,
             history: data.state.history,
@@ -257,7 +255,6 @@ class HumanVsHuman extends Component {
 
     render() {
 
-        console.log(this.props)
         const { fen, dropSquareStyle, squareStyles } = this.state;
 
         return this.props.children({
