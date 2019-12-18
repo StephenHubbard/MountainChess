@@ -10,11 +10,12 @@ import Dashboard from './Components/Dasbhoard/Dashboard';
 import GameView from "../src/Components/GameView/GameView";
 import Login from './Components/Auth/Login';
 import Register from './Components/Auth/Register';
-import Demo from "../src/Components/GameView/Chessboard/Demo";
+// import Demo from "../src/Components/GameView/Chessboard/Demo";
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom'
-import Profile from './Components/Profile/Profile';
-class App extends Component {
+import Profile from "../src/Components/Profile/Profile"
+
+class App extends Component { 
   
   render() {
     // random chess game

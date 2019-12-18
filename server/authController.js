@@ -34,7 +34,7 @@ module.exports = {
         }
         req.session.user = {user_id, username, portrait, email}
         res.status(200).send({ message: 'Logged in successfully!', user: req.session.user })
-        // console.log(req.session.user)
+        console.log(req.session.user)
     },
 
     logout: (req, res) => {

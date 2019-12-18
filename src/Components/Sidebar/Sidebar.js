@@ -48,7 +48,7 @@ class Sidebar extends Component {
             <div className="profile-pic-container">
               <img
                 src="https://engineering.mit.edu/wp-content/uploads/blank-profile-picture.png"
-                className="profile-picture"/>
+                className="profile-picture" alt=""/>
                 <h4 className="username">Carter</h4>
             </div>
             <div className="friends-list">
