@@ -3,6 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const authCtrl = require('./authController');
 const portraitsCtrl = require('./portraitsController');
+const userCtrl = require('./userController')
 const gameCtrl = require('./gameController');
 const massive = require('massive');
 const {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env;
@@ -41,6 +42,9 @@ app.get('/auth/getUser', authCtrl.getUser)
 app.get('/api/portraits', portraitsCtrl.getPortraits)
 app.put('/api/portraits', portraitsCtrl.updatePortrait)
 
+// GETTING FRIENDS LIST USERS 
+app.get('/api/users', userCtrl.getUser)
+
 // MASSIVE
 massive(CONNECTION_STRING)
 .then(dbInstance => {
@@ -50,3 +54,4 @@ massive(CONNECTION_STRING)
     console.log(`Server is listening on port ${SERVER_PORT}.`))
 })
 .catch(err => console.log(err))
+

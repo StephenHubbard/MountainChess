@@ -2,6 +2,14 @@
   color: white;
 }
 
+li {
+  font-size: 20px;
+}
+
+button {
+  color: black;
+}
+
 
 .sidebar {
   display: flex;
@@ -46,13 +54,7 @@
   position: fixed;
 }
 
-.profile-picture-container {
-  width: 100%;
-  height: 30px;
-  margin-bottom: 100px;
-  display: flex;
-  justify-content: center;
-}
+
 
 .profile-picture {
   max-height: 50px;
@@ -66,14 +68,31 @@
   display: flex;
   position: absolute;
   top: 10%;
-  right: 42%;
+  right: 38%;
+  font-size: 25px;
 }
 
 .friends-list{
-  display: block;
   height: 100px;
   width: 100%;
-  margin-bottom: 100px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 100px;
+}
+
+.offline-online {
+  height: 9px;
+  width: 9px;
+  border-radius: 50%;
+  background-color: green;
+  display: flex;  
+  margin: 0 10px 2px 10px;
+  display: inline-block;
+}
+
+.friends-list button {
+  margin-left: 10;
 }
 
 .friends-list li {
