@@ -7,6 +7,7 @@ import LoggedInUser from "./../LoginContainer/LoggedInUser";
 import Register from "./../Auth/Register";
 // import LoginContainer from "./../LoginContainer/LoginContainer";
 import Login from "./../Auth/Login"
+import Friend from '../Friend/Friend'
 
 class Sidebar extends Component {
   constructor() {
@@ -76,6 +77,9 @@ class Sidebar extends Component {
         console.log(err)
       })
   }
+
+  
+
   render() {
     // console.log(this.props)
     const { open } = this.state;
@@ -179,17 +183,14 @@ class Sidebar extends Component {
               )}
             </div>
             <div className="friends-list">
+              <h3>Your Friends</h3>
               <ul>
                 {this.state.users.map(el =>  (
-                  <li><div className="friend">{el.username}<button className="invite-btn">Invite</button></div></li>
+                  <li><Friend username={el.username}/></li>
                 ))}
               </ul>
-                {/* <li><div className="offline-online"></div>Friend1<button>Challenge</button></li>
-                <li><div className="offline-online"></div>Friend2<button>Challenge</button></li>
-                <li><div className="offline-online"></div>Friend3<button>Challenge</button></li>
-                <li><div className="offline-online"></div>Friend4<button>Challenge</button></li>
-                <li><div className="offline-online"></div>Friend5<button>Challenge</button></li>
-                <li><div className="offline-online"></div>Friend6<button>Challenge</button></li> */}
+                {//<div className="friend">{el.username}<button className="invite-btn">Invite</button></div>
+                }
             </div>
             <div className="top-users">
               <ul>
