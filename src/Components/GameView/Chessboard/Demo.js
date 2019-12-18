@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import WithMoveValidation from "../Chessboard/WithMoveValidation";
 
-class Demo extends Component {
+class Demo extends Component { 
     render() {
         return (
         <div>

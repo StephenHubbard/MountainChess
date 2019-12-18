@@ -1,2 +1,3 @@
-INSERT INTO fen (fen_string, g_id, user_id)
-VALUES (${fen_string}, null, null);
+UPDATE games
+SET fen_string = ${fen_string}
+WHERE g_id = 1;

@@ -10,11 +10,11 @@ import Dashboard from './Dasbhoard/Dashboard';
 import GameView from "../src/Components/GameView/GameView";
 import Login from './Components/Auth/Login';
 import Register from './Components/Auth/Register';
-import Demo from "../src/Components/GameView/Chessboard/Demo";
+// import Demo from "../src/Components/GameView/Chessboard/Demo";
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom'
 
-class App extends Component {
+class App extends Component { 
   
   render() {
     // random chess game
@@ -40,8 +40,6 @@ class App extends Component {
         <GameView />
         <Login />
         <Register />
-        <Demo />
-        <Demo />
       </div>
     )
   }

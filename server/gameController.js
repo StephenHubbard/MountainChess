@@ -4,7 +4,6 @@ module.exports = {
     newMove: (req, res) => {
         // console.log(req.body)
         // combines what I got with req.body and combines the strings to the correct postgres table format
-        console.log(req.body)
         const before = req.body.history[i].color + req.body.history[i].piece + req.body.history[i].from
         const after = req.body.history[i].color + req.body.history[i].piece + req.body.history[i].to
 
