@@ -186,7 +186,7 @@ class Sidebar extends Component {
               <h3>Your Friends</h3>
               <ul>
                 {this.state.users.map(el =>  (
-                  <li><Friend username={el.username}/></li>
+                  <li><Friend usernameDisplay={el.username}/></li>
                 ))}
               </ul>
                 {//<div className="friend">{el.username}<button className="invite-btn">Invite</button></div>

@@ -34,7 +34,7 @@ export default class Friend extends Component {
         </div>
         <div className="usernames">
           <div className="username-container">
-            <div className="username"> {this.props.username} </div>
+            <div className="username"> {this.props.usernameDisplay} </div>
           </div>
         </div>
           <div className="button-container">

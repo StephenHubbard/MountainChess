@@ -10,7 +10,7 @@ CREATE TABLE chess_users (
     user_id SERIAL PRIMARY KEY,
     email VARCHAR,
     username VARCHAR(100),
-    portrait TEXT,
+    portrait TEXT DEFAULT 'https://engineering.mit.edu/wp-content/uploads/blank-profile-picture.png',
     logged_in BOOLEAN DEFAULT FALSE
 );
 
@@ -47,6 +47,7 @@ CREATE TABLE portraits (
 );
 
 CREATE TABLE friends (
+    friendship_id SERIAL PRIMARY KEY,
     user_1 INT REFERENCES chess_users(user_id),
     user_2 INT REFERENCES chess_users(user_id)
 );
@@ -75,7 +76,3 @@ VALUES (2, 1, true),
 (3, 1, true),
 (1, 2, true),
 (2, 2, false);
-
-
-
-
