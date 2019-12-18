@@ -60,12 +60,6 @@ class Sidebar extends Component {
                   <li><div className="friend">{el.username}<button className="invite-btn">Invite</button></div></li>
                 ))}
               </ul>
-                {/* <li><div className="offline-online"></div>Friend1<button>Challenge</button></li>
-                <li><div className="offline-online"></div>Friend2<button>Challenge</button></li>
-                <li><div className="offline-online"></div>Friend3<button>Challenge</button></li>
-                <li><div className="offline-online"></div>Friend4<button>Challenge</button></li>
-                <li><div className="offline-online"></div>Friend5<button>Challenge</button></li>
-                <li><div className="offline-online"></div>Friend6<button>Challenge</button></li> */}
             </div>
             <div className="top-users">
               <ul>

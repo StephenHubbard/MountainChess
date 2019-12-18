@@ -33,20 +33,6 @@ button {
   left: 0;
 }
 
-
-/* .sidebar .open {
-  left: 0
-} */
-
-/* .fa-bars {
-  display: flex;
-  margin-left: 10px;
-  font-size: 30px;
-  color: white;
-  position: fixed;
-  
-} */
-
 .hamburger {
   display: flex;
   margin-top: 5px;
