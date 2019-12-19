@@ -29,16 +29,18 @@ class Sidebar extends Component {
   }
 
   getUser = () => {
-    axios
-      .get("/auth/getUser")
-      .then(res => {
-        //console.log(res.data)
-        this.setState({
-          username: "",
-          user_id: ""
-        });
-      })
-      .catch(err => console.log(err));
+    if (this.props.username) {
+      axios
+        .get("/auth/getUser")
+        .then(res => {
+          //console.log(res.data)
+          this.setState({
+            username: "",
+            user_id: ""
+          });
+        })
+        .catch(err => console.log(err));
+    }
   };
 
   logout = () => {
@@ -186,7 +188,7 @@ class Sidebar extends Component {
               <h3>Your Friends</h3>
               <ul>
                 {this.state.users.map(el =>  (
-                  <li><Friend username={el.username}/></li>
+                  <li><Friend usernameDisplay={el.username}/></li>
                 ))}
               </ul>
                 {//<div className="friend">{el.username}<button className="invite-btn">Invite</button></div>
