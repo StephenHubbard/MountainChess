@@ -17,13 +17,12 @@ class Login extends Component {
     }
 
     login = () => {
-        console.log(this.state.username, this.state.password)
+        // console.log(this.state.username, this.state.password)
         const { username, password } = this.state
         axios
         .post('/auth/login', { username, password })
         .then(res => {
             //console.log(res.data.user)
-            this.props.history.push('/')
             this.props.updateUserInfo({
                 username: res.data.user.username,
                 user_id: res.data.user.user_id,

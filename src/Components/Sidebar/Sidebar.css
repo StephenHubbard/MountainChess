@@ -36,12 +36,20 @@ button {
   /* border: 1px solid yellow; */
   position: fixed;
   top: 5%;
-  transition: right 0.2s ease-in-out;
-  left: 0;
+  /* transition: right 0.2s ease-in-out; */
+  -webkit-animation: slide 0.5 forwards;
+  animation: slide 0.5s forwards;
+  /* left: 0; */
 }
 
-<<<<<<< HEAD
-=======
+@-webkit-keyframes slide {
+  100% { left: 0; }
+}
+
+@keyframes slide {
+  100% { left: 0; }
+}
+
 .sidebar ul {
   display: flex;
   justify-content: center;
@@ -69,7 +77,6 @@ button {
   
 } */
 
->>>>>>> master
 .hamburger {
   margin-left: 2px;
   display: flex;
@@ -88,7 +95,7 @@ button {
 	justify-content: space-around;
 	align-items: center;
   align-content: center;
-  border: 1px purple solid;
+  /* border: 1px purple solid; */
 }
 
 .login-div {
@@ -102,13 +109,33 @@ button {
 	justify-content: space-around;
 	align-items: center;
   align-content: center;
-  border: 1px purple solid;
+  /* border: 1px purple solid; */
+}
+
+.sidebar-portrait {
+  width: 75px;
+  height: 75px;
+  margin-left: 40px;
+  padding: 10px;
+  z-index: 1;
+  /* border: 1px red solid; */
 }
 
 .profile-picture {
-  max-height: 50px;
-  max-height: 50px;
-  /* border: 1px blue solid; */
+  width: 100px;
+  height: 100px;
+  /* border: 1px red solid; */
+}
+
+.modal-portraits {
+  position: absolute;
+  width: 47vw;
+  height: 50vh;
+  bottom: 7%;
+  left: 5%;
+  display: flex;
+  flex-wrap: wrap;
+  /* border: red 1px solid; */
 }
 
 h4 {
@@ -128,10 +155,10 @@ h4 {
   height: 50%;
   width: 100%;
   margin-top: 0px;
-  
-  border: 1px red solid;
+  color: white;
   position: relative;
   font-size: 25px;
+  /* border: 1px red solid; */
 }
 
 /* .friends-list{
@@ -166,7 +193,8 @@ h4 {
   height: 25%;  
   width: 100%;
   margin-bottom: 10%;
-  border: 1px blue solid;
+  color: white;
+  /* border: 1px blue solid; */
 }
 
 .top-users li {
@@ -178,7 +206,7 @@ h4 {
   display: flex;
   position: absolute;
   width: 800px;
-  height: 400px;
+  height: 450px;
   left: 300%;
   /* left: 750px; */
   top: 50vh;
@@ -203,7 +231,7 @@ h4 {
 .modal-body {
   position: relative;
   overflow-y: scroll;
-  height: 400px;
+  height: 450px;
   width: 100%;
   padding: 0px;
   background-color: black;
@@ -256,24 +284,25 @@ h4 {
 }
 
 .modal-loginInfo {
-  height: 0px;
-  width: 0px;
-  margin-left: 50%;
+  height: 200px;
+  width: 200px;
+  margin-left: 38%;
+  margin-top: 10%;
   padding: 0px;
   background-color: black;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  /* justify-content: space-around; */
+  justify-content: space-around;
   align-items: center;
   align-content: stretch;
-  /* border: 1px red solid; */
+  border: 1px red solid;
 }
 
 .modal-registerInfo {
   height: 490px;
   width: 700px;
-  margin-left: 500px;
+  margin-left: 50px;
   padding: 0px;
   background-color: black;
   display: flex;

@@ -10,7 +10,7 @@ module.exports = {
     updatePortrait: (req, res) => {
         const db = req.app.get("db");
         db.update_portrait([req.body.name, req.session.user.user_id])
-        .then(portrait => {
+        .then(portraits => {
             //console.log(portraits[0])
             req.session.user = portraits[0]
             res.status(200).send(req.session.user)

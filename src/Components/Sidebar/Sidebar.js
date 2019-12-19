@@ -19,14 +19,18 @@ class Sidebar extends Component {
       user_id: "",
       loginModalActivate: false,
       registerModalActivate: false,
+      portraitModalActivate: false,
       users: [],
+      portraits: []
     };
     this.getUser = this.getUser.bind(this);
+    this.getPortraits = this.getPortraits.bind(this);
   }
 
   componentDidMount() {
     this.getUser();
-    this.getUsers()
+    this.getUsers();
+    this.getPortraits();
   }
 
   getUser = () => {
@@ -34,14 +38,41 @@ class Sidebar extends Component {
     axios
       .get("/auth/getUser")
       .then(res => {
-        //console.log(res.data)
+        // console.log(res.data)
         this.setState({
           username: "",
-          user_id: ""
+          user_id: "",
+          profile_img:""
+        });
+      })
+      .catch(err => console.log(err));
+  };
+};
+
+  getPortraits = () => {
+    axios
+      .get("/api/portraits")
+      .then(res => {
+        //console.log(res.data)
+        this.setState({
+          portraits: res.data
         });
       })
       .catch(err => console.log(err));
     }
+
+  updatePortrait = name => {
+    axios.put("/api/portraits", { name: name }).then(res => {
+      //console.log(res.data)
+      this.props
+        .updateUserInfo({
+          username: res.data.username,
+          user_id: res.data.user_id,
+          profile_img: res.data.portrait,
+          email: res.data.email
+        })
+      })
+      .catch(err => console.log(err));
   };
 
   logout = () => {
@@ -65,7 +96,13 @@ class Sidebar extends Component {
       registerModalActivate: !this.state.registerModalActivate
     });
   };
-
+  
+  portraitModalFn = () => {
+    this.setState({
+      portraitModalActivate: !this.state.portraitModalActivate
+    });
+  };
+  
   getUsers() {
     // console.log('hit')
     axios 
@@ -84,8 +121,21 @@ class Sidebar extends Component {
   
 
   render() {
-    // console.log(this.props)
+    console.log(this.props)
     const { open } = this.state;
+    let allPortraits = this.state.portraits.map((portrait, i) => {
+      if (portrait.image !== 'blank-profile.png'){
+        return (
+          <img
+            onClick={() => this.updatePortrait(portrait.image)}
+            className="sidebar-portrait"
+            alt="portrait"
+            src={`/assets/ProfilePics/${portrait.image}`}
+          />
+        )
+      }
+      
+    });
     return (
       <>
       
@@ -107,11 +157,12 @@ class Sidebar extends Component {
               {this.props.user_id ? (
                 <div className="profile-div">
                   <img
-                    src="https://engineering.mit.edu/wp-content/uploads/blank-profile-picture.png"
-                    // src={`/assets/ProfilePics/${this.props.profile_img}`} />
-                    alt=""
+                    // src="https://engineering.mit.edu/wp-content/uploads/blank-profile-picture.png"
                     className="profile-picture"
-                  />
+                    alt=""
+                    src={`/assets/ProfilePics/${this.props.profile_img}`}
+                    onClick={() => this.portraitModalFn()}
+                    />
                   <h4>{this.props.username}</h4>
                   <button id="logout-button" onClick={() => this.logout()}>
                     Logout
@@ -138,13 +189,14 @@ class Sidebar extends Component {
                         <span
                           className="close"
                           onClick={() =>
-                            this.setState({
-                              loginModalActivate: false
-                            },
-                            console.log(this.state.loginModalActivate)
+                            this.setState(
+                              {
+                                loginModalActivate: false
+                              },
+                              // console.log(this.state.loginModalActivate)
                             )
                           }
-                          >
+                        >
                           &times;
                         </span>
                         {/* <h2>Please enter your login information.</h2> */}
@@ -179,6 +231,34 @@ class Sidebar extends Component {
                       </div>
                       <div className="modal-registerInfo">
                         <Register />
+                      </div>
+                    </div>
+                  </div>
+                  {/* <div class="overlay"></div> */}
+                </div>
+              )}
+
+              {/* PORTRAIT MODAL */}
+              {this.state.portraitModalActivate && (
+                <div>
+                  <div className="modal-content">
+                    {/* Modal Body */}
+                    <div className="modal-body">
+                      <div className="modal-header">
+                        <span
+                          className="close"
+                          onClick={() =>
+                            this.setState({
+                              portraitModalActivate: false
+                            })
+                          }
+                        >
+                          &times;
+                        </span>
+                        <h2>Choose your profile picture</h2>
+                      </div>
+                      <div className="modal-portraits">
+                        {allPortraits}
                       </div>
                     </div>
                   </div>
