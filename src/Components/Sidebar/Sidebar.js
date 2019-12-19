@@ -29,17 +29,17 @@ class Sidebar extends Component {
   }
 
   getUser = () => {
-    if (this.props.username) {
-      axios
-        .get("/auth/getUser")
-        .then(res => {
-          //console.log(res.data)
-          this.setState({
-            username: "",
-            user_id: ""
-          });
-        })
-        .catch(err => console.log(err));
+    if(this.props.username) {
+    axios
+      .get("/auth/getUser")
+      .then(res => {
+        //console.log(res.data)
+        this.setState({
+          username: "",
+          user_id: ""
+        });
+      })
+      .catch(err => console.log(err));
     }
   };
 
