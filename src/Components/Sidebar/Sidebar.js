@@ -8,6 +8,7 @@ import Register from "./../Auth/Register";
 // import LoginContainer from "./../LoginContainer/LoginContainer";
 import Login from "./../Auth/Login"
 import UserPresence from "./UserPresence";
+import Friend from '../Friend/Friend'
 
 class Sidebar extends Component {
   constructor() {
@@ -29,6 +30,7 @@ class Sidebar extends Component {
   }
 
   getUser = () => {
+    if(this.props.username) {
     axios
       .get("/auth/getUser")
       .then(res => {
@@ -39,6 +41,7 @@ class Sidebar extends Component {
         });
       })
       .catch(err => console.log(err));
+    }
   };
 
   logout = () => {
@@ -64,19 +67,22 @@ class Sidebar extends Component {
   };
 
   getUsers() {
-    console.log('hit')
+    // console.log('hit')
     axios 
       .get('/api/users')
       .then(res => {
         this.setState({
           users: res.data
         })
-        console.log(this.state.users)
+        // console.log(this.state.users)
       })
       .catch(err => {
         console.log(err)
       })
   }
+
+  
+
   render() {
     // console.log(this.props)
     const { open } = this.state;
@@ -181,6 +187,7 @@ class Sidebar extends Component {
               )}
             </div>
             <div className="friends-list">
+              <h3>Your Friends</h3>
               <ul>
                 {this.state.users.map(el =>  (
                   <li><div className="friend">{el.username}<button className="invite-btn">Invite</button><UserPresence/></div></li>

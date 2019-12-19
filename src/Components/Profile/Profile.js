@@ -39,14 +39,14 @@ export default class Profile extends Component {
 
   render() {
     return (
-      <div className="profile">
+      <div className="big-profile">
           <h1> Your Profile </h1>
         <div className="chart">
           <div className="chart-row">
             <Line
               data={this.state.data}
               options={{
-                maintainAspectRatio: true,
+                maintainAspectRatio: false,
                 title: {
                   display: true,
                   text: `Expected value over the next 5 years`

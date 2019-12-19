@@ -17,10 +17,11 @@ const server = app.listen(SERVER_PORT, () => console.log(`Server is listening on
 // SOCKETS
 const io = socket(server)
 
-// * GLOBAL SOCKETS
 
 io.on('connection', socket => {
-    console.log('socket connected')
+    // console.log('socket connected')
+    
+    // * GAME SOCKETS
 
     socket.on('new game', data => {
         socket.join(data.g_id)
@@ -28,7 +29,6 @@ io.on('connection', socket => {
     })
 
     socket.on('new move', data => {
-        console.log(data)
         console.log(`new move on game ${data.g_id}`)
         io.to(data.g_id).emit('game response', data)
     })
@@ -39,9 +39,26 @@ io.on('connection', socket => {
         socket.join(data.room)
         console.log(`user ${data.user} has connected to socket ${data.room}.`)
     })
+    // * CHALLENGE USER SOCKETS
+
+    socket.on('find a game', data => {
+        socket.join(data.lastGame)
+        console.log(`user ${data.username} has joined game room ${data.lastGame}`)
+
+    })
+
+    socket.on('challenge user', data => {
+        console.log(`user ${data.challenger} has challenged ${data.challengee} to a new game`)
+    })
+
+    socket.on('I have friends', data => {
+        socket.join(data.friend_list)
+        // console.log(`user has joined friend list ${data.friend_list}`)
+        io.to(data.friend_list).emit('')
+    })
 })
 
-// SOCKETS
+// END SOCKETS
 
 
 app.use(require("body-parser").text())
@@ -64,6 +81,7 @@ app.use(session({
 // GAME LOGIC
 app.post('/game/newMove', gameCtrl.newMove)
 app.post('/game/updateFen', gameCtrl.updateFen)
+app.get('/game/getLastGame', gameCtrl.getLastGame)
 
 
 // REGISTERING, LOGGING IN AND LOGGING OUT
@@ -76,8 +94,9 @@ app.get('/auth/getUser', authCtrl.getUser)
 app.get('/api/portraits', portraitsCtrl.getPortraits)
 app.put('/api/portraits', portraitsCtrl.updatePortrait)
 
-// GETTING FRIENDS LIST USERS 
+// FRIENDS LIST USERS 
 app.get('/api/users', userCtrl.getUser)
+app.post('/api/addfriend/:user_id', userCtrl.addFriend)
 
 // MASSIVE
 massive(CONNECTION_STRING)
