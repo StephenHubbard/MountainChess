@@ -1,11 +1,13 @@
 INSERT INTO chess_users (
     email,
-    username
+    username,
+    portrait
 )
 
 VALUES (
     ${email},
-    ${username}
+    ${username},
+    'blank-profile.png'
 );
 
 SELECT user_id FROM chess_users

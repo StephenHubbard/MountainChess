@@ -4,7 +4,7 @@
   height: 100px;
   left: 0%;
   margin-top: 0px;
-  background-image: url("/assets/Logos/Mountain-Chess-word.png");
+  background-image: url("/assets/Logos/MtChessLogo3-red.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
   display: flex;
@@ -12,7 +12,7 @@
   align-items: center;
   color: white;
   display: inline-block;
-  border: 1px blue solid;
+  /* border: 1px blue solid; */
   z-index: 10;
 }
 
