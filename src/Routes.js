@@ -10,7 +10,7 @@ import AddFriend from './Components/AddFriend/AddFriend';
 export default(
     <Switch>
         <Route exact path='/' component={App} />
-        <Route path={'/game'} component={GameView} />
+        <Route path={'/game/:id'} component={GameView} />
         <Route path={'/profile'} component={Profile} />
         <Route path={'/addfriend'} component={AddFriend} />
     </Switch>
