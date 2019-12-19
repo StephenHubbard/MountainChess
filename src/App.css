@@ -84,3 +84,6 @@ button {
   font-weight: 800;
   font-family: 'Slabo 27px', serif;
 }
+* {
+	margin: 0px;
+}

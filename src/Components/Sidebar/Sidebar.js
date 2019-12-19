@@ -29,6 +29,7 @@ class Sidebar extends Component {
   }
 
   getUser = () => {
+    if(this.props.username) {
     axios
       .get("/auth/getUser")
       .then(res => {
@@ -39,6 +40,7 @@ class Sidebar extends Component {
         });
       })
       .catch(err => console.log(err));
+    }
   };
 
   logout = () => {

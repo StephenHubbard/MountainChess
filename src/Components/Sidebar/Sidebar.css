@@ -5,6 +5,7 @@
 
 li {
   font-size: 20px;
+  
 }
 
 button {
@@ -37,6 +38,19 @@ button {
   top: 5%;
   transition: right 0.2s ease-in-out;
   left: 0;
+}
+
+.sidebar ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  
+}
+.sidebar li {
+  background-color: #26272b;
+  width: 90%;
+  margin: 0px 0;
 }
 
 

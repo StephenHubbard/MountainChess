@@ -69,8 +69,9 @@ app.get('/auth/getUser', authCtrl.getUser)
 app.get('/api/portraits', portraitsCtrl.getPortraits)
 app.put('/api/portraits', portraitsCtrl.updatePortrait)
 
-// GETTING FRIENDS LIST USERS 
+// FRIENDS LIST USERS 
 app.get('/api/users', userCtrl.getUser)
+app.post('/api/addfriend/:user_id', userCtrl.addFriend)
 
 // MASSIVE
 massive(CONNECTION_STRING)
