@@ -64,3 +64,11 @@ table {
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+.App {
+	font-family: 'Slabo 27px', serif;
+}
+
+input {
+	color: black;
+}

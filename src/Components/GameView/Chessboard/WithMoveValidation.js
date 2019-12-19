@@ -3,28 +3,92 @@ import PropTypes from "prop-types";
 import Chess from "chess.js"; // import Chess from  "chess.js"(default) if recieving an error about new Chess() not being a constructor
 import Chessboard from "chessboardjsx";
 import axios from 'axios';
+import io from 'socket.io-client'
+
+
 
 
 class HumanVsHuman extends Component {
     static propTypes = { children: PropTypes.func };
-
-    state = {
-        fen: "start",
-        // square styles for active drop square
-        dropSquareStyle: {},
-        // custom square styles
-        squareStyles: {},
-        // square with the currently clicked piece
-        pieceSquare: "",
-        // currently clicked square
-        square: "",
-        // array of past game moves
-        history: []
-    };
-
-    componentDidMount() {
-        this.game = new Chess();
+    constructor(props) {
+        super(props)
         
+        this.state = {
+            fen: "start",
+            // square styles for active drop square
+            dropSquareStyle: {},
+            // custom square styles
+            squareStyles: {},
+            // square with the currently clicked piece
+            pieceSquare: "",
+            // currently clicked square
+            square: "",
+            // array of past game moves
+            history: [],
+        };
+        this.socket = io.connect(':7777')
+        this.socket.on('game response', data => this.updateGame(data))
+    }
+        
+    async componentDidMount() {
+        this.game = new Chess();
+        this.socket.emit('new game', {g_id: 1})
+
+        // await this.setState({
+        //     fen: "rnbqkbnr/ppp1pppp/8/3p4/6P1/4P3/PPPP1P1P/RNBQKBNR b KQkq g3 0 2",
+        //     history: [
+        //         {
+        //         color: "w",
+        //         from: "c2",
+        //         to: "c3",
+        //         flags: "n",
+        //         piece: "p",
+        //         san: "c3",
+        //         }, 
+        //         {
+        //         color: "b",
+        //         from: "c7",
+        //         to: "c5",
+        //         flags: "b",
+        //         piece: "p",
+        //         san: "c5",
+        //         }
+        //     ]
+        // })
+        // await console.log(this.state)
+        
+    }
+
+    updateGame(data) { 
+        console.log(data)
+        this.setState({
+            fen: data.state.fen,
+            history: data.state.history,
+            dropSquareStyle: data.state.dropSquareStyle,
+            squareStyles: data.state.squareStyles,
+            pieceSquare: data.state.pieceSquare,
+            square: data.state.square,
+        })
+        // console.log("test")
+        // this.game = "test"
+        // console.log(this.game)
+        // chess.move({ from: 'e7', to: 'e6' });
+        // console.log(this.game.moves({ verbose: true }))
+        // console.log(this.game.move({ from: 'g2', to: 'g3' }))
+        // this.game = "test"
+        // this.game = data.socketGame
+        this.game.move({
+            from: data.state.history[data.state.history.length - 1].from,
+            to: data.state.history[data.state.history.length - 1].to,
+            promotion: 'q'
+        });
+        // this.game.put({ type: data.state.history[data.state.history.length - 1].piece, color: data.state.history[data.state.history.length - 1].color }, data.state.history[data.state.history.length - 1].to)
+        // this.game.remove(data.state.history[data.state.history.length - 1].from)
+
+        // console.log(data.state.history[data.state.history.length - 1])
+        console.log(this.game.history ({ verbose: true }))
+        
+
     }
 
     // keep clicked square style and remove hint squares
@@ -43,7 +107,7 @@ class HumanVsHuman extends Component {
             ...{
                 [c]: {
                 background:
-                    "radial-gradient(circle, #fffc00 36%, transparent 40%)",
+                    "radial-gradient(circle, #99d9f7 36%, transparent 40%)",
                 borderRadius: "50%"
                 }
             },
@@ -74,12 +138,14 @@ class HumanVsHuman extends Component {
         if (move === null) return;
         this.setState(({ history, pieceSquare }) => ({
             fen: this.game.fen(),
+            // * commenting this out, but was originally part of code.
             history: this.game.history({ verbose: true }),
             squareStyles: squareStyling({ pieceSquare, history })
         }));
         // * function added to both drag and drop and click
         this.newMoveFn();
-        this.updateFen()
+        this.updateFen();
+        
     };
 
     onMouseOverSquare = square => {
@@ -129,12 +195,16 @@ class HumanVsHuman extends Component {
 
         this.setState(({ history, pieceSquare }) => ({
             fen: this.game.fen(),
+            // * commenting this out, but was originally part of code.
+
             history: this.game.history({ verbose: true }),
             squareStyles: squareStyling({ pieceSquare, history })
         }));
         // * changed to an async function so state was updating correctly
         await this.setState({
         fen: this.game.fen(),
+            // * commenting this out, but was originally part of code.
+
         history: this.game.history({ verbose: true }),
         pieceSquare: ""
         });
@@ -146,16 +216,18 @@ class HumanVsHuman extends Component {
 
     // * function is adding moves to the db
     newMoveFn() {
-        console.log(this.state)
-        console.log(this.game)
-        // console.log(this.game)
+        // var chess = new Chess();
         let history = this.state.history
+        this.socket.emit(
+            'new move', {g_id: 1, state: this.state }
+        )
         axios
         .post('/game/newMove', {history})
         .then(res => {
-            console.log("move inserted to db.moves")
+            // console.log("move inserted to db.moves")
         })
         .catch(err => console.log(err))
+
     }
     
     
@@ -165,7 +237,11 @@ class HumanVsHuman extends Component {
         axios
         .post('/game/updateFen', {fen})
         .then(res => {
-            console.log(res.data)
+            // console.log(res.data)
+            this.setState({
+                fen: res.data,
+            })
+            // console.log(this.state)
         })
         .catch(err => console.log(err))
     }

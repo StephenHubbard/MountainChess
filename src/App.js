@@ -1,20 +1,20 @@
 import React, {Component} from 'react';
 import './App.css';
-import Dashboard from './Dasbhoard/Dashboard';
+import Dashboard from './Components/Dasbhoard/Dashboard';
 // import Sidebar from './Components/Sidebar/Sidebar'
 // import Chessboard from 'chessboardjsx';
 // import Chess from 'chess.js';
 // import Chessboard from 'chessboardjsx';
 // import Chess from 'chess.js';
+// import GameView from "../src/Components/GameView/GameView";
+// import Login from './Components/Auth/Login';
+// import Register from './Components/Auth/Register';
 // import Demo from "../src/Components/GameView/Chessboard/Demo";
-import GameView from "../src/Components/GameView/GameView";
-import Login from './Components/Auth/Login';
-import Register from './Components/Auth/Register';
-import Demo from "../src/Components/GameView/Chessboard/Demo";
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom'
+import Profile from "../src/Components/Profile/Profile"
 
-class App extends Component {
+class App extends Component { 
   
   render() {
     // random chess game
@@ -34,12 +34,11 @@ class App extends Component {
         {/* <Chessboard position="start"/> */}
         {/* <Sidebar /> */}
         <Dashboard />
-        <h1>Mountain Chess</h1>
+        {/* <h1>Mountain Chess</h1> */}
         </header> 
         {/* <Chessboard position="start"/> */}
-        <GameView />
-        <Login />
-        <Register />
+        {/* <GameView /> */}
+        <Profile/>
       </div>
     )
   }
