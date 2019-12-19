@@ -33,6 +33,12 @@ io.on('connection', socket => {
         io.to(data.g_id).emit('game response', data)
     })
 
+    // USER PRESENCE SOCKETS 
+
+    socket.on('online', data => {
+        socket.join(data.room)
+        console.log(`user ${data.user} has connected to socket ${data.room}.`)
+    })
     // * CHALLENGE USER SOCKETS
 
     socket.on('find a game', data => {

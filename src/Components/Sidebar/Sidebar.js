@@ -7,6 +7,7 @@ import LoggedInUser from "./../LoginContainer/LoggedInUser";
 import Register from "./../Auth/Register";
 // import LoginContainer from "./../LoginContainer/LoginContainer";
 import Login from "./../Auth/Login"
+import UserPresence from "./UserPresence";
 import Friend from '../Friend/Friend'
 
 class Sidebar extends Component {
@@ -87,6 +88,7 @@ class Sidebar extends Component {
     const { open } = this.state;
     return (
       <>
+      
         <div className="hamburger">
           <i
             className="fas fa-bars"
@@ -188,11 +190,9 @@ class Sidebar extends Component {
               <h3>Your Friends</h3>
               <ul>
                 {this.state.users.map(el =>  (
-                  <li><Friend usernameDisplay={el.username}/></li>
+                  <li><div className="friend">{el.username}<button className="invite-btn">Invite</button><UserPresence/></div></li>
                 ))}
               </ul>
-                {//<div className="friend">{el.username}<button className="invite-btn">Invite</button></div>
-                }
             </div>
             <div className="top-users">
               <ul>
