@@ -4,7 +4,7 @@ import { Ellipsis } from 'react-awesome-spinners'
 export default class Loading extends Component {
   render() {
     return (
-          <Ellipsis />
+          <Ellipsis color="#888888" role="status" position="center"/>
     );
   }
 }

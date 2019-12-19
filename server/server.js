@@ -96,6 +96,7 @@ app.put('/api/portraits', portraitsCtrl.updatePortrait)
 
 // FRIENDS LIST USERS 
 app.get('/api/users', userCtrl.getUser)
+app.get('/api/user', userCtrl.findUser)
 app.post('/api/addfriend/:user_id', userCtrl.addFriend)
 
 // MASSIVE

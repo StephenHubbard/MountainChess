@@ -26,12 +26,11 @@ class UserPresence extends Component {
     if (this.props.username) {
       this.statusUpdate()
     }
-    console.log('hit3')
   }
     // this.setState({userOnline: !this.state.userOnline}, () => {
 
   statusUpdate = () => {
-    console.log('hit2')
+    
     if (this.props.username) {
       this.socket.emit('online', { room: 'online', user: this.props.username })
       this.setState({ userOnline: 'green' })
@@ -39,7 +38,6 @@ class UserPresence extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div>
         <div className={this.state.userOnline}>

@@ -121,7 +121,6 @@ class Sidebar extends Component {
   
 
   render() {
-    console.log(this.props)
     const { open } = this.state;
     let allPortraits = this.state.portraits.map((portrait, i) => {
       if (portrait.image !== 'blank-profile.png'){

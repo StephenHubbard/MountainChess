@@ -21,7 +21,7 @@ class Login extends Component {
         const { username, password } = this.state
         axios
         .post('/auth/login', { username, password })
-        .then(res => {
+        .then(async (res) => {
             //console.log(res.data.user)
             this.props.updateUserInfo({
                 username: res.data.user.username,
@@ -29,7 +29,11 @@ class Login extends Component {
                 profile_img: res.data.user.portrait,
                 email: res.data.user.email
             })
-            Swal.fire(res.data.message)
+            await window.location.reload();
+            setTimeout(() => {
+                Swal.fire(res.data.message);
+              }, 1500);
+            
         })
         .catch(err => {
             //Swal.fire(err.response.data.message)

@@ -7,7 +7,7 @@ export default class SmallProfile extends Component {
         super(props)
         this.state = {
             friend: false,
-            username: '',
+            loggedInUser: this.props.usernameDisplay,
             user_id: ''
         }
     }
@@ -31,8 +31,9 @@ export default class SmallProfile extends Component {
     }
 
     addFriend = () => {
+        const {loggedInUser} = this.state
         axios
-          .post(`/api/addfriend/${this.props.user_id}`, {})
+          .post(`/api/addfriend/${this.props.user_id}`, {loggedInUser})
           .then(res => {
               this.setState({
                   friend: true
@@ -48,15 +49,15 @@ export default class SmallProfile extends Component {
         <div className="profile">
           <div className="profile-box">
             <div className="left-box">
-                <img className="left-box-portrait" src={this.props.portrait}/>
+                <img className="left-box-portrait" src={`/assets/ProfilePics/${this.props.portrait}`}/>
             </div>
             <div className="right-box">
               <div className="username">
-                 <h4>{this.props.username}</h4>
+                 <h4>{this.props.usernameProp}</h4>
               </div>
               <button
                 className="edit-btn"
-                onClick={() => console.log(this.state.user_id)}
+                onClick={() => console.log(this.state)}
               >
                 Add Friend
               </button>

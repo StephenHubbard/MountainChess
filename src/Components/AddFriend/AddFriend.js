@@ -3,17 +3,34 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import SmallProfile from "./SmallProfile";
 import Loading from "../Loading/Loading";
+import { connect } from "http2";
 
-export default class AddFriend extends Component {
+class AddFriend extends Component {
   constructor(props) {
     super(props);
     this.state = {
       users: [],
       filteredUsers: [],
       search: "",
-      loading: true
+      loading: true,
+      username: '',
+      user_id: ''
     };
   }
+
+  findUser = () => {
+    const {username} = this.state
+    axios
+      .get("/api/user", {username})
+      .then(res => {
+        console.log(res.data)
+        this.setState({
+          username: res.data.username,
+          user_id: res.data.user_id
+        });
+      })
+      .catch(err => console.log(err));
+  };
 
   componentDidMount() {
     setTimeout(() => {
@@ -29,6 +46,8 @@ export default class AddFriend extends Component {
       .catch(err => {
         console.log(err);
       });
+      this.findUser();
+      console.log(this.props)
   }
 
   clearSearch = () => {
@@ -79,7 +98,7 @@ export default class AddFriend extends Component {
             {!this.state.search
               ? this.state.users.map(el => (
                   <SmallProfile
-                    username={el.username}
+                    usernameProp={el.username}
                     email={el.username}
                     portrait={el.portrait}
                     user_id={el.user_id}
@@ -87,7 +106,7 @@ export default class AddFriend extends Component {
                 ))
               : this.state.filteredUsers.map(el => (
                   <SmallProfile
-                    username={el.username}
+                    usernameProp={el.username}
                     email={el.username}
                     portrait={el.portrait}
                     user_id={el.user_id}
@@ -100,3 +119,12 @@ export default class AddFriend extends Component {
     );
   }
 }
+
+function mapStateToProps(reduxState) {
+    const {username, user_id} = reduxState;
+    return {
+      username, user_id
+    };
+  }
+
+export default connect(mapStateToProps, {})(AddFriend)
