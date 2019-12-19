@@ -25,5 +25,13 @@ module.exports = {
             res.status(200).send(result)
         })
         .catch(err => console.log(err))
+    }, 
+    getLastGame: (req, res) => {
+        const db = req.app.get('db')
+        db.get_last_game()
+        .then(result => {
+            res.status(200).send(result)
+        })
+        .catch(err => console.log(err))
     }
 }
