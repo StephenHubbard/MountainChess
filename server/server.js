@@ -54,7 +54,7 @@ io.on('connection', socket => {
     socket.on('find a game', data => {
         socket.join(data.lastGame)
         console.log(`user ${data.username} has joined game room ${data.lastGame}`)
-
+        socket.broadcast.emit('last game number', data.lastGame)
     })
 
     socket.on('challenge user', data => {
