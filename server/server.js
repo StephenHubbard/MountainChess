@@ -42,10 +42,7 @@ io.on('connection', socket => {
         socket.join(data.room)
         console.log(`user ${data.username} has connected to socket '${data.room}'.`)
         let newUser = {username: data.username, portrait: data.profile_img}
-        // console.log(newUser)
-        // console.log(loggedInUsers.indexOf(newUser))
         limitUsers.indexOf(data.username) === -1 ? limitUsers.push(data.username) & loggedInUsers.push(newUser) : console.log("user already logged in one")
-        // limitUsers.indexOf(data.username) === -1 ? loggedInUsers.push(newUser) : console.log("user already logged in two")
         socket.broadcast.emit('all online users', loggedInUsers)
     })
 
@@ -54,7 +51,7 @@ io.on('connection', socket => {
     socket.on('find a game', data => {
         socket.join(data.lastGame)
         console.log(`user ${data.username} has joined game room ${data.lastGame}`)
-
+        socket.broadcast.emit('last game number', data.lastGame)
     })
 
     socket.on('challenge user', data => {
@@ -109,6 +106,7 @@ app.get('/api/users', userCtrl.getUser)
 app.get('/api/user', userCtrl.findUser)
 app.post('/api/addfriend/:user_id_display', userCtrl.addFriend)
 app.post('/api/users/user/:user_id_display', userCtrl.checkFriend)
+app.post('/api/getUserFriends', userCtrl.getUserFriends)
 app.get(`/api/users/:user_id_display`, userCtrl.checkIfSame)
 
 // MASSIVE

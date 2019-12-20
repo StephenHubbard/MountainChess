@@ -31,6 +31,7 @@ class SmallProfile extends Component {
 
   componentDidMount() {
     if (this.props.username) {
+      console.log(this.props)
       this.checkFriend();
       this.checkIfSame();
     }
@@ -90,6 +91,7 @@ class SmallProfile extends Component {
               <img
                 className="left-box-portrait"
                 src={`/assets/ProfilePics/${this.props.portrait}`}
+                alt=""
               />
             </div>
             <div className="right-box">

@@ -38,6 +38,16 @@ module.exports = {
       res.status(200).send(result)
     })
     .catch(err => console.log(err))
+  }, 
+
+  getUserFriends: (req, res) => {
+    const db = req.app.get('db');
+    const { user_id } = req.body
+    db.get_user_friends(user_id)
+    .then(result => {
+      res.status(200).send(result)
+    })
+    .catch(err => console.log(err))
   },
 
   checkIfSame: (req, res) => {
