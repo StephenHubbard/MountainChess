@@ -27,6 +27,7 @@ class Sidebar extends Component {
       portraits: [], 
       loggedInUsers: [],
       offlineUsers: [],
+      userFriends: [],
     };
     this.getUser = this.getUser.bind(this);
     this.getPortraits = this.getPortraits.bind(this);
@@ -75,6 +76,31 @@ class Sidebar extends Component {
       loggedInUsers: data
     })
     this.calcOfflineUsers()
+    this.getUserFriends()
+  }
+
+  async getUserFriends(){
+    // console.log(this.state.users)
+    let friendArr = []
+    let friendUserIdArr = []
+    const { user_id } = this.props
+    await axios
+    .post('/api/getUserFriends', { user_id })
+    .then(res => {
+      friendArr = res.data
+    })
+    // .catch(err => console.log(err))
+    console.log(friendArr)
+    for (let i = 0; i < friendArr.length; i++) {
+      console.log(friendUserIdArr.indexOf(friendArr[i].user_1))
+      if (friendUserIdArr.indexOf(friendArr[i].user_1) === -1){
+        friendUserIdArr.push(friendArr[i].user_1)
+      }
+      if (friendUserIdArr.indexOf(friendArr[i].user_1) === -1){
+      friendUserIdArr.push(friendArr[i].user_2)
+      }
+    }
+    // console.log(friendUserIdArr)
   }
 
   getUser = () => {
