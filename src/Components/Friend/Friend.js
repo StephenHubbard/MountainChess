@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 // import axios from "axios";
 import "./Friend.css";
-import io from 'socket.io-client'
-import {withRouter} from 'react-router-dom'
-import { updateUserInfo } from "../../ducks/reducer";
 
-class Friend extends Component {
+//import {
+//redux functions
+//}
+
+export default class Friend extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,19 +18,9 @@ class Friend extends Component {
         { username: "friend3" }
       ]
     };
-    this.socket = io.connect(':7777')
   }
 
-  componentDidMount() {
-    let friendRoom = Math.floor(Math.random() * 1000)
-    // console.log(this.props)
-    this.socket.emit('I have friends', {friend_list: friendRoom})
 
-  }
-
-  challengeUser() {
-    this.socket.emit('challenge user', {challenger: this.props.username, challengee: this.props.usernameDisplay})
-  }
 
   render() {
     return (
@@ -43,19 +34,13 @@ class Friend extends Component {
         </div>
         <div className="usernames">
           <div className="username-container">
-            <div className="username"> {this.props.usernameDisplay} </div>
+            <div className="username"> {this.props.username} </div>
           </div>
         </div>
           <div className="button-container">
-              <button onClick={() => this.challengeUser()}>Challenge</button>
+              <button>Play</button>
           </div>
       </div>
     );
   }
 }
-
-function mapStateToProps(reduxState) {
-  return reduxState
-  }
-  
-export default withRouter(connect(mapStateToProps, {updateUserInfo})(Friend))

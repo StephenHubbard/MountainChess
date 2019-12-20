@@ -5,7 +5,10 @@ import io from "socket.io-client";
 import { connect } from "react-redux";
 import { updateUserInfo } from "../../ducks/reducer";
 import { Link, withRouter } from "react-router-dom";
-import axios from "axios";
+import axios from 'axios';
+import UserPresence from "../Sidebar/UserPresence";
+
+
 
 class Dashboard extends Component {
   constructor() {
@@ -31,20 +34,19 @@ class Dashboard extends Component {
     await axios.get("/game/getLastGame").then(res => {
       console.log(res.data[0].max);
       this.setState({
-        lastGame: res.data[0].max
-      });
-    });
-    let lastGame = this.state.lastGame;
-    await this.socket.emit("find a game", {
-      lastGame: lastGame,
-      username: this.props.username
-    });
-    await this.props.history.push(`/game/${lastGame}`);
+        lastGame: res.data[0].max + 1
+      })
+    })
+    let lastGame = this.state.lastGame
+    await this.socket.emit('find a game', {lastGame: lastGame, username: this.props.username})
+    await this.props.history.push(`/game/${lastGame}`)
   }
 
   render() {
     return (
       <div>
+      <UserPresence/>
+
         <Sidebar />
         <Link to="/">
           <div className="logo">

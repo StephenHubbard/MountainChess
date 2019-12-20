@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./Sidebar.css";
+import "./UserPresence.css";
 import { connect } from "react-redux";
 import { updateUserInfo } from "./../../ducks/reducer";
 import axios from "axios";
@@ -7,8 +8,10 @@ import LoggedInUser from "./../LoginContainer/LoggedInUser";
 import Register from "./../Auth/Register";
 // import LoginContainer from "./../LoginContainer/LoginContainer";
 import Login from "./../Auth/Login"
-import UserPresence from "./UserPresence";
-import Friend from '../Friend/Friend'
+// import UserPresence from "./UserPresence";
+// import Friend from '../Friend/Friend'
+import io from 'socket.io-client'
+
 
 class Sidebar extends Component {
   constructor() {
@@ -21,16 +24,36 @@ class Sidebar extends Component {
       registerModalActivate: false,
       portraitModalActivate: false,
       users: [],
-      portraits: []
+      portraits: [], 
+      loggedInUsers: [],
+      offlineUsers: [],
     };
     this.getUser = this.getUser.bind(this);
     this.getPortraits = this.getPortraits.bind(this);
+    this.socket = io.connect(':7777')
+    this.socket.on('all online users', data => this.updateFollowedUsers(data))
+
   }
 
   componentDidMount() {
     this.getUser();
     this.getUsers();
     this.getPortraits();
+  }
+
+  calcOfflineUsers() {
+    console.log(this.state.users)
+    console.log(this.state.loggedInUsers)
+    for (let i = 0; i < this.state.loggedInUsers.length; i++) {
+      console.log(this.state.loggedInUsers[i].username)
+    }
+  }
+
+  updateFollowedUsers(data) {
+    this.setState({
+      loggedInUsers: data
+    })
+    this.calcOfflineUsers()
   }
 
   getUser = () => {
@@ -50,15 +73,15 @@ class Sidebar extends Component {
 };
 
   getPortraits = () => {
-    axios
-      .get("/api/portraits")
-      .then(res => {
-        //console.log(res.data)
-        this.setState({
-          portraits: res.data
-        });
-      })
-      .catch(err => console.log(err));
+      axios
+        .get("/api/portraits")
+        .then(res => {
+          //console.log(res.data)
+          this.setState({
+            portraits: res.data
+          });
+        })
+        .catch(err => console.log(err));
     }
 
   updatePortrait = name => {
@@ -104,24 +127,22 @@ class Sidebar extends Component {
   };
   
   getUsers() {
-    // console.log('hit')
-    axios 
-      .get('/api/users')
-      .then(res => {
-        this.setState({
-          users: res.data
+      axios 
+        .get('/api/users')
+        .then(res => {
+          this.setState({
+            users: res.data
+          })
+          // this.calcOfflineUsers()
         })
-        // console.log(this.state.users)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+        .catch(err => {
+          console.log(err)
+        })
   }
 
   
 
   render() {
-    console.log(this.props)
     const { open } = this.state;
     let allPortraits = this.state.portraits.map((portrait, i) => {
       if (portrait.image !== 'blank-profile.png'){
@@ -133,12 +154,13 @@ class Sidebar extends Component {
             src={`/assets/ProfilePics/${portrait.image}`}
           />
         )
+      } else {
+        return <></>
       }
       
     });
     return (
       <>
-      
         <div className="hamburger">
           <i
             className="fas fa-bars"
@@ -266,15 +288,24 @@ class Sidebar extends Component {
                 </div>
               )}
             </div>
-            <div className="friends-list">
-              <h3>Your Friends</h3>
+            <div className="friends-list" id="style-2">
+              <h3>Logged In Users</h3>
               <ul>
-                {this.state.users.map(el =>  (
-                  <li><div className="friend">{el.username}<button className="invite-btn">Invite</button><UserPresence/></div></li>
+                {this.state.loggedInUsers.map(el =>  (
+                  <li className="friend-li" key={el.username}>
+                    <div className="friend">
+                      <div className="green" />
+                      <img className="portrait-small" src={`/assets/ProfilePics/${el.portrait}`} alt="" />
+                      {el.username}
+                      <button className="invite-btn">Invite</button>
+                    </div>
+                  </li>
+                  // console.log(el)
                 ))}
               </ul>
             </div>
             <div className="top-users">
+              <h3>Top Users</h3>
               <ul>
                 <li>User1</li>
                 <li>User2</li>
