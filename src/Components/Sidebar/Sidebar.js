@@ -7,8 +7,10 @@ import LoggedInUser from "./../LoginContainer/LoggedInUser";
 import Register from "./../Auth/Register";
 // import LoginContainer from "./../LoginContainer/LoginContainer";
 import Login from "./../Auth/Login"
-import UserPresence from "./UserPresence";
-import Friend from '../Friend/Friend'
+// import UserPresence from "./UserPresence";
+// import Friend from '../Friend/Friend'
+import io from 'socket.io-client'
+
 
 class Sidebar extends Component {
   constructor() {
@@ -21,16 +23,28 @@ class Sidebar extends Component {
       registerModalActivate: false,
       portraitModalActivate: false,
       users: [],
-      portraits: []
+      portraits: [], 
+      loggedInUsers: [],
     };
     this.getUser = this.getUser.bind(this);
     this.getPortraits = this.getPortraits.bind(this);
+    this.socket = io.connect(':7777')
+    this.socket.on('all online users', data => this.updateFollowedUsers(data))
+
   }
 
   componentDidMount() {
     this.getUser();
     this.getUsers();
     this.getPortraits();
+  }
+
+  updateFollowedUsers(data) {
+    console.log(data)
+    this.setState({
+      loggedInUsers: data
+    })
+    // console.log(this.state.loggedInUsers)
   }
 
   getUser = () => {
@@ -121,7 +135,6 @@ class Sidebar extends Component {
   
 
   render() {
-    console.log(this.props)
     const { open } = this.state;
     let allPortraits = this.state.portraits.map((portrait, i) => {
       if (portrait.image !== 'blank-profile.png'){
@@ -133,12 +146,13 @@ class Sidebar extends Component {
             src={`/assets/ProfilePics/${portrait.image}`}
           />
         )
+      } else {
+        return <></>
       }
       
     });
     return (
       <>
-      
         <div className="hamburger">
           <i
             className="fas fa-bars"
@@ -267,10 +281,10 @@ class Sidebar extends Component {
               )}
             </div>
             <div className="friends-list">
-              <h3>Your Friends</h3>
+              <h3>Logged In Users</h3>
               <ul>
-                {this.state.users.map(el =>  (
-                  <li><div className="friend">{el.username}<button className="invite-btn">Invite</button><UserPresence/></div></li>
+                {this.state.loggedInUsers.map(el =>  (
+                  <li key={el}><div className="friend">{el}<button className="invite-btn">Invite</button></div></li>
                 ))}
               </ul>
             </div>

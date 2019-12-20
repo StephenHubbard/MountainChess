@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 import { updateUserInfo } from "../../ducks/reducer";
 import {withRouter} from 'react-router-dom';
 import axios from 'axios';
+import UserPresence from "../Sidebar/UserPresence";
+
 
 
 class Dashboard extends Component {
@@ -43,6 +45,8 @@ class Dashboard extends Component {
   render() {
     return(
       <div>
+      <UserPresence/>
+
         <Sidebar />
         <div className="logo">
           {/* <h1 className="title"> Mountain Chess </h1> */}

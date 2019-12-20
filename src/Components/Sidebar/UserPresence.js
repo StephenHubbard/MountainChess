@@ -22,29 +22,30 @@ class UserPresence extends Component {
   //   await console.log('hit2')
   // }
 
-  componentDidMount () {
-    if (this.props.username) {
+  async componentDidMount () {
+    if (await this.props.username) {
+      await this.statusUpdate()
+    }
+  }
+
+  componentDidUpdate() {
+    if( this.props.username) {
       this.statusUpdate()
     }
-    console.log('hit3')
   }
-    // this.setState({userOnline: !this.state.userOnline}, () => {
 
   statusUpdate = () => {
-    console.log('hit2')
     if (this.props.username) {
-      this.socket.emit('online', { room: 'online', user: this.props.username })
-      this.setState({ userOnline: 'green' })
-    }
+      this.socket.emit('online', { room: 'online', username: this.props.username, profile_img: this.props.profile_img})
+      // this.setState({ userOnline: 'green' })
+    } 
   }
 
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <div>
-        <div className={this.state.userOnline}>
-
-        </div>
+      
       </div>
     )
   }
