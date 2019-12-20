@@ -97,6 +97,7 @@ export default class AddFriend extends Component {
             {!this.state.search
               ? this.state.users.map(el => (
                   <SmallProfile
+                    key={`${el.username} el.user_id`}
                     usernameProp={el.username}
                     email={el.username}
                     portrait={el.portrait}
@@ -105,6 +106,7 @@ export default class AddFriend extends Component {
                 ))
               : this.state.filteredUsers.map(el => (
                   <SmallProfile
+                    key={`${el.username} el.user_id`}
                     usernameProp={el.username}
                     email={el.username}
                     portrait={el.portrait}
