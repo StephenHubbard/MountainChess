@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+}
+
+.register-container {
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px red solid; */
+}
+
+.four-inputs {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px green solid; */
+}
+
+input {
+    height: 30px;
+    width: 200px;
+    font-size: 20px;
+}
+
+#email {
+    margin: 10px;
+}
+
+#username-register {
+    margin: 10px;
+}
+
+#password1 {
+    margin: 10px;
+}
+
+#password2 {
+    margin: 10px;
+}

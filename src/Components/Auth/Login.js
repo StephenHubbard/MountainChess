@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { updateUserInfo } from './../../ducks/reducer';
 import { connect } from 'react-redux';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 
 class Login extends Component {
     state = {
@@ -29,18 +29,19 @@ class Login extends Component {
                 profile_img: res.data.user.portrait,
                 email: res.data.user.email
             })
-            Swal.fire(res.data.message)
+            // Swal.fire(res.data.message)
         })
         .catch(err => {
             //Swal.fire(err.response.data.message)
         })
+        this.props.loginModalActivateFn()
         
     }
 
     render() {
         return (
             <div className="login-page">
-                <div className="login-container" alt=''>
+                <div className="login-box" alt=''>
                     <h1>Enter your login information here.</h1>
                     <input id="username"
                     onChange={e => this.handleChange('username', e.target.value)}
