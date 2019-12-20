@@ -32,6 +32,7 @@ class Sidebar extends Component {
     };
     this.getUser = this.getUser.bind(this);
     this.getPortraits = this.getPortraits.bind(this);
+    this.loginModalToggle = this.loginModalToggle.bind(this);
     this.socket = io.connect(':7777')
     this.socket.on('all online users', data => this.updateFollowedUsers(data))
 
@@ -163,6 +164,12 @@ class Sidebar extends Component {
     });
   };
 
+  loginModalToggle = () => {
+    this.setState({
+      loginModalActivate: false
+    })
+  }
+
   registerModalFn = () => {
     this.setState({
       registerModalActivate: !this.state.registerModalActivate
@@ -253,10 +260,10 @@ class Sidebar extends Component {
               {/* LOGIN MODAL */}
               {this.state.loginModalActivate && (
                 <div>
-                  <div className="modal-content">
+                  <div className="login-modal-content">
                     {/* Modal Body */}
-                    <div className="modal-body">
-                      <div className="modal-header">
+                    <div className="login-modal-body">
+                      <div className="login-modal-header">
                         <span
                           className="close"
                           onClick={() =>
@@ -273,7 +280,9 @@ class Sidebar extends Component {
                         {/* <h2>Please enter your login information.</h2> */}
                       </div>
                       <div className="modal-loginInfo">
-                        <Login />
+                        <Login 
+                        loginModalActivateFn = {this.loginModalToggle}
+                        />
                       </div>
                     </div>
                   </div>
@@ -284,10 +293,10 @@ class Sidebar extends Component {
               {/* REGISTER MODAL */}
               {this.state.registerModalActivate && (
                 <div>
-                  <div className="modal-content">
+                  <div className="register-modal-content">
                     {/* Modal Body */}
-                    <div className="modal-body">
-                      <div className="modal-header">
+                    <div className="register-modal-body">
+                      <div className="register-modal-header">
                         <span
                           className="close"
                           onClick={() =>
@@ -298,11 +307,11 @@ class Sidebar extends Component {
                         >
                           &times;
                         </span>
-                        <h2>Register for a free account.</h2>
+                        {/* <h2>Register for a free account.</h2> */}
                       </div>
-                      <div className="modal-registerInfo">
+                      {/* <div className="modal-registerInfo"> */}
                         <Register />
-                      </div>
+                      {/* </div> */}
                     </div>
                   </div>
                   {/* <div class="overlay"></div> */}
@@ -312,10 +321,10 @@ class Sidebar extends Component {
               {/* PORTRAIT MODAL */}
               {this.state.portraitModalActivate && (
                 <div>
-                  <div className="modal-content">
+                  <div className="portrait-modal-content">
                     {/* Modal Body */}
-                    <div className="modal-body">
-                      <div className="modal-header">
+                    <div className="portrait-modal-body">
+                      <div className="portrait-modal-header">
                         <span
                           className="close"
                           onClick={() =>
