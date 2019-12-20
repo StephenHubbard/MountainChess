@@ -205,9 +205,9 @@ h4 {
 .modal-content {
   display: flex;
   position: absolute;
-  width: 800px;
-  height: 450px;
-  left: 300%;
+  width: 55vw;
+  height: 63vh;
+  left: 270%;
   /* left: 750px; */
   top: 50vh;
   display: flex;
@@ -230,14 +230,15 @@ h4 {
 /* Modal Body */
 .modal-body {
   position: relative;
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 450px;
   width: 100%;
   padding: 0px;
   background-color: black;
-  color: gold;
+  color: ghostwhite;
   margin-top: 0px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+
   /* border: 3px green solid; */
 }
 
@@ -245,7 +246,7 @@ h4 {
 .modal-header {
   padding: 2px 16px;
   background-color: black;
-  color: gold;
+  color: ghostwhite;
   /* border: 3px yellow solid; */
 }
 

@@ -227,7 +227,7 @@ class Sidebar extends Component {
                         >
                           &times;
                         </span>
-                        <h2>Register for a free account.</h2>
+                        {/* <h2>Register for a free account.</h2> */}
                       </div>
                       <div className="modal-registerInfo">
                         <Register />
