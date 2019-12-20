@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./Sidebar.css";
+import "./UserPresence.css";
 import { connect } from "react-redux";
 import { updateUserInfo } from "./../../ducks/reducer";
 import axios from "axios";
@@ -25,6 +26,7 @@ class Sidebar extends Component {
       users: [],
       portraits: [], 
       loggedInUsers: [],
+      offlineUsers: [],
     };
     this.getUser = this.getUser.bind(this);
     this.getPortraits = this.getPortraits.bind(this);
@@ -39,11 +41,19 @@ class Sidebar extends Component {
     this.getPortraits();
   }
 
+  calcOfflineUsers() {
+    console.log(this.state.users)
+    console.log(this.state.loggedInUsers)
+    for (let i = 0; i < this.state.loggedInUsers.length; i++) {
+      console.log(this.state.loggedInUsers[i].username)
+    }
+  }
+
   updateFollowedUsers(data) {
     this.setState({
       loggedInUsers: data
     })
-    console.log(this.state.loggedInUsers)
+    this.calcOfflineUsers()
   }
 
   getUser = () => {
@@ -117,19 +127,17 @@ class Sidebar extends Component {
   };
   
   getUsers() {
-    if (this.props.username) {
       axios 
         .get('/api/users')
         .then(res => {
           this.setState({
             users: res.data
           })
-          // console.log(this.state.users)
+          // this.calcOfflineUsers()
         })
         .catch(err => {
           console.log(err)
         })
-    }
   }
 
   
@@ -280,12 +288,13 @@ class Sidebar extends Component {
                 </div>
               )}
             </div>
-            <div className="friends-list">
+            <div className="friends-list" id="style-2">
               <h3>Logged In Users</h3>
               <ul>
                 {this.state.loggedInUsers.map(el =>  (
                   <li className="friend-li" key={el.username}>
                     <div className="friend">
+                      <div className="green" />
                       <img className="portrait-small" src={`/assets/ProfilePics/${el.portrait}`} alt="" />
                       {el.username}
                       <button className="invite-btn">Invite</button>
