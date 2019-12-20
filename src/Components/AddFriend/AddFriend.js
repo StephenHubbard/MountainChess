@@ -4,6 +4,7 @@ import axios from "axios";
 import SmallProfile from "./SmallProfile";
 import Loading from "../Loading/Loading";
 
+
 export default class AddFriend extends Component {
   constructor(props) {
     super(props);
@@ -11,9 +12,25 @@ export default class AddFriend extends Component {
       users: [],
       filteredUsers: [],
       search: "",
-      loading: true
+      loading: true,
+      username: '',
+      user_id: ''
     };
   }
+
+  findUser = () => {
+    const {username} = this.state
+    axios
+      .get("/api/user", {username})
+      .then(res => {
+        console.log(res.data)
+        this.setState({
+          username: res.data.username,
+          user_id: res.data.user_id
+        });
+      })
+      .catch(err => console.log(err));
+  };
 
   componentDidMount() {
     setTimeout(() => {
@@ -29,6 +46,7 @@ export default class AddFriend extends Component {
       .catch(err => {
         console.log(err);
       });
+      this.findUser();
   }
 
   clearSearch = () => {
@@ -79,18 +97,18 @@ export default class AddFriend extends Component {
             {!this.state.search
               ? this.state.users.map(el => (
                   <SmallProfile
-                    username={el.username}
+                    usernameProp={el.username}
                     email={el.username}
                     portrait={el.portrait}
-                    user_id={el.user_id}
+                    user_id_display={el.user_id}
                   />
                 ))
               : this.state.filteredUsers.map(el => (
                   <SmallProfile
-                    username={el.username}
+                    usernameProp={el.username}
                     email={el.username}
                     portrait={el.portrait}
-                    user_id={el.user_id}
+                    user_id_display={el.user_id}
                   />
                 ))}
           </ul>
@@ -100,3 +118,6 @@ export default class AddFriend extends Component {
     );
   }
 }
+
+
+
