@@ -17,14 +17,14 @@ class TopUsers extends Component {
   }
 
   getTopUsers = () => {
-    axios
-      .get('/api/users/elo')
-      .then(res => {
-        console.log(res.data)
-        this.setState({
-          topUsers: res.data
-      });
-    })
+    // axios
+    //   .get('/api/users/elo')
+    //   .then(res => {
+    //     console.log(res.data)
+    //     this.setState({
+    //       topUsers: res.data
+    //   });
+    // })
   }
 
   render() {
@@ -50,4 +50,4 @@ function mapStateToProps(reduxState) {
   return reduxState;
 }
 
-export default withRouter(connect(mapStateToProps, {})(TopUsers));
+export default connect(mapStateToProps, {})(TopUsers);

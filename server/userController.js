@@ -64,11 +64,12 @@ module.exports = {
   },
 
   getTopUsers: (req, res) => {
-    const db = req.app.get("db")
-      db.get_top_users()
-      .then(result => {
-        console.log(result)
-        res.status(200).send(result)
-      })
+    console.log("hit")
+    // const db = req.app.get("db")
+    //   db.get_top_users()
+    //   .then(result => {
+    //     console.log(result)
+    //     res.status(200).send(result)
+    //   })
   }
 }
