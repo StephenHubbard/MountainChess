@@ -8,6 +8,7 @@ import LoggedInUser from "./../LoginContainer/LoggedInUser";
 import Register from "./../Auth/Register";
 // import LoginContainer from "./../LoginContainer/LoginContainer";
 import Login from "./../Auth/Login"
+import TopUsers from './../TopUsers/TopUsers'
 // import UserPresence from "./UserPresence";
 // import Friend from '../Friend/Friend'
 import io from 'socket.io-client'
@@ -373,12 +374,7 @@ class Sidebar extends Component {
             </div>
             <div className="top-users">
               <h3>Top Users</h3>
-              <ul>
-                <li>User1</li>
-                <li>User2</li>
-                <li>User3</li>
-                <li>User4</li>
-              </ul>
+              <TopUsers/>
             </div>
           </div>
           <LoggedInUser logout={this.logout} />

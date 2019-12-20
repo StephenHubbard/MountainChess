@@ -60,5 +60,16 @@ module.exports = {
     .catch( err => {
       console.log(err)
     })
+    .catch(er => console.log(err))
+  },
+
+  getTopUsers: (req, res) => {
+    console.log("hit")
+    // const db = req.app.get("db")
+    //   db.get_top_users()
+    //   .then(result => {
+    //     console.log(result)
+    //     res.status(200).send(result)
+    //   })
   }
 }

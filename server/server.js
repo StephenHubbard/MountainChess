@@ -109,6 +109,9 @@ app.post('/api/users/user/:user_id_display', userCtrl.checkFriend)
 app.post('/api/getUserFriends', userCtrl.getUserFriends)
 app.get(`/api/users/:user_id_display`, userCtrl.checkIfSame)
 
+// GETTING TOP RANKED PLAYERs
+app.get('/api/users/elo', userCtrl.getTopUsers)
+
 // MASSIVE
 massive(CONNECTION_STRING)
 .then(dbInstance => {
@@ -117,4 +120,5 @@ massive(CONNECTION_STRING)
     
 })
 .catch(err => console.log(err))
+
 
