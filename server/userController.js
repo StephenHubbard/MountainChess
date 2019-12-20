@@ -38,7 +38,6 @@ module.exports = {
       res.status(200).send(result)
     })
     .catch(err => console.log(err))
-<<<<<<< HEAD
   }, 
 
   getUserFriends: (req, res) => {
@@ -49,7 +48,6 @@ module.exports = {
       res.status(200).send(result)
     })
     .catch(err => console.log(err))
-=======
   },
 
   checkIfSame: (req, res) => {
@@ -62,6 +60,5 @@ module.exports = {
     .catch( err => {
       console.log(err)
     })
->>>>>>> master
   }
 }

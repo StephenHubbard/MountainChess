@@ -42,7 +42,6 @@ class Sidebar extends Component {
     this.getPortraits();
   }
 
-<<<<<<< HEAD
   async calcOfflineUsers() {
     // * Welcome to my wet code hell. -Stephen
     let newArr1 = []
@@ -51,10 +50,6 @@ class Sidebar extends Component {
     let offlineUsersFull = []
     for ( let i = 0; i < this.state.loggedInUsers.length; i++) {
       await newArr1.push(this.state.loggedInUsers[i].username)
-=======
-  calcOfflineUsers() {
-    for (let i = 0; i < this.state.loggedInUsers.length; i++) {
->>>>>>> master
     }
     for ( let i = 0; i < this.state.users.length; i++) {
       await newArr2.push(this.state.users[i].username)
