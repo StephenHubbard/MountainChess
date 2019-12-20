@@ -10,7 +10,8 @@ class SmallProfile extends Component {
     super(props);
     this.state = {
       friend: false,
-      loggedInUser: ''
+      loggedInUser: '',
+      isSame: ''
     };
   }
 
@@ -29,10 +30,20 @@ class SmallProfile extends Component {
   //   };
 
   componentDidMount() {
-      console.log(this.props.username)
     if (this.props.username) {
       this.checkFriend();
+      this.checkIfSame();
     }
+  }
+
+  checkIfSame = () => {
+    axios
+        .get(`/api/users/${this.props.user_id_display}`)
+        .then( res => {
+            if(this.state.loggedInUser === res.data[0].username) {
+                this.setState({isSame: 'same'})
+            }
+        })
   }
 
   addFriend = () => {
@@ -85,8 +96,8 @@ class SmallProfile extends Component {
               <div className="username">
                 <h4>{this.props.usernameProp}</h4>
               </div>
-              <button disabled={this.state.friend} className="edit-btn" onClick={() => this.addFriend()}>
-                {!this.state.friend ? ('Add Friend') : ('Already Friended')}
+              <button disabled={this.state.friend} className="edit-btn" onClick={() => this.addFriend()} id={this.state.isSame}>
+                {!this.state.friend  ? ('Add Friend') : ('Already Friended')}
               </button>
             </div>
           </div>

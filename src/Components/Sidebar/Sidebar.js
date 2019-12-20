@@ -42,10 +42,7 @@ class Sidebar extends Component {
   }
 
   calcOfflineUsers() {
-    console.log(this.state.users)
-    console.log(this.state.loggedInUsers)
     for (let i = 0; i < this.state.loggedInUsers.length; i++) {
-      console.log(this.state.loggedInUsers[i].username)
     }
   }
 

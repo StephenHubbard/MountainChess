@@ -38,5 +38,17 @@ module.exports = {
       res.status(200).send(result)
     })
     .catch(err => console.log(err))
+  },
+
+  checkIfSame: (req, res) => {
+    const db = req.app.get('db');
+    const {user_id_display} = req.params;
+    db.check_if_same(user_id_display)
+    .then(result => {
+      res.status(200).send(result)
+    })
+    .catch( err => {
+      console.log(err)
+    })
   }
 }
