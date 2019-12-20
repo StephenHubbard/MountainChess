@@ -1,0 +1,19 @@
+.top-user-li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.portrait-small {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+}
+
+.top-user-username {
+  margin: 0 30px 0 10px;
+}
+
+.top-user-elo {
+  margin: 0 15px;
+}

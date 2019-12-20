@@ -108,6 +108,9 @@ app.put('/api/portraits', portraitsCtrl.updatePortrait)
 app.get('/api/users', userCtrl.getUser)
 app.post('/api/addfriend/:user_id', userCtrl.addFriend)
 
+// GETTING TOP RANKED PLAYERs
+app.get('/api/users/elo', userCtrl.getTopUsers)
+
 // MASSIVE
 massive(CONNECTION_STRING)
 .then(dbInstance => {
@@ -116,4 +119,5 @@ massive(CONNECTION_STRING)
     
 })
 .catch(err => console.log(err))
+
 

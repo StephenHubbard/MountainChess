@@ -15,5 +15,14 @@ module.exports = {
       res.sendStatus(200)
     })
     .catch(er => console.log(err))
+  },
+
+  getTopUsers: (req, res) => {
+    const db = req.app.get("db")
+      db.get_top_users()
+      .then(result => {
+        console.log(result)
+        res.status(200).send(result)
+      })
   }
 }

@@ -1,0 +1,1 @@
+SELECT * FROM chess_users ORDER BY elo DESC LIMIT 5;
