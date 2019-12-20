@@ -66,7 +66,7 @@ table {
 }
 
 .App {
-	font-family: 'Slabo 27px', serif;
+	font-family: 'PT Sans Caption', sans-serif;
 }
 
 input {
@@ -74,16 +74,10 @@ input {
 }
 
 button {
-    margin: 0 5px;
-  background: rgb(84, 84, 95);
-  border-radius: 5px;
-  color: ghostwhite;
   border: none;
-  height: 25px;
-  font-size: 15px;
-  font-weight: 800;
-  font-family: 'Slabo 27px', serif;
+  
 }
+
 * {
 	margin: 0px;
 }

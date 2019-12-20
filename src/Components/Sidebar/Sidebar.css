@@ -334,6 +334,18 @@ h4 {
   border: 1px red solid;
 }
 
+.sidebar button {
+    margin: 0 5px;
+  background: rgb(84, 84, 95);
+  border-radius: 5px;
+  color: ghostwhite;
+  border: none;
+  height: 25px;
+  font-size: 15px;
+  font-weight: 800;
+  font-family: 'PT Sans Caption', sans-serif;
+}
+
 .modal-registerInfo {
   height: 490px;
   width: 700px;
