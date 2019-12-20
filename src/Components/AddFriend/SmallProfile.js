@@ -10,7 +10,7 @@ class SmallProfile extends Component {
     super(props);
     this.state = {
       friend: '',
-      loggedInUser: ''
+      loggedInUser: '',
     };
   }
 
@@ -29,9 +29,9 @@ class SmallProfile extends Component {
   //   };
 
   componentDidMount() {
-      this.setState({loggedInUser: this.props.username, friend: false})
-      console.log(this.props.username)
+    // console.log(this.props.username)
     if (this.props.username) {
+      console.log(this.props)
       this.checkFriend();
     }
   }
@@ -58,12 +58,14 @@ class SmallProfile extends Component {
       }
   };
 
-  checkFriend = () => {
+  checkFriend = async () => {
+    await this.setState({loggedInUser: this.props.username, friend: false})
     const { loggedInUser } = this.state;
-    axios
-      .get(`/api/users/user/${this.props.user_id_display}`, { loggedInUser })
+    console.log(loggedInUser)
+    await axios
+      .post(`/api/users/user/${this.props.user_id_display}`, { loggedInUser } )
       .then(result => {
-        console.log(result.data[0].count);
+        // console.log(result.data[0].count);
         if (result.data[0].count > 0) {
           this.setState({ friend: true });
         } else {this.setState({friend: false})}
@@ -71,6 +73,7 @@ class SmallProfile extends Component {
   };
 
   render() {
+    // console.log(this.props)
       if(this.props.username) {
           console.log(this.state.friend);
       }
