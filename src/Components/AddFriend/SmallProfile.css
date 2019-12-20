@@ -75,6 +75,10 @@
     
 }
 
+#same {
+    display: none
+}
+
 .profile .profile-btn {
     color: rgb(89, 106, 139)
 }
@@ -86,6 +90,7 @@
 .small-profile button:disabled {
     color: rgb(46, 44, 51);
 }
+
 
 
 

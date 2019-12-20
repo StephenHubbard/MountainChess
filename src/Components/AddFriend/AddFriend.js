@@ -3,9 +3,11 @@ import axios from "axios";
 // import { Link } from "react-router-dom";
 import SmallProfile from "./SmallProfile";
 import Loading from "../Loading/Loading";
+import "./AddFriend.css";
+import { connect } from "react-redux";
+import { updateUserInfo } from "../../ducks/reducer";
 
-
-export default class AddFriend extends Component {
+class AddFriend extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,17 +15,16 @@ export default class AddFriend extends Component {
       filteredUsers: [],
       search: "",
       loading: true,
-      username: '',
-      user_id: ''
+      username: "",
+      user_id: ""
     };
   }
 
   findUser = () => {
-    const {username} = this.state
+    const { username } = this.state;
     axios
-      .get("/api/user", {username})
+      .get("/api/user", { username })
       .then(res => {
-        console.log(res.data)
         this.setState({
           username: res.data.username,
           user_id: res.data.user_id
@@ -46,7 +47,7 @@ export default class AddFriend extends Component {
       .catch(err => {
         console.log(err);
       });
-      this.findUser();
+    this.findUser();
   }
 
   clearSearch = () => {
@@ -55,17 +56,15 @@ export default class AddFriend extends Component {
     });
   };
 
-
   filter = async () => {
     let arr = this.state.users.filter(el =>
       el.username.includes(this.state.search)
     );
-    
+
     await this.setState({
       filteredUsers: arr
     });
     console.log(this.state);
-    
   };
 
   handleChange = target => {
@@ -76,6 +75,52 @@ export default class AddFriend extends Component {
   render() {
     return (
       <>
+        {!this.props.username ? (
+          <div className="logged-out-container">
+            <h1 className="logged-out-h1">Log in to view all profiles!</h1>
+          </div>
+        ) : (
+          <>
+            {!this.state.loading && (
+              <div className="add-friend">
+                <div className="search">
+                  <input
+                    name="search"
+                    onChange={e => {
+                      this.handleChange(e.target);
+                      this.filter();
+                    }}
+                    value={this.state.search}
+                    placeholder="Search by Username"
+                  />
+                </div>
+                <div className="all">
+                <ul>
+                  {!this.state.search
+                    ? this.state.users.map(el => (
+                        <SmallProfile
+                          key={`${el.username} el.user_id`}
+                          usernameProp={el.username}
+                          email={el.username}
+                          portrait={el.portrait}
+                          user_id_display={el.user_id}
+                        />
+                      ))
+                    : this.state.filteredUsers.map(el => (
+                        <SmallProfile
+                          key={`${el.username} el.user_id`}
+                          usernameProp={el.username}
+                          email={el.username}
+                          portrait={el.portrait}
+                          user_id_display={el.user_id}
+                        />
+                      ))}
+                </ul>
+                </div>
+              </div>
+            )}
+          </>
+        )}
         {this.state.loading && (
           <>
             <div className="loading">
@@ -83,43 +128,13 @@ export default class AddFriend extends Component {
             </div>
           </>
         )}
-        {!this.state.loading && (<div className="add-friend">
-          <input
-            name="search"
-            onChange={e => {
-              this.handleChange(e.target);
-              this.filter();
-            }}
-            value={this.state.search}
-            placeholder="Search by Username"
-          />
-          <ul>
-            {!this.state.search
-              ? this.state.users.map(el => (
-                  <SmallProfile
-                    key={`${el.username} el.user_id`}
-                    usernameProp={el.username}
-                    email={el.username}
-                    portrait={el.portrait}
-                    user_id_display={el.user_id}
-                  />
-                ))
-              : this.state.filteredUsers.map(el => (
-                  <SmallProfile
-                    key={`${el.username} el.user_id`}
-                    usernameProp={el.username}
-                    email={el.username}
-                    portrait={el.portrait}
-                    user_id_display={el.user_id}
-                  />
-                ))}
-          </ul>
-        </div>)}
-        
       </>
     );
   }
 }
 
+function mapStateToProps(reduxState) {
+  return reduxState;
+}
 
-
+export default connect(mapStateToProps, { updateUserInfo })(AddFriend);

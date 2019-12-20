@@ -109,6 +109,7 @@ app.get('/api/users', userCtrl.getUser)
 app.get('/api/user', userCtrl.findUser)
 app.post('/api/addfriend/:user_id_display', userCtrl.addFriend)
 app.post('/api/users/user/:user_id_display', userCtrl.checkFriend)
+app.get(`/api/users/:user_id_display`, userCtrl.checkIfSame)
 
 // MASSIVE
 massive(CONNECTION_STRING)
