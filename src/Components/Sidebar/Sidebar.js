@@ -14,8 +14,8 @@ import io from 'socket.io-client'
 
 
 class Sidebar extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       open: false,
       username: "",
@@ -27,6 +27,7 @@ class Sidebar extends Component {
       portraits: [], 
       loggedInUsers: [],
       offlineUsers: [],
+      userFriends: [],
     };
     this.getUser = this.getUser.bind(this);
     this.getPortraits = this.getPortraits.bind(this);
@@ -42,12 +43,33 @@ class Sidebar extends Component {
     this.getPortraits();
   }
 
-  calcOfflineUsers() {
-    console.log(this.state.users)
-    console.log(this.state.loggedInUsers)
-    for (let i = 0; i < this.state.loggedInUsers.length; i++) {
-      console.log(this.state.loggedInUsers[i].username)
+  async calcOfflineUsers() {
+    // * Welcome to my wet code hell. -Stephen
+    let newArr1 = []
+    let newArr2 = []
+    let offlineUsers = []
+    let offlineUsersFull = []
+    for ( let i = 0; i < this.state.loggedInUsers.length; i++) {
+      await newArr1.push(this.state.loggedInUsers[i].username)
     }
+    for ( let i = 0; i < this.state.users.length; i++) {
+      await newArr2.push(this.state.users[i].username)
+    }
+    for (let i in newArr2) {
+      if (newArr1.indexOf(newArr2[i]) < 0){
+        offlineUsers.push(newArr2[i])
+      }
+    }
+    for (let i = 0; i < offlineUsers.length; i++) {
+      for (let k = 0; k < this.state.users.length; k++) {
+        if (this.state.users[k].username === offlineUsers[i]) {
+          offlineUsersFull.push(this.state.users[k])
+        }
+      }
+    }
+    await this.setState({
+      offlineUsers: offlineUsersFull
+    })
   }
 
   updateFollowedUsers(data) {
@@ -55,6 +77,31 @@ class Sidebar extends Component {
       loggedInUsers: data
     })
     this.calcOfflineUsers()
+    this.getUserFriends()
+  }
+
+  async getUserFriends(){
+    // console.log(this.state.users)
+    let friendArr = []
+    let friendUserIdArr = []
+    const { user_id } = this.props
+    await axios
+    .post('/api/getUserFriends', { user_id })
+    .then(res => {
+      friendArr = res.data
+    })
+    // .catch(err => console.log(err))
+    console.log(friendArr)
+    for (let i = 0; i < friendArr.length; i++) {
+      console.log(friendUserIdArr.indexOf(friendArr[i].user_1))
+      if (friendUserIdArr.indexOf(friendArr[i].user_1) === -1){
+        friendUserIdArr.push(friendArr[i].user_1)
+      }
+      if (friendUserIdArr.indexOf(friendArr[i].user_1) === -1){
+      friendUserIdArr.push(friendArr[i].user_2)
+      }
+    }
+    // console.log(friendUserIdArr)
   }
 
   getUser = () => {
@@ -106,6 +153,7 @@ class Sidebar extends Component {
         username: "",
         user_id: ""
       });
+      window.location.reload();
     });
   };
 
@@ -309,8 +357,18 @@ class Sidebar extends Component {
                       <button className="invite-btn">Invite</button>
                     </div>
                   </li>
-                  // console.log(el)
                 ))}
+                {this.state.offlineUsers.map(el =>  (
+                  <li className="friend-li" key={el.username}>
+                    <div className="friend">
+                      <div className="red offline-friend" />
+                      <img className="portrait-small" src={`/assets/ProfilePics/${el.portrait}`} alt="" />
+                      {el.username}
+                      <button className="invite-btn">Invite</button>
+                    </div>
+                  </li>
+                ))}
+
               </ul>
             </div>
             <div className="top-users">

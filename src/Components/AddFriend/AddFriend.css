@@ -1,0 +1,23 @@
+.logged-out-h1 {
+    color: grey;
+    font-size: 40px;
+    
+}
+
+.logged-out-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    margin-top: 300px;
+}
+
+.add-friend input{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.all ul {
+
+}
+

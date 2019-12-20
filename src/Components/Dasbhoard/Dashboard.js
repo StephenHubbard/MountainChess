@@ -31,8 +31,9 @@ class Dashboard extends Component {
   }
 
   async findGame() {
-    await axios.get("/game/getLastGame").then(res => {
-      console.log(res.data[0].max);
+    await axios
+    .get('/game/getLastGame') 
+    .then(res => {
       this.setState({
         lastGame: res.data[0].max + 1
       })
