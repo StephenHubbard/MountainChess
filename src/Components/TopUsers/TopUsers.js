@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import './TopUsers.css'
+import { withRouter } from 'react-router-dom'
 
 class TopUsers extends Component {
   constructor() {
@@ -49,4 +50,4 @@ function mapStateToProps(reduxState) {
   return reduxState;
 }
 
-export default connect(mapStateToProps, {})(TopUsers);
+export default withRouter(connect(mapStateToProps, {})(TopUsers));
