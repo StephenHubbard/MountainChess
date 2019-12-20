@@ -11,8 +11,8 @@ import UserPresence from "./UserPresence";
 import Friend from '../Friend/Friend'
 
 class Sidebar extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       open: false,
       username: "",
@@ -82,6 +82,7 @@ class Sidebar extends Component {
         username: "",
         user_id: ""
       });
+      window.location.reload();
     });
   };
 

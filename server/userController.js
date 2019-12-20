@@ -7,13 +7,14 @@ module.exports = {
       })
   },
 
-  addFriend: (req) => {
+  addFriend: (req, res) => {
     const {loggedInUser} = req.body;
-    const {user_id} = req.params;
+    const {user_id_display} = req.params;
     const db = req.app.get('db');
-    db.add_friend([loggedInUser, user_id])
-    .then(res => {
-      res.sendStatus(200)
+    // console.log(loggedInUser, user_id_display)
+    db.add_friend([loggedInUser, user_id_display])
+    .then(() => {
+      res.status(200)
     })
     .catch(err => console.log(err))
   },
@@ -24,6 +25,17 @@ module.exports = {
     db.find_user(username)
     .then(user => {
       res.status(200).send(user)
+    })
+    .catch(err => console.log(err))
+  },
+
+  checkFriend: (req, res) => {
+    const db = req.app.get('db');
+    const {loggedInUser} = req.body;
+    const {user_id_display} = req.params;
+    db.check_friend([loggedInUser, user_id_display])
+    .then(result => {
+      res.status(200).send(result)
     })
     .catch(err => console.log(err))
   }

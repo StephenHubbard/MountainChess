@@ -3,9 +3,9 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import SmallProfile from "./SmallProfile";
 import Loading from "../Loading/Loading";
-import { connect } from "http2";
 
-class AddFriend extends Component {
+
+export default class AddFriend extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -47,7 +47,6 @@ class AddFriend extends Component {
         console.log(err);
       });
       this.findUser();
-      console.log(this.props)
   }
 
   clearSearch = () => {
@@ -101,7 +100,7 @@ class AddFriend extends Component {
                     usernameProp={el.username}
                     email={el.username}
                     portrait={el.portrait}
-                    user_id={el.user_id}
+                    user_id_display={el.user_id}
                   />
                 ))
               : this.state.filteredUsers.map(el => (
@@ -109,7 +108,7 @@ class AddFriend extends Component {
                     usernameProp={el.username}
                     email={el.username}
                     portrait={el.portrait}
-                    user_id={el.user_id}
+                    user_id_display={el.user_id}
                   />
                 ))}
           </ul>
@@ -120,11 +119,5 @@ class AddFriend extends Component {
   }
 }
 
-function mapStateToProps(reduxState) {
-    const {username, user_id} = reduxState;
-    return {
-      username, user_id
-    };
-  }
 
-export default connect(mapStateToProps, {})(AddFriend)
+

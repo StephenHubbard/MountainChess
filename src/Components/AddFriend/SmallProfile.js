@@ -1,65 +1,95 @@
 import React, { Component } from "react";
 import "./SmallProfile.css";
-import axios from 'axios'
+import axios from "axios";
+import { connect } from "react-redux";
+import { updateUserInfo } from "../../ducks/reducer";
+import Swal from 'sweetalert2'
 
-export default class SmallProfile extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            friend: false,
-            loggedInUser: this.props.usernameDisplay,
-            user_id: ''
-        }
+class SmallProfile extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      friend: '',
+      loggedInUser: ''
+    };
+  }
+
+  // getUser = () => {
+  //     const {username} = this.state
+  //     axios
+  //       .get("/api/getUser", {username})
+  //       .then(res => {
+  //         console.log(res.data)
+  //         this.setState({
+  //           username: res.data.username,
+  //           user_id: res.data.user_id
+  //         });
+  //       })
+  //       .catch(err => console.log(err));
+  //   };
+
+  componentDidMount() {
+      this.setState({loggedInUser: this.props.username, friend: false})
+      console.log(this.props.username)
+    if (this.props.username) {
+      this.checkFriend();
     }
+  }
 
-    getUser = () => {
-        const {username} = this.state
+  addFriend = () => {
+      if(this.props.username){
+        const { loggedInUser } = this.state;
         axios
-          .get("/api/getUser", {username})
+          .post(`/api/addfriend/${this.props.user_id_display}`, { loggedInUser })
           .then(res => {
-            console.log(res.data)
             this.setState({
-              username: res.data.username,
-              user_id: res.data.user_id
+              friend: true
             });
           })
           .catch(err => console.log(err));
-      };
+      } else {
+        Swal.fire({
+            title: `You have to be logged in to do that!`,
+            icon: "warning",
+            confirmButtonText: 'Okay',
+            confirmButtonColor: "rgb(84, 84, 95)"
+          });
+          
+      }
+  };
 
-    componentDidMount() {
-        this.getUser();
-    }
-
-    addFriend = () => {
-        const {loggedInUser} = this.state
-        axios
-          .post(`/api/addfriend/${this.props.user_id}`, {loggedInUser})
-          .then(res => {
-              this.setState({
-                  friend: true
-              })
-          })
-          .catch(err => console.log(err))
-    }
+  checkFriend = () => {
+    const { loggedInUser } = this.state;
+    axios
+      .get(`/api/users/user/${this.props.user_id_display}`, { loggedInUser })
+      .then(result => {
+        console.log(result.data[0].count);
+        if (result.data[0].count > 0) {
+          this.setState({ friend: true });
+        } else {this.setState({friend: false})}
+      });
+  };
 
   render() {
-
+      if(this.props.username) {
+          console.log(this.state.friend);
+      }
     return (
       <div className="small-profile">
         <div className="profile">
           <div className="profile-box">
             <div className="left-box">
-                <img className="left-box-portrait" src={`/assets/ProfilePics/${this.props.portrait}`}/>
+              <img
+                className="left-box-portrait"
+                src={`/assets/ProfilePics/${this.props.portrait}`}
+              />
             </div>
             <div className="right-box">
               <div className="username">
-                 <h4>{this.props.usernameProp}</h4>
+                <h4>{this.props.usernameProp}</h4>
               </div>
-              <button
-                className="edit-btn"
-                onClick={() => console.log(this.state)}
-              >
-                Add Friend
+              <button disabled={this.state.friend} className="edit-btn" onClick={() => this.addFriend()}>
+                {!this.state.friend ? ('Add Friend') : ('Already Friended')}
               </button>
             </div>
           </div>
@@ -68,3 +98,9 @@ export default class SmallProfile extends Component {
     );
   }
 }
+
+function mapStateToProps(reduxState) {
+  return reduxState;
+}
+
+export default connect(mapStateToProps, { updateUserInfo })(SmallProfile);
