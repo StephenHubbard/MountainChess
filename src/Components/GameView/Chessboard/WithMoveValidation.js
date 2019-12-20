@@ -29,38 +29,27 @@ class HumanVsHuman extends Component {
             square: "",
             // array of past game moves
             history: [],
+            lastGameNum: '',
         };
         this.socket = io.connect(':7777')
         this.socket.on('game response', data => this.updateGame(data))
+        this.socket.on('last game number', data => this.updateLastGame(data))
     }
         
     async componentDidMount() {
+        console.log(this.state.lastGameNum)
         this.game = new Chess();
         this.socket.emit('new game', {g_id: 1})
-
-        // await this.setState({
-        //     fen: "rnbqkbnr/ppp1pppp/8/3p4/6P1/4P3/PPPP1P1P/RNBQKBNR b KQkq g3 0 2",
-        //     history: [
-        //         {
-        //         color: "w",
-        //         from: "c2",
-        //         to: "c3",
-        //         flags: "n",
-        //         piece: "p",
-        //         san: "c3",
-        //         }, 
-        //         {
-        //         color: "b",
-        //         from: "c7",
-        //         to: "c5",
-        //         flags: "b",
-        //         piece: "p",
-        //         san: "c5",
-        //         }
-        //     ]
-        // })
-        // await console.log(this.state)
         
+    }
+
+    updateLastGame(data) {
+        console.log("hit")
+        console.log(data)
+        this.setState({
+            lastGameNum: data + 1,
+        })
+        console.log(this.state.lastGameNum)
     }
 
     updateGame(data) { 

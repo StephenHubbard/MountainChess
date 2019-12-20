@@ -1,0 +1,1 @@
+SELECT username FROM chess_users WHERE user_id = $1;

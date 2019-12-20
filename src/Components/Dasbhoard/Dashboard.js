@@ -32,7 +32,6 @@ class Dashboard extends Component {
     await axios
     .get('/game/getLastGame') 
     .then(res => {
-      console.log(res.data[0].max)
       this.setState({
         lastGame: res.data[0].max + 1
       })

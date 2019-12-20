@@ -196,6 +196,10 @@ h4 {
   width: 100%;
 }
 
+.friend-offline {
+  color: rgb(167, 167, 167);
+}
+
 /* .friends-list{
   height: 100px;
   width: 100%;
@@ -331,7 +335,19 @@ h4 {
   justify-content: space-around;
   align-items: center;
   align-content: stretch;
-  border: 1px red solid;
+  /* border: 1px red solid; */
+}
+
+.sidebar button {
+    margin: 0 5px;
+  background: rgb(84, 84, 95);
+  border-radius: 5px;
+  color: ghostwhite;
+  border: none;
+  height: 25px;
+  font-size: 15px;
+  font-weight: 800;
+  font-family: 'PT Sans Caption', sans-serif;
 }
 
 .modal-registerInfo {
