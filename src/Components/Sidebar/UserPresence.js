@@ -36,7 +36,7 @@ class UserPresence extends Component {
 
   statusUpdate = () => {
     if (this.props.username) {
-      this.socket.emit('online', { room: 'online', username: this.props.username, profile_img: this.props.profile_img})
+      this.socket.emit('online', {room: 'online', username: this.props.username, profile_img: this.props.profile_img})
       // this.setState({ userOnline: 'green' })
     } 
   }

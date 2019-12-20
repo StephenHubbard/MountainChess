@@ -40,11 +40,10 @@ class Sidebar extends Component {
   }
 
   updateFollowedUsers(data) {
-    console.log(data)
     this.setState({
       loggedInUsers: data
     })
-    // console.log(this.state.loggedInUsers)
+    console.log(this.state.loggedInUsers)
   }
 
   getUser = () => {
@@ -64,15 +63,15 @@ class Sidebar extends Component {
 };
 
   getPortraits = () => {
-    axios
-      .get("/api/portraits")
-      .then(res => {
-        //console.log(res.data)
-        this.setState({
-          portraits: res.data
-        });
-      })
-      .catch(err => console.log(err));
+      axios
+        .get("/api/portraits")
+        .then(res => {
+          //console.log(res.data)
+          this.setState({
+            portraits: res.data
+          });
+        })
+        .catch(err => console.log(err));
     }
 
   updatePortrait = name => {
@@ -118,18 +117,19 @@ class Sidebar extends Component {
   };
   
   getUsers() {
-    // console.log('hit')
-    axios 
-      .get('/api/users')
-      .then(res => {
-        this.setState({
-          users: res.data
+    if (this.props.username) {
+      axios 
+        .get('/api/users')
+        .then(res => {
+          this.setState({
+            users: res.data
+          })
+          // console.log(this.state.users)
         })
-        // console.log(this.state.users)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+        .catch(err => {
+          console.log(err)
+        })
+    }
   }
 
   
@@ -284,11 +284,19 @@ class Sidebar extends Component {
               <h3>Logged In Users</h3>
               <ul>
                 {this.state.loggedInUsers.map(el =>  (
-                  <li key={el}><div className="friend">{el}<button className="invite-btn">Invite</button></div></li>
+                  <li className="friend-li" key={el.username}>
+                    <div className="friend">
+                      <img className="portrait-small" src={`/assets/ProfilePics/${el.portrait}`} alt="" />
+                      {el.username}
+                      <button className="invite-btn">Invite</button>
+                    </div>
+                  </li>
+                  // console.log(el)
                 ))}
               </ul>
             </div>
             <div className="top-users">
+              <h3>Top Users</h3>
               <ul>
                 <li>User1</li>
                 <li>User2</li>

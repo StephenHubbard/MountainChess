@@ -34,7 +34,7 @@ class Dashboard extends Component {
     .then(res => {
       console.log(res.data[0].max)
       this.setState({
-        lastGame: res.data[0].max
+        lastGame: res.data[0].max + 1
       })
     })
     let lastGame = this.state.lastGame

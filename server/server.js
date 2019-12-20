@@ -27,7 +27,6 @@ io.on('connection', socket => {
 
     socket.on('new game', data => {
         socket.join(`${data.g_id}`)
-        console.log(data.g_id)
         console.log(`User has joined game ${data.g_id}`)
     })
 
@@ -39,11 +38,14 @@ io.on('connection', socket => {
     // USER PRESENCE SOCKETS 
 
     socket.on('online', data => {
-        console.log(data)
         socket.join(data.room)
-        console.log(`user ${data.user} has connected to socket ${data.room}.`)
-        loggedInUsers.indexOf(data.user) === - 1 ? loggedInUsers.push(data.username) : console.log("user already logged in")
-        socket.broadcast.emit('all online users', loggedInUsers, data.profile_img)
+        console.log(`user ${data.username} has connected to socket '${data.room}'.`)
+        let newUser = {username: data.username, portrait: data.profile_img}
+        console.log(newUser)
+        console.log(loggedInUsers.indexOf(newUser))
+        loggedInUsers.indexOf(newUser) === -1 ? loggedInUsers.push(newUser) : console.log("user already logged in")
+        socket.broadcast.emit('all online users', loggedInUsers)
+        console.log(loggedInUsers)
     })
 
     // * CHALLENGE USER SOCKETS
