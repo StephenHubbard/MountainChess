@@ -48,7 +48,7 @@ export default class SmallProfile extends Component {
         <div className="profile">
           <div className="profile-box">
             <div className="left-box">
-                <img className="left-box-portrait" src={this.props.portrait}/>
+                <img className="left-box-portrait" src={this.props.portrait} alt=""/>
             </div>
             <div className="right-box">
               <div className="username">

@@ -17,14 +17,17 @@ const server = app.listen(SERVER_PORT, () => console.log(`Server is listening on
 // SOCKETS
 const io = socket(server)
 
+let loggedInUsers = []
+let limitUsers = []
 
 io.on('connection', socket => {
+
     // console.log('socket connected')
     
     // * GAME SOCKETS
 
     socket.on('new game', data => {
-        socket.join(data.g_id)
+        socket.join(`${data.g_id}`)
         console.log(`User has joined game ${data.g_id}`)
     })
 
@@ -37,8 +40,15 @@ io.on('connection', socket => {
 
     socket.on('online', data => {
         socket.join(data.room)
-        console.log(`user ${data.user} has connected to socket ${data.room}.`)
+        console.log(`user ${data.username} has connected to socket '${data.room}'.`)
+        let newUser = {username: data.username, portrait: data.profile_img}
+        // console.log(newUser)
+        // console.log(loggedInUsers.indexOf(newUser))
+        limitUsers.indexOf(data.username) === -1 ? limitUsers.push(data.username) & loggedInUsers.push(newUser) : console.log("user already logged in one")
+        // limitUsers.indexOf(data.username) === -1 ? loggedInUsers.push(newUser) : console.log("user already logged in two")
+        socket.broadcast.emit('all online users', loggedInUsers)
     })
+
     // * CHALLENGE USER SOCKETS
 
     socket.on('find a game', data => {
