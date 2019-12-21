@@ -207,20 +207,32 @@ class Sidebar extends Component {
     });
     return (
       <>
-        <div className="hamburger">
-          <i
-            className="fas fa-bars"
-            onClick={() => {
-              this.setState({ open: !open });
-              // console.log(this.state.open);
-            }}
-          />
-        </div>
+      {this.state.open ? (
+        null
+      ) : <div className="hamburger-closed">
+      <i
+        className="fas fa-bars"
+        onClick={() => {
+          this.setState({ open: !open });
+          // console.log(this.state.open);
+        }}
+      />
+      </div>}
+      
         {/* <div className={`sidebar-${open ? 'open' : ''}`}>
                 <h1>sidebarrrr</h1>
-            </div> */}
+              </div> */}
         <div className="sidebar-toggle">
           <div className={`sidebar ${open ? "open" : ""}`}>
+              <div className="hamburger-open">
+                <i
+                  className="fas fa-bars"
+                  onClick={() => {
+                    this.setState({ open: !open });
+                    // console.log(this.state.open);
+                  }}
+                />
+              </div>
             <div className="login-container">
               {this.props.user_id ? (
                 <div className="profile-div">

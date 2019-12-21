@@ -14,7 +14,7 @@ button {
 
 
 .sidebar {
-  height: 95%;
+  height: 100%;
   width: 300px;
   /* border: 1px solid yellow; */
   position: fixed;
@@ -31,11 +31,11 @@ button {
 }
 
 .sidebar.open {
-  height: 95%;
+  height: 100%;
   width: 300px;
   /* border: 1px solid yellow; */
   position: fixed;
-  top: 5%;
+  top: 0;
   /* transition: right 0.2s ease-in-out; */
   -webkit-animation: slide 0.5 forwards;
   animation: slide 0.5s forwards;
@@ -77,17 +77,26 @@ button {
   
 } */
 
-.hamburger {
+.hamburger-closed {
   margin-left: 2px;
-  display: flex;
   margin-top: 7px;
-  position: fixed;
+  top: 0px;
+  left: 0px;
+  position: absolute;
+}
+
+.hamburger-open {
+  margin-left: 2px;
+  margin-top: 7px;
+  top: 0px;
+  right: 8px;
+  position: absolute;
 }
 
 .profile-div {
   width: 245px;
   height: 20vh;
-  margin-top: 0;
+  margin-top: 20px;
   margin-left: 0;
   display: flex;
 	flex-direction: column;

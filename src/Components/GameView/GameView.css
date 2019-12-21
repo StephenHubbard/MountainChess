@@ -1,5 +1,12 @@
 .game-view {
+    display: flex;
     z-index: 0;
-    /* opacity: .88; */
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+    width: 300px;
+    margin-top: 20px;
 }
 
