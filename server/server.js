@@ -110,7 +110,7 @@ app.post('/api/getUserFriends', userCtrl.getUserFriends)
 app.get(`/api/users/:user_id_display`, userCtrl.checkIfSame)
 
 // GETTING TOP RANKED PLAYERs
-app.get('/api/users/elo', userCtrl.getTopUsers)
+app.get('/api/elo', userCtrl.getTopUsers)
 
 // MASSIVE
 massive(CONNECTION_STRING)

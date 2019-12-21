@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import './TopUsers.css'
-import { withRouter } from 'react-router-dom'
+// import { withRouter } from 'react-router-dom'
 
 class TopUsers extends Component {
   constructor() {
@@ -17,14 +17,13 @@ class TopUsers extends Component {
   }
 
   getTopUsers = () => {
-    // axios
-    //   .get('/api/users/elo')
-    //   .then(res => {
-    //     console.log(res.data)
-    //     this.setState({
-    //       topUsers: res.data
-    //   });
-    // })
+    axios
+      .get('/api/elo')
+      .then(res => {
+        this.setState({
+          topUsers: res.data
+      });
+    })
   }
 
   render() {
