@@ -53,8 +53,8 @@ class Sidebar extends Component {
     for ( let i = 0; i < this.state.loggedInUsers.length; i++) {
       await newArr1.push(this.state.loggedInUsers[i].username)
     }
-    for ( let i = 0; i < this.state.users.length; i++) {
-      await newArr2.push(this.state.users[i].username)
+    for ( let i = 0; i < this.state.userFriends.length; i++) {
+      await newArr2.push(this.state.userFriends[i].username)
     }
     for (let i in newArr2) {
       if (newArr1.indexOf(newArr2[i]) < 0){
@@ -62,47 +62,37 @@ class Sidebar extends Component {
       }
     }
     for (let i = 0; i < offlineUsers.length; i++) {
-      for (let k = 0; k < this.state.users.length; k++) {
-        if (this.state.users[k].username === offlineUsers[i]) {
-          offlineUsersFull.push(this.state.users[k])
+      for (let k = 0; k < this.state.userFriends.length; k++) {
+        if (this.state.userFriends[k].username === offlineUsers[i]) {
+          offlineUsersFull.push(this.state.userFriends[k])
         }
       }
     }
     await this.setState({
       offlineUsers: offlineUsersFull
     })
+    console.log(this.state.offlineUsers)
   }
 
-  updateFollowedUsers(data) {
+  async updateFollowedUsers(data) {
     this.setState({
       loggedInUsers: data
     })
-    this.calcOfflineUsers()
-    this.getUserFriends()
+    await this.getUserFriends()
+    await this.calcOfflineUsers()
   }
 
   async getUserFriends(){
     // console.log(this.state.users)
-    let friendArr = []
-    let friendUserIdArr = []
     const { user_id } = this.props
     await axios
     .post('/api/getUserFriends', { user_id })
     .then(res => {
-      friendArr = res.data
+      this.setState({
+        userFriends: res.data
+      })
     })
-    // .catch(err => console.log(err))
-    console.log(friendArr)
-    for (let i = 0; i < friendArr.length; i++) {
-      console.log(friendUserIdArr.indexOf(friendArr[i].user_1))
-      if (friendUserIdArr.indexOf(friendArr[i].user_1) === -1){
-        friendUserIdArr.push(friendArr[i].user_1)
-      }
-      if (friendUserIdArr.indexOf(friendArr[i].user_1) === -1){
-      friendUserIdArr.push(friendArr[i].user_2)
-      }
-    }
-    // console.log(friendUserIdArr)
+    .catch(err => console.log(err))
   }
 
   getUser = () => {
@@ -347,7 +337,7 @@ class Sidebar extends Component {
               )}
             </div>
             <div className="friends-list" id="style-2">
-              <h3>Logged In Users</h3>
+              <h3>Friends</h3>
               <ul>
                 {this.state.loggedInUsers.map(el =>  (
                   <li className="friend-li" key={el.username}>

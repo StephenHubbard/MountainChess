@@ -31,7 +31,6 @@ class SmallProfile extends Component {
 
   componentDidMount() {
     if (this.props.username) {
-      console.log(this.props)
       this.checkFriend();
       this.checkIfSame();
     }

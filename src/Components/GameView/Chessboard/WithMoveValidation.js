@@ -37,19 +37,15 @@ class HumanVsHuman extends Component {
     }
         
     async componentDidMount() {
-        console.log(this.state.lastGameNum)
         this.game = new Chess();
         this.socket.emit('new game', {g_id: 1})
         
     }
 
     updateLastGame(data) {
-        console.log("hit")
-        console.log(data)
         this.setState({
             lastGameNum: data + 1,
         })
-        console.log(this.state.lastGameNum)
     }
 
     updateGame(data) { 
