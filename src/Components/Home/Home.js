@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import Sidebar from "../Sidebar/Sidebar";
 import io from "socket.io-client";
 import { connect } from "react-redux";
 import { updateUserInfo } from "../../ducks/reducer";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import axios from 'axios';
 import "./Home.css";
 

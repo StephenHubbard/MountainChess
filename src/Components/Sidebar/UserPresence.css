@@ -1,13 +1,14 @@
 .red {
-  height: 8px;
-  width: 8px;
+  height: 13px;
+  width: 13px;
   border-radius: 50%;
-  background-color: red;
+  background-color: rgba(255, 0, 0, .1);
+  border: 1px solid white;
 }
 
 .green {
-  height: 8px;
-  width: 8px;
+  height: 14px;
+  width: 14px;
   border-radius: 50%;
   background-color: green;
 }

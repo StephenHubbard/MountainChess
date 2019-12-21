@@ -7,14 +7,14 @@ import { connect } from 'react-redux';
 // import Swal from 'sweetalert2';
 
 class Login extends Component {
-  state = {
-    username: "",
-    password: ""
-  };
+    state = {
+        username: "",
+        password: ""
+    };
 
-  handleChange = (key, value) => {
-    this.setState({ [key]: value });
-  };
+    handleChange = (key, value) => {
+        this.setState({ [key]: value });
+    };
 
     login = () => {
         // console.log(this.state.username, this.state.password)

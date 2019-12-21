@@ -23,14 +23,15 @@ class TopUsers extends Component {
         this.setState({
           topUsers: res.data
       });
+      console.log(this.state.topUsers)
     })
   }
 
   render() {
     return (
-      <ul>
+      <ul >
         {this.state.topUsers.map(el =>  (
-          <li className="top-user-li" key={el.username}>
+          <li className="top-user-li" key={el.username} >
             <img className="portrait-small" src={`/assets/ProfilePics/${el.portrait}`} alt="" />
             <div className="top-user-username">
               {el.username}

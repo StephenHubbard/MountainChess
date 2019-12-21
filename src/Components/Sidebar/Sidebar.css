@@ -59,8 +59,13 @@ button {
 }
 .sidebar li {
   background-color: #26272b;
-  width: 90%;
-  margin: 0px 0;
+  min-width: 90%;
+  margin: 0px;
+  height: 30px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 
@@ -167,11 +172,11 @@ h4 {
   color: white;
   position: relative;
   font-size: 25px;
-  overflow-y: scroll;
+  overflow-y: auto;
   /* border: 1px red solid; */
 }
 
-#style-2::-webkit-scrollbar-track
+#scroll-style::-webkit-scrollbar-track
 {
   box-shadow: 1px 1pxe;
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
@@ -180,7 +185,7 @@ h4 {
   
 }
 
-#style-2::-webkit-scrollbar
+#scroll-style::-webkit-scrollbar
 {
 	border-radius: 10px;
 
@@ -189,7 +194,7 @@ h4 {
   
 }
 
-#style-2::-webkit-scrollbar-thumb
+#scroll-style::-webkit-scrollbar-thumb
 {
   border-radius: 10px;
   box-shadow: 1px 1px;
@@ -209,14 +214,6 @@ h4 {
   color: rgb(167, 167, 167);
 }
 
-/* .friends-list{
-  height: 100px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  margin-top: 100px;
-} */
 
 .offline-online {
   height: 9px;
@@ -242,6 +239,7 @@ h4 {
   width: 100%;
   margin-bottom: 10%;
   color: white;
+  overflow: auto;
   /* border: 1px blue solid; */
 }
 
@@ -271,6 +269,7 @@ h4 {
   -webkit-animation: fadein 1s;
   animation: fadein 1s;
   z-index: 10;
+  border-radius: 10px;
 
   /* border: 1px salmon solid; */
 }
@@ -324,6 +323,7 @@ h4 {
   -webkit-animation: fadein 1s;
   animation: fadein 1s;
   z-index: 10;
+  border-radius: 10px;
   /* border: 1px salmon solid; */
 }
 

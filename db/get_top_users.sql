@@ -1,1 +1,1 @@
-SELECT * FROM chess_users ORDER BY elo DESC LIMIT 5;
+SELECT * FROM chess_users ORDER BY elo DESC LIMIT 10;

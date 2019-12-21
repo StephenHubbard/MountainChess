@@ -348,7 +348,7 @@ class Sidebar extends Component {
                 </div>
               )}
             </div>
-            <div className="friends-list" id="style-2">
+            <div className="friends-list" id="scroll-style">
               <h3>Friends</h3>
               <ul>
                 {this.state.loggedInUsers.map(el =>  (
@@ -366,7 +366,7 @@ class Sidebar extends Component {
                     <div className="friend">
                       <div className="red offline-friend" />
                       <img className="portrait-small" src={`/assets/ProfilePics/${el.portrait}`} alt="" />
-                      {el.username}
+                      {el.username.substring(0,8)}
                       <button className="invite-btn">Invite</button>
                     </div>
                   </li>
@@ -374,7 +374,7 @@ class Sidebar extends Component {
 
               </ul>
             </div>
-            <div className="top-users">
+            <div className="top-users" id="scroll-style">
               <h3>Top Users</h3>
               <TopUsers/>
             </div>
