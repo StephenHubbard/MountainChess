@@ -249,6 +249,16 @@ class Sidebar extends Component {
                   </button>
                 </div>
               ) : (
+                <div>
+                <div className="profile-div">
+                  <img
+                    // src="https://engineering.mit.edu/wp-content/uploads/blank-profile-picture.png"
+                    className="profile-picture"
+                    alt=""
+                    src={`/assets/ProfilePics/blank-profile.png`}
+                    />
+                  <h4>Guest</h4>
+                </div>
                 <div className="login-div">
                   <button id="login-button" onClick={() => this.loginModalFn()}>
                     Login
@@ -256,6 +266,7 @@ class Sidebar extends Component {
                   <button id="register-button" onClick={this.registerModalFn}>
                     Register
                   </button>
+                </div>
                 </div>
               )}
 
@@ -349,6 +360,8 @@ class Sidebar extends Component {
               )}
             </div>
             <div className="friends-list" id="scroll-style">
+              {this.props.username ? (
+              <div>
               <h3>Friends</h3>
               <ul>
                 {this.state.loggedInUsers.map(el =>  (
@@ -356,7 +369,7 @@ class Sidebar extends Component {
                     <div className="friend">
                       <div className="green" />
                       <img className="portrait-small" src={`/assets/ProfilePics/${el.portrait}`} alt="" />
-                      {el.username}
+                      <h5>{el.username}</h5>
                       <button className="invite-btn">Invite</button>
                     </div>
                   </li>
@@ -366,13 +379,16 @@ class Sidebar extends Component {
                     <div className="friend">
                       <div className="red offline-friend" />
                       <img className="portrait-small" src={`/assets/ProfilePics/${el.portrait}`} alt="" />
-                      {el.username.substring(0,8)}
+                      <h5>{el.username.substring(0,8)}</h5>
                       <button className="invite-btn">Invite</button>
                     </div>
                   </li>
                 ))}
-
               </ul>
+              </div>
+              ) : 
+              <h5>Login to see other online Users</h5>
+              }
             </div>
             <div className="top-users" id="scroll-style">
               <h3>Top Users</h3>

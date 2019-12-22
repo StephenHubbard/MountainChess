@@ -1,9 +1,8 @@
 .red {
-  height: 13px;
-  width: 13px;
+  height: 11px;
+  width: 11px;
   border-radius: 50%;
-  background-color: rgba(255, 0, 0, .1);
-  border: 1px solid white;
+  border: 2px solid ghostwhite;
 }
 
 .green {
@@ -11,4 +10,5 @@
   width: 14px;
   border-radius: 50%;
   background-color: green;
+  
 }
