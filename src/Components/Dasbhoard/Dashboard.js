@@ -31,7 +31,20 @@ class Dashboard extends Component {
             {/* <h1 className="title"> Mountain Chess </h1> */}
           </div>
         </Link>
-        
+        <nav className="dashboard-nav stroke">
+          <Link to="/">
+            <li>Home</li>
+          </Link>
+          <Link to="/users">
+            <li>All Users</li>
+          </Link>
+          <Link to="/profile/1">
+            <li>My Profile</li>
+          </Link>
+          <Link to="/about">
+            <li>About</li>
+          </Link>
+        </nav>
       </div>
     );
   }

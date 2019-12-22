@@ -23,7 +23,6 @@ class TopUsers extends Component {
         this.setState({
           topUsers: res.data
       });
-      console.log(this.state.topUsers)
     })
   }
 
