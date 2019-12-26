@@ -49,6 +49,16 @@
   text-align: center;
 }
 
+a {
+  text-decoration: none;
+  border: none;
+}
+
+a:hover {
+  border: none;
+  text-decoration: none;
+}
+
 .dashboard-nav li {
   list-style-type: none;
   transition: 0.3s ease;
@@ -64,10 +74,6 @@
   border-bottom: 2px solid ghostwhite;
   padding: 0px 0px; 
   cursor: pointer;
-}
-
-a {
-  text-decoration: none;
 }
 
 

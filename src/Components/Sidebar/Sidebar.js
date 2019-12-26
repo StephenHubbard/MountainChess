@@ -194,12 +194,10 @@ class Sidebar extends Component {
   }
 
   inviteFriend(friend) {
-    console.log(friend)
     this.socket.emit('challenge user', {challenger: this.props.username, challengee: friend})
   }
 
   challengeAlert(data) {
-    console.log(data)
 
     if (this.props.username === data.challengee) {
       const swalWithBootstrapButtons = Swal.mixin({
@@ -224,9 +222,9 @@ class Sidebar extends Component {
         cancelButtonAriaLabel: 'Thumbs down'
       }).then((result) => {
         if (result.value) {
-          swalWithBootstrapButtons.fire(
+          Swal.fire(
             this.props.history.push('/game/7'),
-            'Good Luck!',
+            `<strong>Good Luck!</strong>`,
             'success',
           )
           this.socket.emit('challenge accepted', {challenger: data.challenger, challengee: data.challengee})
@@ -438,7 +436,7 @@ class Sidebar extends Component {
                       <div className="green" />
                       <img className="portrait-small" src={`/assets/ProfilePics/${el.portrait}`} alt="" />
                       <h5>{el.username}</h5>
-                      <button className="invite-btn" onClick={() => this.inviteFriend(el.username)}>Invite</button>
+                      <button className="invite-btn" onClick={() => this.inviteFriend(el.username)}>Challenge</button>
                     </div>
                   </li>
                 ))}

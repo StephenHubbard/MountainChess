@@ -560,6 +560,6 @@ align-items: center;
   width: 25px;
 }
 
-.btn-success {
-  
+.invite-btn {
+  min-width: 90px;
 }
