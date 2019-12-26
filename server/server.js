@@ -74,6 +74,31 @@ io.on('connection', socket => {
         // console.log(`user has joined friend list ${data.friend_list}`)
         io.to(data.friend_list).emit('')
     })
+
+    // * CHAT SOCKETS
+
+    socket.on('join game room', data => {
+        socket.join(data.room)
+    })
+
+    socket.on('blast to game room', data => {
+        io.to('game room').emit('room response', data)
+    })
+
+    socket.on('typing', data => {
+    if (data.room !== 'global') {
+            socket.to(data.room).broadcast.emit('typing')
+        } else {
+            socket.broadcast.emit('typing')
+        }
+    })
+
+    socket.on('stopped typing', data => {
+    if (data.room !== 'global') {
+            socket.to(data.room).broadcast.emit('stopped typing')
+        }
+            socket.broadcast.emit('stopped typing')
+    })
 })
 
 // END SOCKETS

@@ -21,7 +21,8 @@ class Demo extends Component {
     justifyContent: "space-around",
     alignItems: "center",
     flexWrap: "wrap",
-    width: "100vw",
-    marginTop: 30,
+    width: "40vw",
+    marginTop: 40,
+    marginRight: 10,
     marginBottom: 50
     };
