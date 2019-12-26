@@ -19,6 +19,7 @@ const io = socket(server)
 
 let loggedInUsers = []
 let limitUsers = []
+let connectedUsers = {}
 
 io.on('connection', socket => {
 
@@ -44,6 +45,7 @@ io.on('connection', socket => {
         let newUser = {username: data.username, portrait: data.profile_img}
         limitUsers.indexOf(data.username) === -1 ? limitUsers.push(data.username) & loggedInUsers.push(newUser) : console.log("user already logged in one")
         socket.broadcast.emit('all online users', loggedInUsers)
+        connectedUsers[data.username] = socket.id
     })
 
     // * CHALLENGE USER SOCKETS
@@ -55,7 +57,16 @@ io.on('connection', socket => {
     })
 
     socket.on('challenge user', data => {
+        // connectedUsers[data.challengee].join(1337)
+        // console.log(connectedUsers[data.challengee].socket.id)
+        // console.log(connectedUsers)
+        // console.log(connectedUsers[data.challengee])
         console.log(`user ${data.challenger} has challenged ${data.challengee} to a new game`)
+        socket.broadcast.emit('new game challenge', {challenger: data.challenger, challengee: data.challengee}, connectedUsers[data.challengee])
+    })
+
+    socket.on('challenge accepted', data => {
+        socket.broadcast.emit('challenge was accepted', {challenger: data.challenger, challengee: data.challengee}, connectedUsers[data.challenger])
     })
 
     socket.on('I have friends', data => {
@@ -66,7 +77,6 @@ io.on('connection', socket => {
 })
 
 // END SOCKETS
-
 
 app.use(require("body-parser").text())
 

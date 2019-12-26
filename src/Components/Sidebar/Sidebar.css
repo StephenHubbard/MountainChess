@@ -271,7 +271,6 @@ h4 {
   background-color: rgba(0,0,0,0.4);
   -webkit-animation: fadein 1s;
   animation: fadein 1s;
-  z-index: 10;
   border-radius: 10px;
 
   /* border: 1px salmon solid; */
@@ -559,4 +558,8 @@ align-items: center;
 .portrait-small {
   height: 25px;
   width: 25px;
+}
+
+.btn-success {
+  
 }

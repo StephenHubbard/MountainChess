@@ -12,6 +12,12 @@ import TopUsers from './../TopUsers/TopUsers'
 // import UserPresence from "./UserPresence";
 // import Friend from '../Friend/Friend'
 import io from 'socket.io-client'
+// import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Swal from 'sweetalert2/src/sweetalert2.js'
+import {withRouter} from 'react-router-dom'
+
+
 
 
 class Sidebar extends Component {
@@ -35,6 +41,8 @@ class Sidebar extends Component {
     this.loginModalToggle = this.loginModalToggle.bind(this);
     this.socket = io.connect(':7777')
     this.socket.on('all online users', data => this.updateFollowedUsers(data))
+    this.socket.on('new game challenge', data => this.challengeAlert(data))
+    this.socket.on('challenge was accepted', data => this.challengeAccepted(data))
 
   }
 
@@ -71,7 +79,6 @@ class Sidebar extends Component {
     await this.setState({
       offlineUsers: offlineUsersFull
     })
-    console.log(this.state.offlineUsers)
   }
 
   async updateFollowedUsers(data) {
@@ -186,7 +193,66 @@ class Sidebar extends Component {
         })
   }
 
+  inviteFriend(friend) {
+    console.log(friend)
+    this.socket.emit('challenge user', {challenger: this.props.username, challengee: friend})
+  }
+
+  challengeAlert(data) {
+    console.log(data)
+
+    if (this.props.username === data.challengee) {
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
   
+      Swal.fire({
+        title: `<strong>${data.challenger} has challenged you to a game!</strong>`,
+        icon: 'warning',
+        showCloseButton: true,
+        showCancelButton: true,
+        focusConfirm: false,
+        confirmButtonText:
+          '<i class="fa fa-thumbs-up"></i> Accept!',
+        confirmButtonAriaLabel: 'Thumbs up, great!',
+        cancelButtonText:
+          '<i class="fa fa-thumbs-down"></i>',
+        cancelButtonAriaLabel: 'Thumbs down'
+      }).then((result) => {
+        if (result.value) {
+          swalWithBootstrapButtons.fire(
+            this.props.history.push('/game/7'),
+            'Good Luck!',
+            'success',
+          )
+          this.socket.emit('challenge accepted', {challenger: data.challenger, challengee: data.challengee})
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            'Declined',
+            `${data.challenger} will be alerted of your cowardness`,
+            'error'
+          )
+        }
+      })
+    }
+  }
+
+  challengeAccepted(data) {
+    if (this.props.username === data.challenger) {
+      this.props.history.push('/game/7')
+      Swal.fire({
+        title: `<strong>${data.challengee} has accepted your challenge`,
+        icon: 'success',
+      })
+    }
+  }
 
   render() {
     const { open } = this.state;
@@ -359,6 +425,8 @@ class Sidebar extends Component {
                 </div>
               )}
             </div>
+
+            {/* <ToastContainer /> */}
             <div className="friends-list" id="scroll-style">
               {this.props.username ? (
               <div>
@@ -370,7 +438,7 @@ class Sidebar extends Component {
                       <div className="green" />
                       <img className="portrait-small" src={`/assets/ProfilePics/${el.portrait}`} alt="" />
                       <h5>{el.username}</h5>
-                      <button className="invite-btn">Invite</button>
+                      <button className="invite-btn" onClick={() => this.inviteFriend(el.username)}>Invite</button>
                     </div>
                   </li>
                 ))}
@@ -380,7 +448,7 @@ class Sidebar extends Component {
                       <div className="red offline-friend" />
                       <img className="portrait-small" src={`/assets/ProfilePics/${el.portrait}`} alt="" />
                       <h5>{el.username.substring(0,8)}</h5>
-                      <button className="invite-btn">Invite</button>
+                      <button className="invite-btn">Offline</button>
                     </div>
                   </li>
                 ))}
@@ -406,4 +474,4 @@ function mapStateToProps(reduxState) {
   return reduxState;
 }
 
-export default connect(mapStateToProps, { updateUserInfo })(Sidebar);
+export default withRouter(connect(mapStateToProps, { updateUserInfo })(Sidebar));
