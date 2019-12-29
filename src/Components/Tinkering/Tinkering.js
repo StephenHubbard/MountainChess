@@ -14,14 +14,14 @@ export default class tinkering extends Component {
                             "a3", "b3", "c3", "d3", "e3", "f3", "g3", "h3",
                             "a2", "b2", "c2", "d2", "e2", "f2", "g2", "h2",
                             "a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1"]
-        const startingPlacement = [ "blank", "blank", "blank", "blank", "blank", "blank", "blank", "blank",
+        const startingPlacement = [ "bR", "bN", "bB", "bQ", "bK", "bB", "bN", "bR",
                                     "bp", "bp", "bp", "bp", "bp", "bp", "bp", "bp",
-                                    "blank", "blank", "blank", "blank", "blank", "blank", "blank", "blank",
-                                    "blank", "blank", "blank", "blank", "blank", "blank", "blank", "blank",
-                                    "blank", "blank", "blank", "blank", "blank", "blank", "blank", "blank",
-                                    "blank", "blank", "blank", "blank", "blank", "blank", "blank", "blank",
-                                    "blank", "blank", "blank", "blank", "blank", "blank", "blank", "blank",
-                                    "blank", "blank", "blank", "blank", "blank", "blank", "blank", "blank",]
+                                    "", "", "", "", "", "", "", "",
+                                    "", "", "", "", "", "", "", "",
+                                    "", "", "", "", "", "", "", "",
+                                    "", "", "", "", "", "", "", "",
+                                    "wp", "wp", "wp", "wp", "wp", "wp", "wp", "wp",
+                                    "wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR",]
         // Draws Chessboard
         for (var i = 0; i < 64; i++){
             let newCell = document.getElementById("mainChessBoard").appendChild(document.createElement("div"))
@@ -33,10 +33,18 @@ export default class tinkering extends Component {
         for ( var i = 0; i < 64; i ++) {
             if (startingPlacement[i] === "bp") {
                 let startingPiece = document.getElementById(chessGrid[i]).appendChild(document.createElement("img"))
-                startingPiece.src = "/assets/Pieces/pawn.png"
+                startingPiece.src = "/assets/Pieces/pawn-b.png"
                 startingPiece.className = "piece"
+                startingPiece.id = "b"
+            }
+            if (startingPlacement[i] === "wp") {
+                let startingPiece = document.getElementById(chessGrid[i]).appendChild(document.createElement("img"))
+                startingPiece.src = "/assets/Pieces/pawn-w.png"
+                startingPiece.className = "piece"
+                startingPiece.id = "w"
             }
         }
+        console.log(startingPlacement)
     }
 
     

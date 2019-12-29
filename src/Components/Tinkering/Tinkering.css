@@ -50,7 +50,15 @@
 }
 
 .piece {
-    width: 70px;
-    height: 70px;
-    margin-top: 5px;
+    width: 60px;
+    height: 60px;
+    margin-top: 10px;
+}
+
+#w {
+    filter: drop-shadow(0mm 0mm .2rem rgb(0, 0, 0));
+}
+
+#b {
+    filter: drop-shadow(0mm 0mm .2rem rgb(0, 0, 0));
 }
