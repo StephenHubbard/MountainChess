@@ -14,7 +14,7 @@ import TopUsers from './../TopUsers/TopUsers'
 import io from 'socket.io-client'
 // import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Swal from 'sweetalert2/src/sweetalert2.js'
+import Swal from 'sweetalert2'
 import {withRouter} from 'react-router-dom'
 
 
@@ -358,7 +358,7 @@ class Sidebar extends Component {
                       </div>
                       <div className="modal-loginInfo">
                         <Login 
-                        loginModalActivateFn = {this.loginModalToggle}
+                          loginModalActivateFn = {this.loginModalToggle}
                         />
                       </div>
                     </div>

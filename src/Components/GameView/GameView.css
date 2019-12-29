@@ -67,6 +67,7 @@ h1 {
     position: relative;
     right: 0px;
     margin-left: 5px;
+    margin: 10px 0px;
 }
 
 .message {
@@ -74,11 +75,12 @@ h1 {
     position: relative;
     margin-right: 5px;
     justify-content: flex-end;
-    flex-wrap: wrap;
+    margin: 10px 0px;
 
 }
 
 .messages {
     width: 100%;
-    flex-wrap: wrap;
+    position: absolute;
+    top: 0px;
 }

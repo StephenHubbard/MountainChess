@@ -1,0 +1,50 @@
+#mainChessBoard
+{
+    width:650px;
+    height:650px;
+    margin-top: 50px;
+    border: 5px solid black;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#mainChessBoard div {
+    width:80px;
+    height:80px;
+}
+
+.border-letters h1 {
+    color: white;
+    font-size: 2rem;
+    margin: 0;
+}
+
+.border-letters .bottom-letters {
+    display: flex;
+    flex-direction: row;
+    width: 650px;
+    margin-top: 10px;
+    position: absolute;
+    bottom: -60px;
+}
+
+.left-numbers {
+    display: flex;
+    flex-direction: column;
+    height: 650px;
+    justify-content: space-around;
+    position: absolute;
+    left: -180px;
+    top: 40px;
+}
+
+.border-letters {
+    width: 680px;
+    height: 680px;
+    position: relative;
+    top: -700px;
+}
+
+.left-numbers h1 {
+    margin: 0px;
+}

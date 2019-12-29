@@ -16,9 +16,15 @@ export default class About extends Component {
             <div className="names-cont">
                 <div className="name">
                     <h2>Stephen Hubbard:</h2>
-                    <img className="linkedin-logo" src="https://icons-for-free.com/iconfiles/png/512/linkedin+linkedin+logo+networking+social+media+icon-1320196081476022403.png" alt=""/>
-                    <img className="github-logo" src="http://pngimg.com/uploads/github/github_PNG83.png" alt=""/>
-                    <h2>stephen-hubbard.com</h2>
+                    <a href="https://www.linkedin.com/in/stephenhubbard88/">
+                        <img className="linkedin-logo" src="https://icons-for-free.com/iconfiles/png/512/linkedin+linkedin+logo+networking+social+media+icon-1320196081476022403.png" alt=""/>
+                    </a>
+                    <a href="https://github.com/StephenHubbard">
+                        <img className="github-logo" src="http://pngimg.com/uploads/github/github_PNG83.png" alt=""/>
+                    </a>
+                    <a href="https://www.stephen-hubbard.com">
+                        <h2>stephen-hubbard.com</h2>
+                    </a>
                 </div>
                 <div className="name">
                     <h2>Rob Reiss:</h2>

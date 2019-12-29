@@ -59,7 +59,6 @@ class GameView extends Component {
     }
 
     updateMessages = data => {
-        console.log(data)
         this.setState({
             messages: [...this.state.messages, {message: data.message, username: data.username}],
             userTyping: false,
@@ -103,28 +102,28 @@ class GameView extends Component {
                 <div className="game-row">
                     <Demo />
                     <div className="chat-cont">
-                    <div className="messages">
-                        {messages}
-                    </div>
-                {this.state.userTyping && (
-                    <h4 className="typing-message">User Typing...</h4>
-                )}
-                    <div className="input-btn-div">
-                        <input 
-                            type="text"
-                            name="message"
-                            className="chat-input" 
-                            placeholder="Message..."
-                            value={this.state.message}
-                            onChange={this.handleChange}
-                            onKeyPress={event => {
-                                if (event.key === 'Enter') {
-                                    this.blast()
-                                }
-                            }}
-                        />
-                        <button className="send-btn" onClick={this.blast}>Send</button>
-                    </div>
+                        <div className="messages">
+                            {messages}
+                        </div>
+                        {this.state.userTyping && (
+                            <h4 className="typing-message">User Typing...</h4>
+                        )}
+                        <div className="input-btn-div">
+                            <input 
+                                type="text"
+                                name="message"
+                                className="chat-input" 
+                                placeholder="Message..."
+                                value={this.state.message}
+                                onChange={this.handleChange}
+                                onKeyPress={event => {
+                                    if (event.key === 'Enter') {
+                                        this.blast()
+                                    }
+                                }}
+                            />
+                            <button className="send-btn" onClick={this.blast}>Send</button>
+                        </div>
                     </div>
                 </div>
             </div>
