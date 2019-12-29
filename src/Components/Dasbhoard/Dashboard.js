@@ -44,6 +44,9 @@ class Dashboard extends Component {
           <Link to="/about">
             <li>About</li>
           </Link>
+          <Link to="/tinkering">
+            <li>Chess</li>
+          </Link>
         </nav>
       </div>
     );

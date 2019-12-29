@@ -48,3 +48,9 @@
 .left-numbers h1 {
     margin: 0px;
 }
+
+.piece {
+    width: 70px;
+    height: 70px;
+    margin-top: 5px;
+}
