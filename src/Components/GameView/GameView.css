@@ -1,5 +1,86 @@
 .game-view {
+    display: flex;
     z-index: 0;
-    /* opacity: .88; */
+    align-items: center;
+    flex-direction: column;
 }
 
+h1 {
+    width: 300px;
+    margin-top: 20px;
+}
+
+.chat-cont {
+    position: relative;
+    height: 65vh;
+    width: 25vw;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    margin-top: 0px;
+    margin-right: -200px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    background-color: #eeeeee;
+    justify-content: space-between;
+    border-radius: 3px;
+}
+
+.game-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-input {
+    width: 80%;
+    position: absolute;
+    bottom: 0px;
+}
+
+.input-btn-div {
+    position: absolute;
+    bottom: 0px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.send-btn {
+    position: absolute;
+    width: 20%;
+    bottom: 0px;
+    right: 0px;
+    border: 1px solid rgb(122, 122, 122);
+    border-left: none;
+    height: 30px;
+}
+
+.typing-message {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    margin-bottom: 40px;
+}
+
+.my-message {
+    display: flex;
+    position: relative;
+    right: 0px;
+    margin-left: 5px;
+    margin: 10px 0px;
+}
+
+.message {
+    display: flex;
+    position: relative;
+    margin-right: 5px;
+    justify-content: flex-end;
+    margin: 10px 0px;
+
+}
+
+.messages {
+    width: 100%;
+    position: absolute;
+    top: 0px;
+}

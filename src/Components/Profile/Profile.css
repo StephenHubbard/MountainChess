@@ -1,5 +1,24 @@
 .big-profile h1 {
     font-size: 50px;
+    color: ghostwhite;
+}
+
+.chart-row {
+    height: 50vh;
+    width: 60vw;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    z-index: 5;
+    border: 1px solid black;
+    background: #3a4046; 
+    border-radius: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    margin-top: 50px;
 }
 
 

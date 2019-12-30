@@ -3,7 +3,7 @@
   width: 600px;
   height: 100px;
   left: 0%;
-  margin-top: 0px;
+  margin-top: 20px;
   background-image: url("/assets/Logos/MtChessLogo3-red.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
@@ -13,7 +13,6 @@
   color: white;
   display: inline-block;
   /* border: 1px blue solid; */
-  z-index: 10;
 }
 
 .fa-bars {
@@ -38,15 +37,42 @@
   left: 0
 }
 
-.two-btns button{
-  color: rgb(190, 190, 190);
-  margin: 0 5px;
-  background: rgb(84, 84, 95);
-  border-radius: 5px;
-  border: none;
-  height: 25px;
-  font-size: 15px;
-  font-weight: 800;
-  font-family: 'PT Sans Caption', sans-serif;
+
+.dashboard-nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100 ;
+  flex-direction: row;
+  margin-top: 5px;
+  padding: 4px;
+  text-align: center;
 }
+
+a {
+  text-decoration: none;
+  border: none;
+}
+
+a:hover {
+  border: none;
+  text-decoration: none;
+}
+
+.dashboard-nav li {
+  list-style-type: none;
+  transition: 0.3s ease;
+  color: ghostwhite;
+  font-size: 20px;
+  text-decoration: none;
+  border-bottom: 2px solid rgba(1,1,1,0);
+  padding: 0px 0;
+  margin: 0 10px;
+}
+
+.dashboard-nav li:hover {
+  border-bottom: 2px solid ghostwhite;
+  padding: 0px 0px; 
+  cursor: pointer;
+}
+
 

@@ -1,28 +1,26 @@
 import React, { Component } from "react";
 
-import WithMoveValidation from "../Chessboard/WithMoveValidation";
+import RandomVsRandomGame from "./RandomVsRandomGame";
 
-class Demo extends Component { 
+class RandomVsRandom extends Component {
     render() {
         return (
         <div>
             <div style={boardsContainer}>
-            <WithMoveValidation />
+            <RandomVsRandomGame />
             </div>
         </div>
         );
     }
     }
 
-    export default Demo;
+    export default RandomVsRandom;
 
     const boardsContainer = {
     display: "flex",
     justifyContent: "space-around",
     alignItems: "center",
     flexWrap: "wrap",
-    width: "40vw",
-    marginTop: 40,
-    marginRight: 10,
-    marginBottom: 50
+    width: "20vw",
+    margin: 30,
     };

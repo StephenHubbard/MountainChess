@@ -12,6 +12,12 @@ import TopUsers from './../TopUsers/TopUsers'
 // import UserPresence from "./UserPresence";
 // import Friend from '../Friend/Friend'
 import io from 'socket.io-client'
+// import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Swal from 'sweetalert2'
+import {withRouter} from 'react-router-dom'
+
+
 
 
 class Sidebar extends Component {
@@ -35,6 +41,8 @@ class Sidebar extends Component {
     this.loginModalToggle = this.loginModalToggle.bind(this);
     this.socket = io.connect(':7777')
     this.socket.on('all online users', data => this.updateFollowedUsers(data))
+    this.socket.on('new game challenge', data => this.challengeAlert(data))
+    this.socket.on('challenge was accepted', data => this.challengeAccepted(data))
 
   }
 
@@ -53,8 +61,8 @@ class Sidebar extends Component {
     for ( let i = 0; i < this.state.loggedInUsers.length; i++) {
       await newArr1.push(this.state.loggedInUsers[i].username)
     }
-    for ( let i = 0; i < this.state.users.length; i++) {
-      await newArr2.push(this.state.users[i].username)
+    for ( let i = 0; i < this.state.userFriends.length; i++) {
+      await newArr2.push(this.state.userFriends[i].username)
     }
     for (let i in newArr2) {
       if (newArr1.indexOf(newArr2[i]) < 0){
@@ -62,9 +70,9 @@ class Sidebar extends Component {
       }
     }
     for (let i = 0; i < offlineUsers.length; i++) {
-      for (let k = 0; k < this.state.users.length; k++) {
-        if (this.state.users[k].username === offlineUsers[i]) {
-          offlineUsersFull.push(this.state.users[k])
+      for (let k = 0; k < this.state.userFriends.length; k++) {
+        if (this.state.userFriends[k].username === offlineUsers[i]) {
+          offlineUsersFull.push(this.state.userFriends[k])
         }
       }
     }
@@ -73,36 +81,25 @@ class Sidebar extends Component {
     })
   }
 
-  updateFollowedUsers(data) {
+  async updateFollowedUsers(data) {
     this.setState({
       loggedInUsers: data
     })
-    this.calcOfflineUsers()
-    this.getUserFriends()
+    await this.getUserFriends()
+    await this.calcOfflineUsers()
   }
 
   async getUserFriends(){
     // console.log(this.state.users)
-    let friendArr = []
-    let friendUserIdArr = []
     const { user_id } = this.props
     await axios
     .post('/api/getUserFriends', { user_id })
     .then(res => {
-      friendArr = res.data
+      this.setState({
+        userFriends: res.data
+      })
     })
-    // .catch(err => console.log(err))
-    console.log(friendArr)
-    for (let i = 0; i < friendArr.length; i++) {
-      console.log(friendUserIdArr.indexOf(friendArr[i].user_1))
-      if (friendUserIdArr.indexOf(friendArr[i].user_1) === -1){
-        friendUserIdArr.push(friendArr[i].user_1)
-      }
-      if (friendUserIdArr.indexOf(friendArr[i].user_1) === -1){
-      friendUserIdArr.push(friendArr[i].user_2)
-      }
-    }
-    // console.log(friendUserIdArr)
+    .catch(err => console.log(err))
   }
 
   getUser = () => {
@@ -196,7 +193,64 @@ class Sidebar extends Component {
         })
   }
 
+  inviteFriend(friend) {
+    this.socket.emit('challenge user', {challenger: this.props.username, challengee: friend})
+  }
+
+  challengeAlert(data) {
+
+    if (this.props.username === data.challengee) {
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
   
+      Swal.fire({
+        title: `<strong>${data.challenger} has challenged you to a game!</strong>`,
+        icon: 'warning',
+        showCloseButton: true,
+        showCancelButton: true,
+        focusConfirm: false,
+        confirmButtonText:
+          '<i class="fa fa-thumbs-up"></i> Accept!',
+        confirmButtonAriaLabel: 'Thumbs up, great!',
+        cancelButtonText:
+          '<i class="fa fa-thumbs-down"></i>',
+        cancelButtonAriaLabel: 'Thumbs down'
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire(
+            this.props.history.push('/game/7'),
+            `<strong>Good Luck!</strong>`,
+            'success',
+          )
+          this.socket.emit('challenge accepted', {challenger: data.challenger, challengee: data.challengee})
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            'Declined',
+            `${data.challenger} will be alerted of your cowardness`,
+            'error'
+          )
+        }
+      })
+    }
+  }
+
+  challengeAccepted(data) {
+    if (this.props.username === data.challenger) {
+      this.props.history.push('/game/7')
+      Swal.fire({
+        title: `<strong>${data.challengee} has accepted your challenge`,
+        icon: 'success',
+      })
+    }
+  }
 
   render() {
     const { open } = this.state;
@@ -217,20 +271,32 @@ class Sidebar extends Component {
     });
     return (
       <>
-        <div className="hamburger">
-          <i
-            className="fas fa-bars"
-            onClick={() => {
-              this.setState({ open: !open });
-              // console.log(this.state.open);
-            }}
-          />
-        </div>
+      {this.state.open ? (
+        null
+      ) : <div className="hamburger-closed">
+      <i
+        className="fas fa-bars"
+        onClick={() => {
+          this.setState({ open: !open });
+          // console.log(this.state.open);
+        }}
+      />
+      </div>}
+      
         {/* <div className={`sidebar-${open ? 'open' : ''}`}>
                 <h1>sidebarrrr</h1>
-            </div> */}
+              </div> */}
         <div className="sidebar-toggle">
           <div className={`sidebar ${open ? "open" : ""}`}>
+              <div className="hamburger-open">
+                <i
+                  className="fas fa-bars"
+                  onClick={() => {
+                    this.setState({ open: !open });
+                    // console.log(this.state.open);
+                  }}
+                />
+              </div>
             <div className="login-container">
               {this.props.user_id ? (
                 <div className="profile-div">
@@ -247,6 +313,16 @@ class Sidebar extends Component {
                   </button>
                 </div>
               ) : (
+                <div>
+                <div className="profile-div">
+                  <img
+                    // src="https://engineering.mit.edu/wp-content/uploads/blank-profile-picture.png"
+                    className="profile-picture"
+                    alt=""
+                    src={`/assets/ProfilePics/blank-profile.png`}
+                    />
+                  <h4>Guest</h4>
+                </div>
                 <div className="login-div">
                   <button id="login-button" onClick={() => this.loginModalFn()}>
                     Login
@@ -254,6 +330,7 @@ class Sidebar extends Component {
                   <button id="register-button" onClick={this.registerModalFn}>
                     Register
                   </button>
+                </div>
                 </div>
               )}
 
@@ -281,7 +358,7 @@ class Sidebar extends Component {
                       </div>
                       <div className="modal-loginInfo">
                         <Login 
-                        loginModalActivateFn = {this.loginModalToggle}
+                          loginModalActivateFn = {this.loginModalToggle}
                         />
                       </div>
                     </div>
@@ -346,16 +423,20 @@ class Sidebar extends Component {
                 </div>
               )}
             </div>
-            <div className="friends-list" id="style-2">
-              <h3>Logged In Users</h3>
+
+            {/* <ToastContainer /> */}
+            <div className="friends-list" id="scroll-style">
+              {this.props.username ? (
+              <div>
+              <h3>Friends</h3>
               <ul>
                 {this.state.loggedInUsers.map(el =>  (
                   <li className="friend-li" key={el.username}>
                     <div className="friend">
                       <div className="green" />
                       <img className="portrait-small" src={`/assets/ProfilePics/${el.portrait}`} alt="" />
-                      {el.username}
-                      <button className="invite-btn">Invite</button>
+                      <h5>{el.username}</h5>
+                      <button className="invite-btn" onClick={() => this.inviteFriend(el.username)}>Challenge</button>
                     </div>
                   </li>
                 ))}
@@ -364,15 +445,18 @@ class Sidebar extends Component {
                     <div className="friend">
                       <div className="red offline-friend" />
                       <img className="portrait-small" src={`/assets/ProfilePics/${el.portrait}`} alt="" />
-                      {el.username}
-                      <button className="invite-btn">Invite</button>
+                      <h5>{el.username.substring(0,8)}</h5>
+                      <button className="invite-btn">Offline</button>
                     </div>
                   </li>
                 ))}
-
               </ul>
+              </div>
+              ) : 
+              <h5>Login to see other online Users</h5>
+              }
             </div>
-            <div className="top-users">
+            <div className="top-users" id="scroll-style">
               <h3>Top Users</h3>
               <TopUsers/>
             </div>
@@ -388,4 +472,4 @@ function mapStateToProps(reduxState) {
   return reduxState;
 }
 
-export default connect(mapStateToProps, { updateUserInfo })(Sidebar);
+export default withRouter(connect(mapStateToProps, { updateUserInfo })(Sidebar));

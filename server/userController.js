@@ -40,12 +40,21 @@ module.exports = {
     .catch(err => console.log(err))
   }, 
 
-  getUserFriends: (req, res) => {
+  getUserFriends: async (req, res) => {
     const db = req.app.get('db');
-    const { user_id } = req.body
-    db.get_user_friends(user_id)
-    .then(result => {
-      res.status(200).send(result)
+    let { user_id } = req.body
+    await db.get_user_friends(user_id)
+    .then(async result => {
+      let newArr = result
+      let newArr2 = []
+      for (let i = 0; i < newArr.length; i++) {
+        let user_id = newArr[i].user_2
+        await db.get_friend_profile(user_id)
+        .then(async result => {
+          await newArr2.push(result[0])
+        })
+      }
+      res.status(200).send(newArr2)
     })
     .catch(err => console.log(err))
   },
@@ -64,12 +73,10 @@ module.exports = {
   },
 
   getTopUsers: (req, res) => {
-    console.log("hit")
-    // const db = req.app.get("db")
-    //   db.get_top_users()
-    //   .then(result => {
-    //     console.log(result)
-    //     res.status(200).send(result)
-    //   })
+    const db = req.app.get("db")
+      db.get_top_users()
+      .then(result => {
+        res.status(200).send(result)
+      })
   }
 }

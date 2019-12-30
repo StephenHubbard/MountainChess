@@ -1,2 +1,1 @@
-SELECT * FROM friends 
-WHERE user_1 = $1 OR user_2 = $1
+SELECT user_2 FROM friends WHERE user_1 = $1

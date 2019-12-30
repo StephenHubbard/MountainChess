@@ -49,7 +49,7 @@ export default class Profile extends Component {
                 maintainAspectRatio: false,
                 title: {
                   display: true,
-                  text: `Expected value over the next 5 years`
+                  text: `Recent Game History`
                 },
                 scales: {
                   yAxes: [

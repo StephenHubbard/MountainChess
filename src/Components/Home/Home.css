@@ -1,0 +1,39 @@
+.two-btns {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-top: 100px;
+    width: 50vw;
+}
+
+.two-btns button{
+    color: rgb(190, 190, 190);
+    margin: 0 5px;
+    background: rgb(84, 84, 95);
+    border-radius: 5px;
+    height: 100px;
+    width: 300px;
+    font-size: 35px;
+    font-weight: 800;
+    font-family: 'PT Sans Caption', sans-serif;
+}  
+
+.spectate-cont {
+    height: 30vw;
+    width: 100vh;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding: 20px;
+    background-color: #22252b;
+    justify-content: space-between;
+}
+
+.home-cont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
