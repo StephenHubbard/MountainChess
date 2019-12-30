@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import "./Tinkering.css";
+import Loading from '../Loading/Loading'
+
 
 
 export default class tinkering extends Component {
     constructor() {
         super()
         this.state = {
+            loading: true,
             chessGrid:[ "a8", "b8", "c8", "d8", "e8", "f8", "g8", "h8", 
                         "a7", "b7", "c7", "d7", "e7", "f7", "g7", "h7",
                         "a6", "b6", "c6", "d6", "e6", "f6", "g6", "h6",
@@ -233,17 +236,19 @@ export default class tinkering extends Component {
                             while(yellowCircle.length > 0) {
                                 yellowCircle[0].parentNode.removeChild(yellowCircle[0])
                             }
+                        }
                     }
                 }
             }
         }
     }
 
-    }
 
     componentDidMount() {
-        const chessGrid = this.state.chessGrid
-        const startingPlacement = this.state.placement
+    const chessGrid = this.state.chessGrid;
+    const startingPlacement = this.state.placement;
+    setTimeout(() => {
+        this.setState({ loading: false });
         // Draws Chessboard
         for (var j = 0; j < 64; j++){
             let newCell = document.getElementById("mainChessBoard").appendChild(document.createElement("div"))
@@ -329,40 +334,129 @@ export default class tinkering extends Component {
                 startingPiece.id = "wQ"
             }
         }
+        if (startingPlacement[i] === "bN") {
+            let startingPiece = document
+                .getElementById(chessGrid[i])
+                .appendChild(document.createElement("img"));
+            startingPiece.src = "/assets/Pieces/knight-b.png";
+            startingPiece.className = "piece";
+            startingPiece.id = "b";
+            }
+            if (startingPlacement[i] === "bB") {
+            let startingPiece = document
+                .getElementById(chessGrid[i])
+                .appendChild(document.createElement("img"));
+            startingPiece.src = "/assets/Pieces/bishop-b.png";
+            startingPiece.className = "piece";
+            startingPiece.id = "b";
+            }
+            if (startingPlacement[i] === "bQ") {
+            let startingPiece = document
+                .getElementById(chessGrid[i])
+                .appendChild(document.createElement("img"));
+            startingPiece.src = "/assets/Pieces/queen-b.png";
+            startingPiece.className = "piece";
+            startingPiece.id = "b";
+            }
+            if (startingPlacement[i] === "bK") {
+            let startingPiece = document
+                .getElementById(chessGrid[i])
+                .appendChild(document.createElement("img"));
+            startingPiece.src = "/assets/Pieces/king-b.png";
+            startingPiece.className = "piece";
+            startingPiece.id = "b";
+            }
+            if (startingPlacement[i] === "wP") {
+            let startingPiece = document
+                .getElementById(chessGrid[i])
+                .appendChild(document.createElement("img"));
+            startingPiece.src = "/assets/Pieces/pawn-w.png";
+            startingPiece.className = "piece";
+            startingPiece.id = "w";
+            }
+            if (startingPlacement[i] === "wR") {
+            let startingPiece = document
+                .getElementById(chessGrid[i])
+                .appendChild(document.createElement("img"));
+            startingPiece.src = "/assets/Pieces/rook-w.png";
+            startingPiece.className = "piece";
+            startingPiece.id = "w";
+            }
+            if (startingPlacement[i] === "wN") {
+            let startingPiece = document
+                .getElementById(chessGrid[i])
+                .appendChild(document.createElement("img"));
+            startingPiece.src = "/assets/Pieces/knight-w.png";
+            startingPiece.className = "piece";
+            startingPiece.id = "w";
+            }
+            if (startingPlacement[i] === "wB") {
+            let startingPiece = document
+                .getElementById(chessGrid[i])
+                .appendChild(document.createElement("img"));
+            startingPiece.src = "/assets/Pieces/bishop-w.png";
+            startingPiece.className = "piece";
+            startingPiece.id = "w";
+            }
+            if (startingPlacement[i] === "wK") {
+            let startingPiece = document
+                .getElementById(chessGrid[i])
+                .appendChild(document.createElement("img"));
+            startingPiece.src = "/assets/Pieces/king-w.png";
+            startingPiece.className = "piece";
+            startingPiece.id = "w";
+            }
+            if (startingPlacement[i] === "wQ") {
+            let startingPiece = document
+                .getElementById(chessGrid[i])
+                .appendChild(document.createElement("img"));
+            startingPiece.src = "/assets/Pieces/queen-w.png";
+            startingPiece.className = "piece";
+            startingPiece.id = "w";
+            }
+        }, 800);
+           
     }
 
-    
+
     render() {
         return (
-        <div className="tinkering">
-            <div id="mainChessBoard">
-            </div>
+        <>
+            {this.state.loading && (
+            <>
+                <div className="loading">
+                <Loading />
+                </div>
+            </>
+            )}
+            {!this.state.loading && (<div className="tinkering">
+            <div id="mainChessBoard"></div>
 
             <div className="border-letters">
                 <div className="bottom-letters">
-                    <h1>A</h1>
-                    <h1>B</h1>
-                    <h1>C</h1>
-                    <h1>D</h1>
-                    <h1>E</h1>
-                    <h1>F</h1>
-                    <h1>G</h1>
-                    <h1>H</h1>
+                <h1>A</h1>
+                <h1>B</h1>
+                <h1>C</h1>
+                <h1>D</h1>
+                <h1>E</h1>
+                <h1>F</h1>
+                <h1>G</h1>
+                <h1>H</h1>
                 </div>
                 <div className="left-numbers">
-                    <h1>8</h1>
-                    <h1>7</h1>
-                    <h1>6</h1>
-                    <h1>5</h1>
-                    <h1>4</h1>
-                    <h1>3</h1>
-                    <h1>2</h1>
-                    <h1>1</h1>
+                <h1>8</h1>
+                <h1>7</h1>
+                <h1>6</h1>
+                <h1>5</h1>
+                <h1>4</h1>
+                <h1>3</h1>
+                <h1>2</h1>
+                <h1>1</h1>
                 </div>
             </div>
-        </div>
+            </div>)}
+            
+        </>
         );
     }
 }
-
-
