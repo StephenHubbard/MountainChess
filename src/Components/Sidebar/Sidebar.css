@@ -15,13 +15,12 @@ button {
 
 .sidebar {
   height: 100%;
-  width: 300px;
+  width: 340px;
   /* border: 1px solid yellow; */
   position: fixed;
-  top: 5%;
   left: -300px; 
   display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	flex-wrap: nowrap;
 	justify-content: space-between;
 	align-items: center;
@@ -33,7 +32,7 @@ button {
 
 .sidebar.open {
   height: 100%;
-  width: 300px;
+  width: 340px;
   /* border: 1px solid yellow; */
   position: fixed;
   top: 0;
@@ -41,6 +40,35 @@ button {
   -webkit-animation: slide 0.5 forwards;
   animation: slide 0.5s forwards;
   /* left: 0; */
+}
+
+.left-sidebar {
+  width: 300px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-bar {
+  width: 50px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: evenly;
+  align-items: center;
+  border-left: 4px solid #26272b;
+}
+
+.icon-bar i {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  color: rgb(226, 226, 226);
+}
+
+.spacer {
+  height: 100px;
 }
 
 @-webkit-keyframes slide {
