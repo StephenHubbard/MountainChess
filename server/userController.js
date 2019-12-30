@@ -59,6 +59,30 @@ module.exports = {
     .catch(err => console.log(err))
   },
 
+  //   getUserFriends: async (req, res) => {
+  //   const db = req.app.get('db');
+  //   let { user_id } = req.body
+  //   await db.get_user_friends(user_id)
+  //   .then(async result => {
+  //     let newArr = result
+  //     let newArr2 = []
+  //     for (let i = 0; i < newArr.length; i++) {
+  //       let user_id = newArr[i].user_2
+  //       await db.get_user_1(user_id)
+  //       .then(async result => {
+  //         await newArr2.push(result[0])
+  //       })
+  //       await db.get_user_2(user_id)
+  //       .then(async result => {
+  //         await newArr2.push(result[0])
+  //       })
+  //     }
+  //     console.log(newArr2)
+  //     res.status(200).send(newArr2) //change what you send back to the server
+  //   })
+  //   .catch(err => console.log(err))
+  // },
+
   checkIfSame: (req, res) => {
     const db = req.app.get('db');
     const {user_id_display} = req.params;

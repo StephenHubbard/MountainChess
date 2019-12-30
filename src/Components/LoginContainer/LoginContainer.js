@@ -42,7 +42,7 @@ export default class LoginContainer extends Component {
 
   render() {
     return (
-      <div>
+      <div className="login-container">
         {this.props.user_id ? (
           <div>
             <img
