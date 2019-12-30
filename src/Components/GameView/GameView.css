@@ -22,7 +22,7 @@ h1 {
     flex-direction: row;
     background-color: #eeeeee;
     justify-content: space-between;
-    border-radius: 3px;
+    border-radius: 9px;
 }
 
 .game-row {
@@ -67,7 +67,9 @@ h1 {
     position: relative;
     right: 0px;
     margin-left: 5px;
+    padding-left: 25px;
     margin: 10px 0px;
+    background-color: lightblue;
 }
 
 .message {
@@ -76,7 +78,13 @@ h1 {
     margin-right: 5px;
     justify-content: flex-end;
     margin: 10px 0px;
+    /* background-color: purple; */
+    padding-right: 25px;
+    /* background-color: red; */
+}
 
+.chat-messsage {
+    background-color: orange;
 }
 
 .messages {

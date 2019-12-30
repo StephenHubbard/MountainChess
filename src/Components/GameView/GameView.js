@@ -81,7 +81,7 @@ class GameView extends Component {
 
 
         render() {
-
+        console.log(this.state.username)
         const messages = this.state.messages.map((message, i) => (
             <div
                 key={i}
@@ -89,11 +89,17 @@ class GameView extends Component {
                 message.username === this.state.username ? 'my-message' : 'message'
                 }
             >
-                <h5>{message.username}: </h5>
-                <p> &nbsp;&nbsp;{message.message}</p>
+                <div className="chat-prof-pic">
+                    <img className="portrait-small" src={`/assets/ProfilePics/${message.portrait}`} alt="" />
+                </div>
+                <div className="chat-username">
+                    <h5>{message.username}: </h5>
+                </div>
+                <div className="chat-message">
+                    <p> &nbsp;&nbsp;{message.message}</p>
+                </div>
             </div>
         ))
-
             return (
             <div className="game-view">
                 <header className="App-header">
