@@ -11,7 +11,28 @@
 #mainChessBoard div {
     width:80px;
     height:80px;
+    z-index: 15;
 }
+
+.white {
+    background: white;
+}
+
+/* .white:active {
+    background: rgb(219, 230, 122);
+} */
+
+.black {
+    background: #ababab;
+}
+
+.yellow {
+    background: rgb(219, 230, 122);
+}
+
+/* .black:active {
+    background: rgb(219, 230, 122);
+} */
 
 .border-letters h1 {
     color: white;
@@ -43,6 +64,7 @@
     height: 680px;
     position: relative;
     top: -700px;
+    z-index: 10;
 }
 
 .left-numbers h1 {
@@ -56,9 +78,9 @@
 }
 
 #w {
-    filter: drop-shadow(0mm 0mm .2rem rgb(0, 0, 0));
+    filter: drop-shadow(0mm 0mm .1rem rgb(0, 0, 0));
 }
 
 #b {
-    filter: drop-shadow(0mm 0mm .2rem rgb(0, 0, 0));
+    filter: drop-shadow(0mm 0mm .1rem rgb(0, 0, 0));
 }

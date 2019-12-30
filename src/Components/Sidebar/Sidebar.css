@@ -27,7 +27,8 @@ button {
 	align-items: center;
 	align-content: stretch;
   background-color: #1c1c1c;
-  color: rgb(184, 184, 184)
+  color: rgb(184, 184, 184);
+  z-index: 500;
 }
 
 .sidebar.open {
@@ -271,7 +272,6 @@ h4 {
   animation: fadein 1s;
   border-radius: 10px;
   z-index: 666 !important;
-
 }
 
 /* Modal Body */
@@ -284,6 +284,7 @@ h4 {
   color: ghostwhite;
   margin-top: 0px;
   /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19); */
+  z-index: 666 !important;
 
   /* border: 3px green solid; */
 }
