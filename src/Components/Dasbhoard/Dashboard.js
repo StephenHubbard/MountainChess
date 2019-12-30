@@ -5,16 +5,10 @@ import { connect } from "react-redux";
 import { updateUserInfo } from "../../ducks/reducer";
 import { Link, withRouter } from "react-router-dom";
 import UserPresence from "../Sidebar/UserPresence";
-import Loading from '../Loading/Loading'
+
 
 
 class Dashboard extends Component {
-  constructor() {
-    super();
-
-  }
-
-
 
   render() {
     return (

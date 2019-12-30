@@ -52,18 +52,19 @@ button {
 }
 
 .icon-bar {
-  width: 50px;
+  width: 40px;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: evenly;
   align-items: center;
-  border-left: 4px solid #26272b;
+  background-color: rgb(24, 24, 24)
 }
 
 .icon-bar i {
   margin-top: 25px;
   margin-bottom: 25px;
+  margin-left: 2px;
   color: rgb(226, 226, 226);
 }
 
