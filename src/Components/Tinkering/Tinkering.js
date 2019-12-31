@@ -35,486 +35,515 @@ export default class tinkering extends Component {
         }
     
     handleClick(id) {
-        // note to self for tommorrow - include legal move logic here for each piece
         if (document.getElementById(id).childNodes[0]) {
             let piece = document.getElementById(id).childNodes[0].id
+            let piece2 = document.getElementById(id)
+            console.log(piece2)
             // * WHITE PAWN * //
             if (this.state.legalMoves.length === 0 && piece === "wP") {
                 let thisIndex = this.state.chessGrid.indexOf(id)
-                let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex - 8])
-                let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex - 16])
-                if (legalMove1) {
-                    this.state.legalMoves.push(legalMove1.id)
-                }
-                if (legalMove2) {
-                    this.state.legalMoves.push(legalMove2.id)
-                }
+                    let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex - 8])
+                    let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex - 16])
+                    let legalMove3 = document.getElementById(this.state.chessGrid[thisIndex - 7])
+                    let legalMove4 = document.getElementById(this.state.chessGrid[thisIndex - 9])
+                    if (legalMove1) {
+                        this.state.legalMoves.push(legalMove1.id)
+                    }
+                    if (legalMove2 && piece2.id.substring(1, 2) === "2") {
+                        this.state.legalMoves.push(legalMove2.id)
+                    }
+                    
+                    if (legalMove3.childNodes[0]) {
+                        let subStr = legalMove3.childNodes[0].id.substring(0, 1)
+                        if (legalMove3 && subStr === "b") {
+                            this.state.legalMoves.push(legalMove3.id)
+                        }
+                    }
+                    if (legalMove4.childNodes[0]) {
+                        let subStr = legalMove4.childNodes[0].id.substring(0, 1)
+                        if (legalMove4 && subStr === "b") {
+                            this.state.legalMoves.push(legalMove4.id)                        }
+                    }
             }
-        // * BLACK PAWN * //
+            // * BLACK PAWN * //
             if (this.state.legalMoves.length === 0 && piece === "bP") {
                 let thisIndex = this.state.chessGrid.indexOf(id)
                 let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex + 8])
                 let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex + 16])
+                let legalMove3 = document.getElementById(this.state.chessGrid[thisIndex + 7])
+                let legalMove4 = document.getElementById(this.state.chessGrid[thisIndex + 9])
+                if (legalMove1) {
+                    this.state.legalMoves.push(legalMove1.id)
+                }
+                if (legalMove2 && piece2.id.substring(1, 2) === "7") {
+                    this.state.legalMoves.push(legalMove2.id)
+                }
+                
+                if (legalMove3.childNodes[0]) {
+                    let subStr = legalMove3.childNodes[0].id.substring(0, 1)
+                    if (legalMove3 && subStr === "w") {
+                        this.state.legalMoves.push(legalMove3.id)
+                    }
+                }
+                if (legalMove4.childNodes[0]) {
+                    let subStr = legalMove4.childNodes[0].id.substring(0, 1)
+                    if (legalMove4 && subStr === "w") {
+                        this.state.legalMoves.push(legalMove4.id)                        }
+                }
+            }
+            // *KING* //
+            if (this.state.legalMoves.length === 0 && (piece === "wK" || piece === "bK")) {
+                let thisIndex = this.state.chessGrid.indexOf(id)
+                let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex - 9])
+                let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex - 8])
+                let legalMove3 = document.getElementById(this.state.chessGrid[thisIndex - 7])
+                let legalMove4 = document.getElementById(this.state.chessGrid[thisIndex - 1])
+                let legalMove5 = document.getElementById(this.state.chessGrid[thisIndex + 1])
+                let legalMove6 = document.getElementById(this.state.chessGrid[thisIndex + 7])
+                let legalMove7 = document.getElementById(this.state.chessGrid[thisIndex + 8])
+                let legalMove8 = document.getElementById(this.state.chessGrid[thisIndex + 9])
+
                 if (legalMove1) {
                     this.state.legalMoves.push(legalMove1.id)
                 }
                 if (legalMove2) {
                     this.state.legalMoves.push(legalMove2.id)
                 }
+                if (legalMove3) {
+                    this.state.legalMoves.push(legalMove3.id)
+                }
+                if (legalMove4) {
+                    this.state.legalMoves.push(legalMove4.id)
+                }
+                if (legalMove5) {
+                    this.state.legalMoves.push(legalMove5.id)
+                }
+                if (legalMove6) {
+                    this.state.legalMoves.push(legalMove6.id)
+                }
+                if (legalMove7) {
+                    this.state.legalMoves.push(legalMove7.id)
+                }
+                if (legalMove8) {
+                    this.state.legalMoves.push(legalMove8.id)
+                }
             }
-        // *KING* //
-        if (this.state.legalMoves.length === 0 && (piece === "wK" || piece === "bK")) {
-            let thisIndex = this.state.chessGrid.indexOf(id)
-            let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex - 9])
-            let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex - 8])
-            let legalMove3 = document.getElementById(this.state.chessGrid[thisIndex - 7])
-            let legalMove4 = document.getElementById(this.state.chessGrid[thisIndex - 1])
-            let legalMove5 = document.getElementById(this.state.chessGrid[thisIndex + 1])
-            let legalMove6 = document.getElementById(this.state.chessGrid[thisIndex + 7])
-            let legalMove7 = document.getElementById(this.state.chessGrid[thisIndex + 8])
-            let legalMove8 = document.getElementById(this.state.chessGrid[thisIndex + 9])
+            // *ROOK* //
+            if (this.state.legalMoves.length === 0 && (piece === "wR" || piece === "bR")) {
+                let thisIndex = this.state.chessGrid.indexOf(id)
+                let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex + 1])
+                let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex + 2])
+                let legalMove3 = document.getElementById(this.state.chessGrid[thisIndex + 3])
+                let legalMove4 = document.getElementById(this.state.chessGrid[thisIndex + 4])
+                let legalMove5 = document.getElementById(this.state.chessGrid[thisIndex + 5])
+                let legalMove6 = document.getElementById(this.state.chessGrid[thisIndex + 6])
+                let legalMove7 = document.getElementById(this.state.chessGrid[thisIndex + 7])
+                let legalMove8 = document.getElementById(this.state.chessGrid[thisIndex + 8])
+                let legalMove9 = document.getElementById(this.state.chessGrid[thisIndex + 16])
+                let legalMove10 = document.getElementById(this.state.chessGrid[thisIndex + 24])
+                let legalMove11 = document.getElementById(this.state.chessGrid[thisIndex + 32])
+                let legalMove12 = document.getElementById(this.state.chessGrid[thisIndex + 40])
+                let legalMove13 = document.getElementById(this.state.chessGrid[thisIndex + 48])
+                let legalMove14 = document.getElementById(this.state.chessGrid[thisIndex + 56])
+                let legalMove15 = document.getElementById(this.state.chessGrid[thisIndex - 1])
+                let legalMove16 = document.getElementById(this.state.chessGrid[thisIndex - 2])
+                let legalMove17 = document.getElementById(this.state.chessGrid[thisIndex - 3])
+                let legalMove18 = document.getElementById(this.state.chessGrid[thisIndex - 4])
+                let legalMove19 = document.getElementById(this.state.chessGrid[thisIndex - 5])
+                let legalMove20 = document.getElementById(this.state.chessGrid[thisIndex - 6])
+                let legalMove21 = document.getElementById(this.state.chessGrid[thisIndex - 7])
+                let legalMove22 = document.getElementById(this.state.chessGrid[thisIndex - 8])
+                let legalMove23 = document.getElementById(this.state.chessGrid[thisIndex - 16])
+                let legalMove24 = document.getElementById(this.state.chessGrid[thisIndex - 24])
+                let legalMove25 = document.getElementById(this.state.chessGrid[thisIndex - 32])
+                let legalMove26 = document.getElementById(this.state.chessGrid[thisIndex - 40])
+                let legalMove27 = document.getElementById(this.state.chessGrid[thisIndex - 48])
+                let legalMove28 = document.getElementById(this.state.chessGrid[thisIndex - 56])
 
-            if (legalMove1) {
-                this.state.legalMoves.push(legalMove1.id)
+                if (legalMove1) {
+                    this.state.legalMoves.push(legalMove1.id)
+                }
+                if (legalMove2) {
+                    this.state.legalMoves.push(legalMove2.id)
+                }
+                if (legalMove3) {
+                    this.state.legalMoves.push(legalMove3.id)
+                }
+                if (legalMove4) {
+                    this.state.legalMoves.push(legalMove4.id)
+                }
+                if (legalMove5) {
+                    this.state.legalMoves.push(legalMove5.id)
+                }
+                if (legalMove6) {
+                    this.state.legalMoves.push(legalMove6.id)
+                }
+                if (legalMove7) {
+                    this.state.legalMoves.push(legalMove7.id)
+                }
+                if (legalMove8) {
+                    this.state.legalMoves.push(legalMove8.id)
+                }
+                if (legalMove9) {
+                    this.state.legalMoves.push(legalMove9.id)
+                }
+                if (legalMove10) {
+                    this.state.legalMoves.push(legalMove10.id)
+                }
+                if (legalMove11) {
+                    this.state.legalMoves.push(legalMove11.id)
+                }
+                if (legalMove12) {
+                    this.state.legalMoves.push(legalMove12.id)
+                }
+                if (legalMove13) {
+                    this.state.legalMoves.push(legalMove13.id)
+                }
+                if (legalMove14) {
+                    this.state.legalMoves.push(legalMove14.id)
+                }
+                if (legalMove15) {
+                    this.state.legalMoves.push(legalMove15.id)
+                }
+                if (legalMove16) {
+                    this.state.legalMoves.push(legalMove16.id)
+                }
+                if (legalMove17) {
+                    this.state.legalMoves.push(legalMove17.id)
+                }
+                if (legalMove18) {
+                    this.state.legalMoves.push(legalMove18.id)
+                }
+                if (legalMove19) {
+                    this.state.legalMoves.push(legalMove19.id)
+                }
+                if (legalMove20) {
+                    this.state.legalMoves.push(legalMove20.id)
+                }
+                if (legalMove21) {
+                    this.state.legalMoves.push(legalMove21.id)
+                }
+                if (legalMove22) {
+                    this.state.legalMoves.push(legalMove22.id)
+                }
+                if (legalMove23) {
+                    this.state.legalMoves.push(legalMove23.id)
+                }
+                if (legalMove24) {
+                    this.state.legalMoves.push(legalMove24.id)
+                }
+                if (legalMove25) {
+                    this.state.legalMoves.push(legalMove25.id)
+                }
+                if (legalMove26) {
+                    this.state.legalMoves.push(legalMove26.id)
+                }
+                if (legalMove27) {
+                    this.state.legalMoves.push(legalMove27.id)
+                }
+                if (legalMove28) {
+                    this.state.legalMoves.push(legalMove28.id)
+                }
             }
-            if (legalMove2) {
-                this.state.legalMoves.push(legalMove2.id)
-            }
-            if (legalMove3) {
-                this.state.legalMoves.push(legalMove3.id)
-            }
-            if (legalMove4) {
-                this.state.legalMoves.push(legalMove4.id)
-            }
-            if (legalMove5) {
-                this.state.legalMoves.push(legalMove5.id)
-            }
-            if (legalMove6) {
-                this.state.legalMoves.push(legalMove6.id)
-            }
-            if (legalMove7) {
-                this.state.legalMoves.push(legalMove7.id)
-            }
-            if (legalMove8) {
-                this.state.legalMoves.push(legalMove8.id)
-            }
-        }
-        // *ROOK* //
-        if (this.state.legalMoves.length === 0 && (piece === "wR" || piece === "bR")) {
-            let thisIndex = this.state.chessGrid.indexOf(id)
-            let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex + 1])
-            let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex + 2])
-            let legalMove3 = document.getElementById(this.state.chessGrid[thisIndex + 3])
-            let legalMove4 = document.getElementById(this.state.chessGrid[thisIndex + 4])
-            let legalMove5 = document.getElementById(this.state.chessGrid[thisIndex + 5])
-            let legalMove6 = document.getElementById(this.state.chessGrid[thisIndex + 6])
-            let legalMove7 = document.getElementById(this.state.chessGrid[thisIndex + 7])
-            let legalMove8 = document.getElementById(this.state.chessGrid[thisIndex + 8])
-            let legalMove9 = document.getElementById(this.state.chessGrid[thisIndex + 16])
-            let legalMove10 = document.getElementById(this.state.chessGrid[thisIndex + 24])
-            let legalMove11 = document.getElementById(this.state.chessGrid[thisIndex + 32])
-            let legalMove12 = document.getElementById(this.state.chessGrid[thisIndex + 40])
-            let legalMove13 = document.getElementById(this.state.chessGrid[thisIndex + 48])
-            let legalMove14 = document.getElementById(this.state.chessGrid[thisIndex + 56])
-            let legalMove15 = document.getElementById(this.state.chessGrid[thisIndex - 1])
-            let legalMove16 = document.getElementById(this.state.chessGrid[thisIndex - 2])
-            let legalMove17 = document.getElementById(this.state.chessGrid[thisIndex - 3])
-            let legalMove18 = document.getElementById(this.state.chessGrid[thisIndex - 4])
-            let legalMove19 = document.getElementById(this.state.chessGrid[thisIndex - 5])
-            let legalMove20 = document.getElementById(this.state.chessGrid[thisIndex - 6])
-            let legalMove21 = document.getElementById(this.state.chessGrid[thisIndex - 7])
-            let legalMove22 = document.getElementById(this.state.chessGrid[thisIndex - 8])
-            let legalMove23 = document.getElementById(this.state.chessGrid[thisIndex - 16])
-            let legalMove24 = document.getElementById(this.state.chessGrid[thisIndex - 24])
-            let legalMove25 = document.getElementById(this.state.chessGrid[thisIndex - 32])
-            let legalMove26 = document.getElementById(this.state.chessGrid[thisIndex - 40])
-            let legalMove27 = document.getElementById(this.state.chessGrid[thisIndex - 48])
-            let legalMove28 = document.getElementById(this.state.chessGrid[thisIndex - 56])
+            // ** BISHOP** //
+            if (this.state.legalMoves.length === 0 && (piece === "wB" || piece === "bB")) {
+                let thisIndex = this.state.chessGrid.indexOf(id)
+                            // eslint-disable-next-line
+                            let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex + 9])
+                            // eslint-disable-next-line
+                            let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex + 18])
+                            // eslint-disable-next-line
+                            let legalMove3 = document.getElementById(this.state.chessGrid[thisIndex + 27])
+                            // eslint-disable-next-line
+                            let legalMove4 = document.getElementById(this.state.chessGrid[thisIndex + 36])
+                            // eslint-disable-next-line
+                            let legalMove5 = document.getElementById(this.state.chessGrid[thisIndex + 45])
+                            // eslint-disable-next-line
+                            let legalMove6 = document.getElementById(this.state.chessGrid[thisIndex + 54])
+                            // eslint-disable-next-line
+                            let legalMove7 = document.getElementById(this.state.chessGrid[thisIndex + 63])
+                            // eslint-disable-next-line
+                            let legalMove8 = document.getElementById(this.state.chessGrid[thisIndex + 72])
+                            // eslint-disable-next-line
+                            let legalMove9 = document.getElementById(this.state.chessGrid[thisIndex + 7])
+                            // eslint-disable-next-line
+                            let legalMove10 = document.getElementById(this.state.chessGrid[thisIndex + 14])
+                            // eslint-disable-next-line
+                            let legalMove11 = document.getElementById(this.state.chessGrid[thisIndex + 21])
+                            // eslint-disable-next-line
+                            let legalMove12 = document.getElementById(this.state.chessGrid[thisIndex + 28])
+                            // eslint-disable-next-line
+                            let legalMove13 = document.getElementById(this.state.chessGrid[thisIndex + 35])
+                            // eslint-disable-next-line
+                            let legalMove14 = document.getElementById(this.state.chessGrid[thisIndex + 42])
+                            // eslint-disable-next-line
+                            let legalMove15 = document.getElementById(this.state.chessGrid[thisIndex - 9])
+                            // eslint-disable-next-line
+                            let legalMove16 = document.getElementById(this.state.chessGrid[thisIndex - 18])
+                            // eslint-disable-next-line
+                            let legalMove17 = document.getElementById(this.state.chessGrid[thisIndex - 27])
+                            // eslint-disable-next-line
+                            let legalMove18 = document.getElementById(this.state.chessGrid[thisIndex - 36])
+                            // eslint-disable-next-line
+                            let legalMove19 = document.getElementById(this.state.chessGrid[thisIndex - 45])
+                            // eslint-disable-next-line
+                            let legalMove20 = document.getElementById(this.state.chessGrid[thisIndex - 54])
+                            // eslint-disable-next-line
+                            let legalMove21 = document.getElementById(this.state.chessGrid[thisIndex - 63])
+                            // eslint-disable-next-line
+                            let legalMove22 = document.getElementById(this.state.chessGrid[thisIndex - 72])
+                            // eslint-disable-next-line
+                            let legalMove23 = document.getElementById(this.state.chessGrid[thisIndex - 7])
+                            // eslint-disable-next-line
+                            let legalMove24 = document.getElementById(this.state.chessGrid[thisIndex - 14])
+                            // eslint-disable-next-line
+                            let legalMove25 = document.getElementById(this.state.chessGrid[thisIndex - 21])
+                            // eslint-disable-next-line
+                            let legalMove26 = document.getElementById(this.state.chessGrid[thisIndex - 28])
+                            // eslint-disable-next-line
+                            let legalMove27 = document.getElementById(this.state.chessGrid[thisIndex - 35])
+                            // eslint-disable-next-line
+                            let legalMove28 = document.getElementById(this.state.chessGrid[thisIndex - 42])
 
-            if (legalMove1) {
-                this.state.legalMoves.push(legalMove1.id)
+                if (legalMove1) {
+                    this.state.legalMoves.push(legalMove1.id)
+                }
+                if (legalMove2) {
+                    this.state.legalMoves.push(legalMove2.id)
+                }
+                if (legalMove3) {
+                    this.state.legalMoves.push(legalMove3.id)
+                }
+                if (legalMove4) {
+                    this.state.legalMoves.push(legalMove4.id)
+                }
+                if (legalMove5) {
+                    this.state.legalMoves.push(legalMove5.id)
+                }
+                if (legalMove6) {
+                    this.state.legalMoves.push(legalMove6.id)
+                }
+                if (legalMove7) {
+                    this.state.legalMoves.push(legalMove7.id)
+                }
+                if (legalMove8) {
+                    this.state.legalMoves.push(legalMove8.id)
+                }
+                if (legalMove9) {
+                    this.state.legalMoves.push(legalMove9.id)
+                }
+                if (legalMove10) {
+                    this.state.legalMoves.push(legalMove10.id)
+                }
+                if (legalMove11) {
+                    this.state.legalMoves.push(legalMove11.id)
+                }
+                if (legalMove12) {
+                    this.state.legalMoves.push(legalMove12.id)
+                }
+                if (legalMove13) {
+                    this.state.legalMoves.push(legalMove13.id)
+                }
+                if (legalMove14) {
+                    this.state.legalMoves.push(legalMove14.id)
+                }
+                if (legalMove15) {
+                    this.state.legalMoves.push(legalMove15.id)
+                }
+                if (legalMove16) {
+                    this.state.legalMoves.push(legalMove16.id)
+                }
+                if (legalMove17) {
+                    this.state.legalMoves.push(legalMove17.id)
+                }
+                if (legalMove18) {
+                    this.state.legalMoves.push(legalMove18.id)
+                }
+                if (legalMove19) {
+                    this.state.legalMoves.push(legalMove19.id)
+                }
+                if (legalMove20) {
+                    this.state.legalMoves.push(legalMove20.id)
+                }
+                if (legalMove21) {
+                    this.state.legalMoves.push(legalMove21.id)
+                }
+                if (legalMove22) {
+                    this.state.legalMoves.push(legalMove22.id)
+                }
+                if (legalMove23) {
+                    this.state.legalMoves.push(legalMove23.id)
+                }
+                if (legalMove24) {
+                    this.state.legalMoves.push(legalMove24.id)
+                }
+                if (legalMove25) {
+                    this.state.legalMoves.push(legalMove25.id)
+                }
+                if (legalMove26) {
+                    this.state.legalMoves.push(legalMove26.id)
+                }
+                if (legalMove27) {
+                    this.state.legalMoves.push(legalMove27.id)
+                }
+                if (legalMove28) {
+                    this.state.legalMoves.push(legalMove28.id)
+                }
             }
-            if (legalMove2) {
-                this.state.legalMoves.push(legalMove2.id)
-            }
-            if (legalMove3) {
-                this.state.legalMoves.push(legalMove3.id)
-            }
-            if (legalMove4) {
-                this.state.legalMoves.push(legalMove4.id)
-            }
-            if (legalMove5) {
-                this.state.legalMoves.push(legalMove5.id)
-            }
-            if (legalMove6) {
-                this.state.legalMoves.push(legalMove6.id)
-            }
-            if (legalMove7) {
-                this.state.legalMoves.push(legalMove7.id)
-            }
-            if (legalMove8) {
-                this.state.legalMoves.push(legalMove8.id)
-            }
-            if (legalMove9) {
-                this.state.legalMoves.push(legalMove9.id)
-            }
-            if (legalMove10) {
-                this.state.legalMoves.push(legalMove10.id)
-            }
-            if (legalMove11) {
-                this.state.legalMoves.push(legalMove11.id)
-            }
-            if (legalMove12) {
-                this.state.legalMoves.push(legalMove12.id)
-            }
-            if (legalMove13) {
-                this.state.legalMoves.push(legalMove13.id)
-            }
-            if (legalMove14) {
-                this.state.legalMoves.push(legalMove14.id)
-            }
-            if (legalMove15) {
-                this.state.legalMoves.push(legalMove15.id)
-            }
-            if (legalMove16) {
-                this.state.legalMoves.push(legalMove16.id)
-            }
-            if (legalMove17) {
-                this.state.legalMoves.push(legalMove17.id)
-            }
-            if (legalMove18) {
-                this.state.legalMoves.push(legalMove18.id)
-            }
-            if (legalMove19) {
-                this.state.legalMoves.push(legalMove19.id)
-            }
-            if (legalMove20) {
-                this.state.legalMoves.push(legalMove20.id)
-            }
-            if (legalMove21) {
-                this.state.legalMoves.push(legalMove21.id)
-            }
-            if (legalMove22) {
-                this.state.legalMoves.push(legalMove22.id)
-            }
-            if (legalMove23) {
-                this.state.legalMoves.push(legalMove23.id)
-            }
-            if (legalMove24) {
-                this.state.legalMoves.push(legalMove24.id)
-            }
-            if (legalMove25) {
-                this.state.legalMoves.push(legalMove25.id)
-            }
-            if (legalMove26) {
-                this.state.legalMoves.push(legalMove26.id)
-            }
-            if (legalMove27) {
-                this.state.legalMoves.push(legalMove27.id)
-            }
-            if (legalMove28) {
-                this.state.legalMoves.push(legalMove28.id)
-            }
-        }
-        // ** BISHOP** //
-        if (this.state.legalMoves.length === 0 && (piece === "wB" || piece === "bB")) {
-            let thisIndex = this.state.chessGrid.indexOf(id)
-                        // eslint-disable-next-line
-                        let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex + 9])
-                        // eslint-disable-next-line
-                        let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex + 18])
-                        // eslint-disable-next-line
-                        let legalMove3 = document.getElementById(this.state.chessGrid[thisIndex + 27])
-                        // eslint-disable-next-line
-                        let legalMove4 = document.getElementById(this.state.chessGrid[thisIndex + 36])
-                        // eslint-disable-next-line
-                        let legalMove5 = document.getElementById(this.state.chessGrid[thisIndex + 45])
-                        // eslint-disable-next-line
-                        let legalMove6 = document.getElementById(this.state.chessGrid[thisIndex + 54])
-                        // eslint-disable-next-line
-                        let legalMove7 = document.getElementById(this.state.chessGrid[thisIndex + 63])
-                        // eslint-disable-next-line
-                        let legalMove8 = document.getElementById(this.state.chessGrid[thisIndex + 72])
-                        // eslint-disable-next-line
-                        let legalMove9 = document.getElementById(this.state.chessGrid[thisIndex + 7])
-                        // eslint-disable-next-line
-                        let legalMove10 = document.getElementById(this.state.chessGrid[thisIndex + 14])
-                        // eslint-disable-next-line
-                        let legalMove11 = document.getElementById(this.state.chessGrid[thisIndex + 21])
-                        // eslint-disable-next-line
-                        let legalMove12 = document.getElementById(this.state.chessGrid[thisIndex + 28])
-                        // eslint-disable-next-line
-                        let legalMove13 = document.getElementById(this.state.chessGrid[thisIndex + 35])
-                        // eslint-disable-next-line
-                        let legalMove14 = document.getElementById(this.state.chessGrid[thisIndex + 42])
-                        // eslint-disable-next-line
-                        let legalMove15 = document.getElementById(this.state.chessGrid[thisIndex - 9])
-                        // eslint-disable-next-line
-                        let legalMove16 = document.getElementById(this.state.chessGrid[thisIndex - 18])
-                        // eslint-disable-next-line
-                        let legalMove17 = document.getElementById(this.state.chessGrid[thisIndex - 27])
-                        // eslint-disable-next-line
-                        let legalMove18 = document.getElementById(this.state.chessGrid[thisIndex - 36])
-                        // eslint-disable-next-line
-                        let legalMove19 = document.getElementById(this.state.chessGrid[thisIndex - 45])
-                        // eslint-disable-next-line
-                        let legalMove20 = document.getElementById(this.state.chessGrid[thisIndex - 54])
-                        // eslint-disable-next-line
-                        let legalMove21 = document.getElementById(this.state.chessGrid[thisIndex - 63])
-                        // eslint-disable-next-line
-                        let legalMove22 = document.getElementById(this.state.chessGrid[thisIndex - 72])
-                        // eslint-disable-next-line
-                        let legalMove23 = document.getElementById(this.state.chessGrid[thisIndex - 7])
-                        // eslint-disable-next-line
-                        let legalMove24 = document.getElementById(this.state.chessGrid[thisIndex - 14])
-                        // eslint-disable-next-line
-                        let legalMove25 = document.getElementById(this.state.chessGrid[thisIndex - 21])
-                        // eslint-disable-next-line
-                        let legalMove26 = document.getElementById(this.state.chessGrid[thisIndex - 28])
-                        // eslint-disable-next-line
-                        let legalMove27 = document.getElementById(this.state.chessGrid[thisIndex - 35])
-                        // eslint-disable-next-line
-                        let legalMove28 = document.getElementById(this.state.chessGrid[thisIndex - 42])
-
-            if (legalMove1) {
-                this.state.legalMoves.push(legalMove1.id)
-            }
-            if (legalMove2) {
-                this.state.legalMoves.push(legalMove2.id)
-            }
-            if (legalMove3) {
-                this.state.legalMoves.push(legalMove3.id)
-            }
-            if (legalMove4) {
-                this.state.legalMoves.push(legalMove4.id)
-            }
-            if (legalMove5) {
-                this.state.legalMoves.push(legalMove5.id)
-            }
-            if (legalMove6) {
-                this.state.legalMoves.push(legalMove6.id)
-            }
-            if (legalMove7) {
-                this.state.legalMoves.push(legalMove7.id)
-            }
-            if (legalMove8) {
-                this.state.legalMoves.push(legalMove8.id)
-            }
-            if (legalMove9) {
-                this.state.legalMoves.push(legalMove9.id)
-            }
-            if (legalMove10) {
-                this.state.legalMoves.push(legalMove10.id)
-            }
-            if (legalMove11) {
-                this.state.legalMoves.push(legalMove11.id)
-            }
-            if (legalMove12) {
-                this.state.legalMoves.push(legalMove12.id)
-            }
-            if (legalMove13) {
-                this.state.legalMoves.push(legalMove13.id)
-            }
-            if (legalMove14) {
-                this.state.legalMoves.push(legalMove14.id)
-            }
-            if (legalMove15) {
-                this.state.legalMoves.push(legalMove15.id)
-            }
-            if (legalMove16) {
-                this.state.legalMoves.push(legalMove16.id)
-            }
-            if (legalMove17) {
-                this.state.legalMoves.push(legalMove17.id)
-            }
-            if (legalMove18) {
-                this.state.legalMoves.push(legalMove18.id)
-            }
-            if (legalMove19) {
-                this.state.legalMoves.push(legalMove19.id)
-            }
-            if (legalMove20) {
-                this.state.legalMoves.push(legalMove20.id)
-            }
-            if (legalMove21) {
-                this.state.legalMoves.push(legalMove21.id)
-            }
-            if (legalMove22) {
-                this.state.legalMoves.push(legalMove22.id)
-            }
-            if (legalMove23) {
-                this.state.legalMoves.push(legalMove23.id)
-            }
-            if (legalMove24) {
-                this.state.legalMoves.push(legalMove24.id)
-            }
-            if (legalMove25) {
-                this.state.legalMoves.push(legalMove25.id)
-            }
-            if (legalMove26) {
-                this.state.legalMoves.push(legalMove26.id)
-            }
-            if (legalMove27) {
-                this.state.legalMoves.push(legalMove27.id)
-            }
-            if (legalMove28) {
-                this.state.legalMoves.push(legalMove28.id)
-            }
-        }
-        // *KNIGHT* //
-        if (this.state.legalMoves.length === 0 && (piece === "wN" || piece === "bN")) {
-            let thisIndex = this.state.chessGrid.indexOf(id)
-            // eslint-disable-next-line
-            let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex - 10])
-            // eslint-disable-next-line
-            let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex - 6])
-            // eslint-disable-next-line
-            let legalMove3 = document.getElementById(this.state.chessGrid[thisIndex - 17])
-            // eslint-disable-next-line
-            let legalMove4 = document.getElementById(this.state.chessGrid[thisIndex - 15])
-            // eslint-disable-next-line
-            let legalMove5 = document.getElementById(this.state.chessGrid[thisIndex + 10])
-            // eslint-disable-next-line
-            let legalMove6 = document.getElementById(this.state.chessGrid[thisIndex + 6])
-            // eslint-disable-next-line
-            let legalMove7 = document.getElementById(this.state.chessGrid[thisIndex + 15])
-            // eslint-disable-next-line
-            let legalMove8 = document.getElementById(this.state.chessGrid[thisIndex + 17])
-
-            for (let i = 1; i < 9; i++) {
+            // *KNIGHT* //
+            if (this.state.legalMoves.length === 0 && (piece === "wN" || piece === "bN")) {
+                let thisIndex = this.state.chessGrid.indexOf(id)
                 // eslint-disable-next-line
-                let test = eval(`legalMove${i}`)
-                if (test) {
-                    // let subStr1 = test.id.substr(1, 2)
-                    // let subStr2 = piece.id.substr(1, 2)
-                    // let subStr3 = test.id.substr(0, 1) 
-                    // let subStr4 = piece.id.substr(0, 1)
-                    // if (test && (subStr1 === subStr2 || subStr3 === subStr4)) {
+                let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex - 10])
+                // eslint-disable-next-line
+                let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex - 6])
+                // eslint-disable-next-line
+                let legalMove3 = document.getElementById(this.state.chessGrid[thisIndex - 17])
+                // eslint-disable-next-line
+                let legalMove4 = document.getElementById(this.state.chessGrid[thisIndex - 15])
+                // eslint-disable-next-line
+                let legalMove5 = document.getElementById(this.state.chessGrid[thisIndex + 10])
+                // eslint-disable-next-line
+                let legalMove6 = document.getElementById(this.state.chessGrid[thisIndex + 6])
+                // eslint-disable-next-line
+                let legalMove7 = document.getElementById(this.state.chessGrid[thisIndex + 15])
+                // eslint-disable-next-line
+                let legalMove8 = document.getElementById(this.state.chessGrid[thisIndex + 17])
+
+                for (let i = 1; i < 9; i++) {
+                    // eslint-disable-next-line
+                    let test = eval(`legalMove${i}`)
+                    if (test) {
+                        // let subStr1 = test.id.substr(1, 2)
+                        // let subStr2 = piece.id.substr(1, 2)
+                        // let subStr3 = test.id.substr(0, 1) 
+                        // let subStr4 = piece.id.substr(0, 1)
+                        // if (test && (subStr1 === subStr2 || subStr3 === subStr4)) {
+                            this.state.legalMoves.push(test.id)
+                        }
+                    }
+            }
+            // *QUEEN* //
+            if (this.state.legalMoves.length === 0 && (piece === "wQ" || piece === "bQ")) {
+                let thisIndex = this.state.chessGrid.indexOf(id)
+                // eslint-disable-next-line
+                let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex + 1])
+                // eslint-disable-next-line
+                let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex + 2])
+                // eslint-disable-next-line
+                let legalMove3 = document.getElementById(this.state.chessGrid[thisIndex + 3])
+                // eslint-disable-next-line
+                let legalMove4 = document.getElementById(this.state.chessGrid[thisIndex + 4])
+                // eslint-disable-next-line
+                let legalMove5 = document.getElementById(this.state.chessGrid[thisIndex + 5])
+                // eslint-disable-next-line
+                let legalMove6 = document.getElementById(this.state.chessGrid[thisIndex + 6])
+                // eslint-disable-next-line
+                let legalMove7 = document.getElementById(this.state.chessGrid[thisIndex + 7])
+                // eslint-disable-next-line
+                let legalMove8 = document.getElementById(this.state.chessGrid[thisIndex + 8])
+                // eslint-disable-next-line
+                let legalMove9 = document.getElementById(this.state.chessGrid[thisIndex + 16])
+                // eslint-disable-next-line
+                let legalMove10 = document.getElementById(this.state.chessGrid[thisIndex + 24])
+                // eslint-disable-next-line
+                let legalMove11 = document.getElementById(this.state.chessGrid[thisIndex + 32])
+                // eslint-disable-next-line
+                let legalMove12 = document.getElementById(this.state.chessGrid[thisIndex + 40])
+                // eslint-disable-next-line
+                let legalMove13 = document.getElementById(this.state.chessGrid[thisIndex + 48])
+                // eslint-disable-next-line
+                let legalMove14 = document.getElementById(this.state.chessGrid[thisIndex + 56])
+                // eslint-disable-next-line
+                let legalMove15 = document.getElementById(this.state.chessGrid[thisIndex - 1])
+                // eslint-disable-next-line
+                let legalMove16 = document.getElementById(this.state.chessGrid[thisIndex - 2])
+                // eslint-disable-next-line
+                let legalMove17 = document.getElementById(this.state.chessGrid[thisIndex - 3])
+                // eslint-disable-next-line
+                let legalMove18 = document.getElementById(this.state.chessGrid[thisIndex - 4])
+                // eslint-disable-next-line
+                let legalMove19 = document.getElementById(this.state.chessGrid[thisIndex - 5])
+                // eslint-disable-next-line
+                let legalMove20 = document.getElementById(this.state.chessGrid[thisIndex - 6])
+                // eslint-disable-next-line
+                let legalMove21 = document.getElementById(this.state.chessGrid[thisIndex - 7])
+                // eslint-disable-next-line
+                let legalMove22 = document.getElementById(this.state.chessGrid[thisIndex - 8])
+                // eslint-disable-next-line
+                let legalMove23 = document.getElementById(this.state.chessGrid[thisIndex - 16])
+                // eslint-disable-next-line
+                let legalMove24 = document.getElementById(this.state.chessGrid[thisIndex - 24])
+                // eslint-disable-next-line
+                let legalMove25 = document.getElementById(this.state.chessGrid[thisIndex - 32])
+                // eslint-disable-next-line
+                let legalMove26 = document.getElementById(this.state.chessGrid[thisIndex - 40])
+                // eslint-disable-next-line
+                let legalMove27 = document.getElementById(this.state.chessGrid[thisIndex - 48])
+                // eslint-disable-next-line
+                let legalMove28 = document.getElementById(this.state.chessGrid[thisIndex - 56])
+                // eslint-disable-next-line
+                let legalMove29 = document.getElementById(this.state.chessGrid[thisIndex + 9])
+                // eslint-disable-next-line
+                let legalMove30 = document.getElementById(this.state.chessGrid[thisIndex + 18])
+                // eslint-disable-next-line
+                let legalMove31 = document.getElementById(this.state.chessGrid[thisIndex + 27])
+                // eslint-disable-next-line
+                let legalMove32 = document.getElementById(this.state.chessGrid[thisIndex + 36])
+                // eslint-disable-next-line
+                let legalMove33 = document.getElementById(this.state.chessGrid[thisIndex + 45])
+                // eslint-disable-next-line
+                let legalMove34 = document.getElementById(this.state.chessGrid[thisIndex + 54])
+                // eslint-disable-next-line
+                let legalMove35 = document.getElementById(this.state.chessGrid[thisIndex + 63])
+                // eslint-disable-next-line
+                let legalMove36 = document.getElementById(this.state.chessGrid[thisIndex + 72])
+                // eslint-disable-next-line
+                let legalMove37 = document.getElementById(this.state.chessGrid[thisIndex + 14])
+                // eslint-disable-next-line
+                let legalMove38 = document.getElementById(this.state.chessGrid[thisIndex + 21])
+                // eslint-disable-next-line
+                let legalMove39 = document.getElementById(this.state.chessGrid[thisIndex + 28])
+                // eslint-disable-next-line
+                let legalMove40 = document.getElementById(this.state.chessGrid[thisIndex + 35])
+                // eslint-disable-next-line
+                let legalMove41 = document.getElementById(this.state.chessGrid[thisIndex + 42])
+                // eslint-disable-next-line
+                let legalMove42 = document.getElementById(this.state.chessGrid[thisIndex - 9])
+                // eslint-disable-next-line
+                let legalMove43 = document.getElementById(this.state.chessGrid[thisIndex - 18])
+                // eslint-disable-next-line
+                let legalMove44 = document.getElementById(this.state.chessGrid[thisIndex - 27])
+                // eslint-disable-next-line
+                let legalMove45 = document.getElementById(this.state.chessGrid[thisIndex - 36])
+                // eslint-disable-next-line
+                let legalMove46 = document.getElementById(this.state.chessGrid[thisIndex - 45])
+                // eslint-disable-next-line
+                let legalMove47 = document.getElementById(this.state.chessGrid[thisIndex - 54])
+                // eslint-disable-next-line
+                let legalMove48 = document.getElementById(this.state.chessGrid[thisIndex - 63])
+                // eslint-disable-next-line
+                let legalMove49 = document.getElementById(this.state.chessGrid[thisIndex - 72])
+                // eslint-disable-next-line
+                let legalMove50 = document.getElementById(this.state.chessGrid[thisIndex - 14])
+                // eslint-disable-next-line
+                let legalMove51 = document.getElementById(this.state.chessGrid[thisIndex - 21])
+                // eslint-disable-next-line
+                let legalMove52 = document.getElementById(this.state.chessGrid[thisIndex - 28])
+                // eslint-disable-next-line
+                let legalMove53 = document.getElementById(this.state.chessGrid[thisIndex - 35])
+                // eslint-disable-next-line
+                let legalMove54 = document.getElementById(this.state.chessGrid[thisIndex - 42])
+
+
+                for (let i = 1; i < 55; i++) {
+                    // eslint-disable-next-line
+                    let test = eval(`legalMove${i}`)
+                    if (test) {
                         this.state.legalMoves.push(test.id)
                     }
                 }
-        }
-        // *QUEEN* //
-        if (this.state.legalMoves.length === 0 && (piece === "wQ" || piece === "bQ")) {
-            let thisIndex = this.state.chessGrid.indexOf(id)
-            // eslint-disable-next-line
-            let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex + 1])
-            // eslint-disable-next-line
-            let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex + 2])
-            // eslint-disable-next-line
-            let legalMove3 = document.getElementById(this.state.chessGrid[thisIndex + 3])
-            // eslint-disable-next-line
-            let legalMove4 = document.getElementById(this.state.chessGrid[thisIndex + 4])
-            // eslint-disable-next-line
-            let legalMove5 = document.getElementById(this.state.chessGrid[thisIndex + 5])
-            // eslint-disable-next-line
-            let legalMove6 = document.getElementById(this.state.chessGrid[thisIndex + 6])
-            // eslint-disable-next-line
-            let legalMove7 = document.getElementById(this.state.chessGrid[thisIndex + 7])
-            // eslint-disable-next-line
-            let legalMove8 = document.getElementById(this.state.chessGrid[thisIndex + 8])
-            // eslint-disable-next-line
-            let legalMove9 = document.getElementById(this.state.chessGrid[thisIndex + 16])
-            // eslint-disable-next-line
-            let legalMove10 = document.getElementById(this.state.chessGrid[thisIndex + 24])
-            // eslint-disable-next-line
-            let legalMove11 = document.getElementById(this.state.chessGrid[thisIndex + 32])
-            // eslint-disable-next-line
-            let legalMove12 = document.getElementById(this.state.chessGrid[thisIndex + 40])
-            // eslint-disable-next-line
-            let legalMove13 = document.getElementById(this.state.chessGrid[thisIndex + 48])
-            // eslint-disable-next-line
-            let legalMove14 = document.getElementById(this.state.chessGrid[thisIndex + 56])
-            // eslint-disable-next-line
-            let legalMove15 = document.getElementById(this.state.chessGrid[thisIndex - 1])
-            // eslint-disable-next-line
-            let legalMove16 = document.getElementById(this.state.chessGrid[thisIndex - 2])
-            // eslint-disable-next-line
-            let legalMove17 = document.getElementById(this.state.chessGrid[thisIndex - 3])
-            // eslint-disable-next-line
-            let legalMove18 = document.getElementById(this.state.chessGrid[thisIndex - 4])
-            // eslint-disable-next-line
-            let legalMove19 = document.getElementById(this.state.chessGrid[thisIndex - 5])
-            // eslint-disable-next-line
-            let legalMove20 = document.getElementById(this.state.chessGrid[thisIndex - 6])
-            // eslint-disable-next-line
-            let legalMove21 = document.getElementById(this.state.chessGrid[thisIndex - 7])
-            // eslint-disable-next-line
-            let legalMove22 = document.getElementById(this.state.chessGrid[thisIndex - 8])
-            // eslint-disable-next-line
-            let legalMove23 = document.getElementById(this.state.chessGrid[thisIndex - 16])
-            // eslint-disable-next-line
-            let legalMove24 = document.getElementById(this.state.chessGrid[thisIndex - 24])
-            // eslint-disable-next-line
-            let legalMove25 = document.getElementById(this.state.chessGrid[thisIndex - 32])
-            // eslint-disable-next-line
-            let legalMove26 = document.getElementById(this.state.chessGrid[thisIndex - 40])
-            // eslint-disable-next-line
-            let legalMove27 = document.getElementById(this.state.chessGrid[thisIndex - 48])
-            // eslint-disable-next-line
-            let legalMove28 = document.getElementById(this.state.chessGrid[thisIndex - 56])
-            // eslint-disable-next-line
-            let legalMove29 = document.getElementById(this.state.chessGrid[thisIndex + 9])
-            // eslint-disable-next-line
-            let legalMove30 = document.getElementById(this.state.chessGrid[thisIndex + 18])
-            // eslint-disable-next-line
-            let legalMove31 = document.getElementById(this.state.chessGrid[thisIndex + 27])
-            // eslint-disable-next-line
-            let legalMove32 = document.getElementById(this.state.chessGrid[thisIndex + 36])
-            // eslint-disable-next-line
-            let legalMove33 = document.getElementById(this.state.chessGrid[thisIndex + 45])
-            // eslint-disable-next-line
-            let legalMove34 = document.getElementById(this.state.chessGrid[thisIndex + 54])
-            // eslint-disable-next-line
-            let legalMove35 = document.getElementById(this.state.chessGrid[thisIndex + 63])
-            // eslint-disable-next-line
-            let legalMove36 = document.getElementById(this.state.chessGrid[thisIndex + 72])
-            // eslint-disable-next-line
-            let legalMove37 = document.getElementById(this.state.chessGrid[thisIndex + 14])
-            // eslint-disable-next-line
-            let legalMove38 = document.getElementById(this.state.chessGrid[thisIndex + 21])
-            // eslint-disable-next-line
-            let legalMove39 = document.getElementById(this.state.chessGrid[thisIndex + 28])
-            // eslint-disable-next-line
-            let legalMove40 = document.getElementById(this.state.chessGrid[thisIndex + 35])
-            // eslint-disable-next-line
-            let legalMove41 = document.getElementById(this.state.chessGrid[thisIndex + 42])
-            // eslint-disable-next-line
-            let legalMove42 = document.getElementById(this.state.chessGrid[thisIndex - 9])
-            // eslint-disable-next-line
-            let legalMove43 = document.getElementById(this.state.chessGrid[thisIndex - 18])
-            // eslint-disable-next-line
-            let legalMove44 = document.getElementById(this.state.chessGrid[thisIndex - 27])
-            // eslint-disable-next-line
-            let legalMove45 = document.getElementById(this.state.chessGrid[thisIndex - 36])
-            // eslint-disable-next-line
-            let legalMove46 = document.getElementById(this.state.chessGrid[thisIndex - 45])
-            // eslint-disable-next-line
-            let legalMove47 = document.getElementById(this.state.chessGrid[thisIndex - 54])
-            // eslint-disable-next-line
-            let legalMove48 = document.getElementById(this.state.chessGrid[thisIndex - 63])
-            // eslint-disable-next-line
-            let legalMove49 = document.getElementById(this.state.chessGrid[thisIndex - 72])
-            // eslint-disable-next-line
-            let legalMove50 = document.getElementById(this.state.chessGrid[thisIndex - 14])
-            // eslint-disable-next-line
-            let legalMove51 = document.getElementById(this.state.chessGrid[thisIndex - 21])
-            // eslint-disable-next-line
-            let legalMove52 = document.getElementById(this.state.chessGrid[thisIndex - 28])
-            // eslint-disable-next-line
-            let legalMove53 = document.getElementById(this.state.chessGrid[thisIndex - 35])
-            // eslint-disable-next-line
-            let legalMove54 = document.getElementById(this.state.chessGrid[thisIndex - 42])
-
-
-            for (let i = 1; i < 55; i++) {
-                // eslint-disable-next-line
-                let test = eval(`legalMove${i}`)
-                if (test) {
-                    this.state.legalMoves.push(test.id)
-                }
             }
-        }
         console.log(this.state.legalMoves)
         }
         if (this.state.twoClicks.length === 0) {
@@ -610,7 +639,6 @@ export default class tinkering extends Component {
 
     handleHover(id) {
         let piece = document.getElementById(id)
-
         if (piece.childNodes[0]) {
             if (piece.childNodes[0].id === "wP") {
                 for (let i = 0; i < 64; i++) {
@@ -618,11 +646,29 @@ export default class tinkering extends Component {
                         let thisIndex = this.state.chessGrid.indexOf(id)
                         let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex - 8])
                         let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex - 16])
+                        let legalMove3 = document.getElementById(this.state.chessGrid[thisIndex - 7])
+                        let legalMove4 = document.getElementById(this.state.chessGrid[thisIndex - 9])
                         if (legalMove1) {
                             legalMove1.appendChild(document.createElement("div")).className = "y-dot"
                         }
-                        if (legalMove2) {
+                        if (legalMove2 && piece.id.substring(1, 2) === "2") {
                             legalMove2.appendChild(document.createElement("div")).className = "y-dot"
+                        }
+                        if (legalMove3) {
+                            if (legalMove3.childNodes[0]) {
+                                let subStr = legalMove3.childNodes[0].id.substring(0, 1)
+                                if (legalMove3 && subStr === "b") {
+                                    legalMove3.appendChild(document.createElement("div")).className = "y-dot"
+                                }
+                            }
+                        }
+                        if (legalMove4) {
+                            if (legalMove4.childNodes[0]) {
+                                let subStr = legalMove4.childNodes[0].id.substring(0, 1)
+                                if (legalMove4 && subStr === "b") {
+                                    legalMove4.appendChild(document.createElement("div")).className = "y-dot"
+                                }
+                            }
                         }
                     }
                 }
@@ -633,11 +679,29 @@ export default class tinkering extends Component {
                         let thisIndex = this.state.chessGrid.indexOf(id)
                         let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex + 8])
                         let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex + 16])
+                        let legalMove3 = document.getElementById(this.state.chessGrid[thisIndex + 7])
+                        let legalMove4 = document.getElementById(this.state.chessGrid[thisIndex + 9])
                         if (legalMove1) {
                             legalMove1.appendChild(document.createElement("div")).className = "y-dot"
                         }
-                        if (legalMove2) {
+                        if (legalMove2 && piece.id.substring(1, 2) === "7") {
                             legalMove2.appendChild(document.createElement("div")).className = "y-dot"
+                        }
+                        if (legalMove3) {
+                            if (legalMove3.childNodes[0]) {
+                                let subStr = legalMove3.childNodes[0].id.substring(0, 1)
+                                if (legalMove3 && subStr === "w") {
+                                    legalMove3.appendChild(document.createElement("div")).className = "y-dot"
+                                }
+                            }
+                        }
+                        if (legalMove4) {
+                            if (legalMove4.childNodes[0]) {
+                                let subStr = legalMove4.childNodes[0].id.substring(0, 1)
+                                if (legalMove4 && subStr === "w") {
+                                    legalMove4.appendChild(document.createElement("div")).className = "y-dot"
+                                }
+                            }
                         }
                     }
                 }
@@ -1067,54 +1131,54 @@ export default class tinkering extends Component {
                     }
                 }
             }
-            if (piece.childNodes[0].id === "wN" || piece.childNodes[0].id === "bN") {
-                for (let i = 0; i < 64; i++) {
-                    if (this.state.chessGrid[i] === id) {
-                        let thisIndex = this.state.chessGrid.indexOf(id)
-                        let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex + 10])
-                        let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex - 10])
-    
-                            if ((legalMove1 || legalMove2) && this.state.twoClicks.length !== 1) {
-                                let yellowCircle = document.getElementsByClassName("y-dot")
-                                while(yellowCircle.length > 0) {
-                                    yellowCircle[0].parentNode.removeChild(yellowCircle[0])
-                                }
+        if (piece.childNodes[0].id === "wN" || piece.childNodes[0].id === "bN") {
+            for (let i = 0; i < 64; i++) {
+                if (this.state.chessGrid[i] === id) {
+                    let thisIndex = this.state.chessGrid.indexOf(id)
+                    let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex + 10])
+                    let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex - 10])
+
+                        if ((legalMove1 || legalMove2) && this.state.twoClicks.length !== 1) {
+                            let yellowCircle = document.getElementsByClassName("y-dot")
+                            while(yellowCircle.length > 0) {
+                                yellowCircle[0].parentNode.removeChild(yellowCircle[0])
                             }
                         }
                     }
                 }
-            if (piece.childNodes[0].id === "wQ" || piece.childNodes[0].id === "bQ") {
-                for (let i = 0; i < 64; i++) {
-                    if (this.state.chessGrid[i] === id) {
-                        let thisIndex = this.state.chessGrid.indexOf(id)
-                        let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex + 10])
-                        let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex - 10])
-    
-                            if ((legalMove1 || legalMove2) && this.state.twoClicks.length !== 1) {
-                                let yellowCircle = document.getElementsByClassName("y-dot")
-                                while(yellowCircle.length > 0) {
-                                    yellowCircle[0].parentNode.removeChild(yellowCircle[0])
-                                }
+            }
+        if (piece.childNodes[0].id === "wQ" || piece.childNodes[0].id === "bQ") {
+            for (let i = 0; i < 64; i++) {
+                if (this.state.chessGrid[i] === id) {
+                    let thisIndex = this.state.chessGrid.indexOf(id)
+                    let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex + 10])
+                    let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex - 10])
+
+                        if ((legalMove1 || legalMove2) && this.state.twoClicks.length !== 1) {
+                            let yellowCircle = document.getElementsByClassName("y-dot")
+                            while(yellowCircle.length > 0) {
+                                yellowCircle[0].parentNode.removeChild(yellowCircle[0])
                             }
                         }
                     }
                 }
-            if (piece.childNodes[0].id === "wB" || piece.childNodes[0].id === "bB") {
-                for (let i = 0; i < 64; i++) {
-                    if (this.state.chessGrid[i] === id) {
-                        let thisIndex = this.state.chessGrid.indexOf(id)
-                        let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex + 9])
-                        let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex - 9])
-    
-                            if ((legalMove1 || legalMove2) && this.state.twoClicks.length !== 1) {
-                                let yellowCircle = document.getElementsByClassName("y-dot")
-                                while(yellowCircle.length > 0) {
-                                    yellowCircle[0].parentNode.removeChild(yellowCircle[0])
-                                }
+            }
+        if (piece.childNodes[0].id === "wB" || piece.childNodes[0].id === "bB") {
+            for (let i = 0; i < 64; i++) {
+                if (this.state.chessGrid[i] === id) {
+                    let thisIndex = this.state.chessGrid.indexOf(id)
+                    let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex + 9])
+                    let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex - 9])
+
+                        if ((legalMove1 || legalMove2) && this.state.twoClicks.length !== 1) {
+                            let yellowCircle = document.getElementsByClassName("y-dot")
+                            while(yellowCircle.length > 0) {
+                                yellowCircle[0].parentNode.removeChild(yellowCircle[0])
                             }
                         }
                     }
-                } 
+                }
+            } 
         }
     }
 
