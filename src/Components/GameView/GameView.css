@@ -23,6 +23,10 @@ h1 {
     background-color: #eeeeee;
     justify-content: space-between;
     border-radius: 9px;
+    overflow: scroll;
+    overflow-wrap: normal;
+    overflow-x: hidden;
+    padding-right: 10px;
 }
 
 .game-row {
@@ -39,20 +43,23 @@ h1 {
 
 .input-btn-div {
     position: absolute;
-    bottom: 0px;
+    bottom: 10%;
     display: flex;
-    width: 100%;
+    width: 22%;
     justify-content: space-between;
+    position: fixed;
 }
 
 .send-btn {
     position: absolute;
-    width: 20%;
-    bottom: 0px;
-    right: 0px;
+    width: 7%;
+    bottom: 10%;
+    right: 12%;
     border: 1px solid rgb(122, 122, 122);
     border-left: none;
     height: 30px;
+    position: fixed;
+    border-radius: 4px;
 }
 
 .typing-message {
@@ -69,7 +76,7 @@ h1 {
     margin-left: 5px;
     padding-left: 25px;
     margin: 10px 0px;
-    background-color: lightblue;
+    /* background-color: lightblue; */
 }
 
 .message {
@@ -83,12 +90,33 @@ h1 {
     /* background-color: red; */
 }
 
-.chat-messsage {
-    background-color: orange;
+.my-message .chat-message {
+    background-color: #c4c4c4;
+    border-radius: 10px;
+    padding: 3px 0;
+    margin-left: 3px;
+    word-wrap: break-word;
+    margin-right: 10px;
+}
+
+.message .chat-message {
+    background-color: lightblue;
+    border-radius: 10px;
+    padding: 3px 0;
+    margin-left: 3px;
+    word-wrap: break-word;
+}
+
+.chat-username {
+    margin-top: 3px;
 }
 
 .messages {
     width: 100%;
     position: absolute;
     top: 0px;
+}
+
+.chat-prof-pic {
+    margin-right: 5px;
 }
