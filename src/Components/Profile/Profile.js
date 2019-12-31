@@ -3,6 +3,7 @@ import React, { Component } from "react";
 // import axios from "axios";
 import { Line } from "react-chartjs-2";
 import "./Profile.css";
+import Loading from '../Loading/Loading'
 //import redux functions
 
 export default class Profile extends Component {
@@ -11,6 +12,7 @@ export default class Profile extends Component {
     this.state = {
       username: "",
       email: "",
+      loading: true,
       profile_img: "",
       //this will be the placeholder empty data state object to be filled by a database call
     //   data: {
@@ -37,9 +39,23 @@ export default class Profile extends Component {
     };
   }
 
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ loading: false });
+    }, 800);
+  }  
+
   render() {
     return (
-      <div className="big-profile">
+      <>
+      {this.state.loading && (
+        <>
+          <div className="loading">
+            <Loading />
+          </div>
+        </>
+      )}
+      {!this.state.loading && (<div className="big-profile">
           <h1> Your Profile </h1>
         <div className="chart">
           <div className="chart-row">
@@ -62,7 +78,9 @@ export default class Profile extends Component {
             />
           </div>
         </div>
-      </div>
+      </div>)}
+      
+      </>
     );
   }
 }
