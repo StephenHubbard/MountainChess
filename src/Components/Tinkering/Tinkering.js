@@ -52,6 +52,22 @@ export default class tinkering extends Component {
                 }
             }
         }
+        // * BLACK PAWN * //
+        if (document.getElementById(id).childNodes[0]) {
+            let piece = document.getElementById(id).childNodes[0].id
+            console.log(piece)
+            if (this.state.legalMoves.length === 0 && piece === "bP") {
+                let thisIndex = this.state.chessGrid.indexOf(id)
+                let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex + 8])
+                let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex + 16])
+                if (legalMove1) {
+                    this.state.legalMoves.push(legalMove1.id)
+                }
+                if (legalMove2) {
+                    this.state.legalMoves.push(legalMove2.id)
+                }
+            }
+        }
         // console.log(legalMove1)
         // console.log(legalMove2.id)
         if (this.state.twoClicks.length === 0) {
@@ -151,6 +167,21 @@ export default class tinkering extends Component {
                     }
                 }
             }
+            if (piece.childNodes[0].id === "bP") {
+                for (let i = 0; i < 64; i++) {
+                    if (this.state.chessGrid[i] === id && this.state.twoClicks.length !== 1) {
+                        let thisIndex = this.state.chessGrid.indexOf(id)
+                        let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex + 8])
+                        let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex + 16])
+                        if (legalMove1) {
+                            legalMove1.appendChild(document.createElement("div")).className = "y-dot"
+                        }
+                        if (legalMove2) {
+                            legalMove2.appendChild(document.createElement("div")).className = "y-dot"
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -171,6 +202,21 @@ export default class tinkering extends Component {
                     }
                 }
             }
+        if (piece.childNodes[0].id === "bP") {
+            for (let i = 0; i < 64; i++) {
+                if (this.state.chessGrid[i] === id) {
+                    let thisIndex = this.state.chessGrid.indexOf(id)
+                    let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex + 8])
+                        if (legalMove1 && this.state.twoClicks.length !== 1) {
+                            let yellowCircle = document.getElementsByClassName("y-dot")
+                            while(yellowCircle.length > 0) {
+                                yellowCircle[0].parentNode.removeChild(yellowCircle[0])
+                            }
+                        }
+                    }
+                }
+            }
+                
         }
     }
 
