@@ -35,11 +35,22 @@ export default class tinkering extends Component {
         }
     
     handleClick(id) {
-        let thisIndex = this.state.chessGrid.indexOf(id)
-        let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex - 8])
-        let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex - 16])
-        if (this.state.legalMoves.length === 0) {
-            this.state.legalMoves.push(legalMove1.id, legalMove2.id)
+        // note to self for tommorrow - include legal move logic here for each piece
+        // * WHITE PAWN * //
+        if (document.getElementById(id).childNodes[0]) {
+            let piece = document.getElementById(id).childNodes[0].id
+            console.log(piece)
+            if (this.state.legalMoves.length === 0 && piece === "wP") {
+                let thisIndex = this.state.chessGrid.indexOf(id)
+                let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex - 8])
+                let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex - 16])
+                if (legalMove1) {
+                    this.state.legalMoves.push(legalMove1.id)
+                }
+                if (legalMove2) {
+                    this.state.legalMoves.push(legalMove2.id)
+                }
+            }
         }
         // console.log(legalMove1)
         // console.log(legalMove2.id)
@@ -76,22 +87,22 @@ export default class tinkering extends Component {
             this.state.twoClicks.splice(0, 2)
         }
         let clickedSquare = document.getElementById(id)
-        if (clickedSquare.children[0] && clickedSquare.children[0].className !== "y-dot") {
-            this.state.twoClicks.push(clickedSquare.children[0].id + id)
-
-        } else if (this.state.twoClicks[0] && this.state.legalMoves.indexOf(clickedSquare.id) > -1) {
-            // console.log(this.state.twoClicks)
-            this.state.twoClicks.push(this.state.twoClicks[0].substring(0, 2) + id)
-            this.state.legalMoves.splice(0, 2)
-
-                // this.movePiece(id)
+        if (clickedSquare.children[0]) {
+            if (clickedSquare.children[0] && clickedSquare.children[0].className !== "y-dot" && this.state.twoClicks.length === 0) {
+                this.state.twoClicks.push(clickedSquare.children[0].id + id)
+            } else if ((this.state.twoClicks[0] && this.state.legalMoves.indexOf(clickedSquare.id) > -1) && (clickedSquare.children[0].className === "y-dot" || clickedSquare.children[1].className === "y-dot")) {
+                    this.state.twoClicks.push(this.state.twoClicks[0].substring(0, 2) + id)
+                    this.state.legalMoves.splice(0, 2)
+                    this.movePiece(id)
+                } else {
+                    this.state.twoClicks.splice(0, 2)
+                    this.state.legalMoves.splice(0, 2)   
+                }
         } else {
             this.state.twoClicks.splice(0, 2)
-            this.state.legalMoves.splice(0, 2)
-            
+            this.state.legalMoves.splice(0, 2) 
         }
-            this.movePiece(id)
-        }
+    }
 
 
     async movePiece(id) {
