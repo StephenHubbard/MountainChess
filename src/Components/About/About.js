@@ -44,27 +44,27 @@ export default class About extends Component {
         <></>
         <div className="names-cont">
           <div className="name">
-            <h2>Stephen Hubbard:</h2>
-            <a href="https://www.linkedin.com/in/stephenhubbard88/">
+            <h2 id="name">Stephen Hubbard:</h2>
+            <a id="link" href="https://www.linkedin.com/in/stephenhubbard88/">
               <img
                 className="linkedin-logo"
                 src="https://icons-for-free.com/iconfiles/png/512/linkedin+linkedin+logo+networking+social+media+icon-1320196081476022403.png"
                 alt=""
               />
             </a>
-            <a href="https://github.com/StephenHubbard">
+            <a id="link" href="https://github.com/StephenHubbard">
               <img
                 className="github-logo"
                 src="http://pngimg.com/uploads/github/github_PNG83.png"
                 alt=""
               />
             </a>
-            <a href="https://www.stephen-hubbard.com">
+            <a id="link" href="https://www.stephen-hubbard.com">
               <h2>stephen-hubbard.com</h2>
             </a>
           </div>
           <div className="name">
-            <h2>Rob Reiss:</h2>
+            <h2 id="name">Rob Reiss:</h2>
             <img
               className="linkedin-logo"
               src="https://icons-for-free.com/iconfiles/png/512/linkedin+linkedin+logo+networking+social+media+icon-1320196081476022403.png"
@@ -77,15 +77,15 @@ export default class About extends Component {
             />
           </div>
           <div className="name">
-            <h2>Lance Jenkins:</h2>
-            <a href="https://www.linkedin.com/in/lance-jenkins/">
+            <h2  id="name">Lance Jenkins:</h2>
+            <a id="link" href="https://www.linkedin.com/in/lance-jenkins/">
               <img
                 className="linkedin-logo"
                 src="https://icons-for-free.com/iconfiles/png/512/linkedin+linkedin+logo+networking+social+media+icon-1320196081476022403.png"
                 alt=""
               />
             </a>
-            <a href="https://www.github.com/laprje">
+            <a id="link" href="https://www.github.com/laprje">
               <img
                 className="github-logo"
                 src="http://pngimg.com/uploads/github/github_PNG83.png"
@@ -94,7 +94,7 @@ export default class About extends Component {
             </a>
           </div>
           <div className="name">
-            <h2>Carter Endsley:</h2>
+            <h2  id="name">Carter Endsley:</h2>
             <img
               className="linkedin-logo"
               src="https://icons-for-free.com/iconfiles/png/512/linkedin+linkedin+logo+networking+social+media+icon-1320196081476022403.png"

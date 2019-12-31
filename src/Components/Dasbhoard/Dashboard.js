@@ -3,7 +3,7 @@ import "./Dashboard.css";
 import Sidebar from "../Sidebar/Sidebar";
 import { connect } from "react-redux";
 import { updateUserInfo } from "../../ducks/reducer";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import UserPresence from "../Sidebar/UserPresence";
 
 
@@ -32,6 +32,5 @@ function mapStateToProps(reduxState) {
   return reduxState;
 }
 
-export default withRouter(
-  connect(mapStateToProps, { updateUserInfo })(Dashboard)
-);
+export default connect(mapStateToProps, { updateUserInfo })(Dashboard);
+
