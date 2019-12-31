@@ -18,7 +18,7 @@ import Swal from "sweetalert2";
 import { withRouter } from "react-router-dom";
 import {Link} from 'react-router-dom'
 
-class Sidebar extends Component {
+export class Sidebar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -310,7 +310,7 @@ class Sidebar extends Component {
                       src={`/assets/ProfilePics/${this.props.profile_img}`}
                       onClick={() => this.portraitModalFn()}
                     />
-                    <h4>{this.props.username}</h4>
+                    <h4 data-testid = "username">{this.props.username}</h4>
                     <button id="logout-button" onClick={() => this.logout()}>
                       Logout
                     </button>
@@ -482,23 +482,23 @@ class Sidebar extends Component {
             <div className="icon-bar">
               <div className='spacer'></div>
                   <Link to="/">
-                    <i class="fas fa-home"></i>
+                    <i className="fas fa-home" id='sb-icon'></i>
                   </Link>
 
                   <Link to="/profile/1">
-                    <i class="fas fa-user-circle"></i>
+                    <i className="fas fa-user-circle" id='sb-icon'></i>
                   </Link>
 
                   <Link to="/users">
-                    <i class="fas fa-users"></i>
+                    <i className="fas fa-users" id='sb-icon'></i>
                   </Link>
 
                   <Link to="/about">
-                    <i class="fas fa-info-circle"></i>
+                    <i classname="fas fa-info-circle" id='sb-icon'></i>
                   </Link>
 
                   <Link to="/tinkering">
-                    <i class="fas fa-chess"></i>
+                    <i className="fas fa-chess" id='sb-icon'></i>
                   </Link>
             </div>
             <LoggedInUser logout={this.logout} />

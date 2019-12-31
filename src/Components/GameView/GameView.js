@@ -23,7 +23,8 @@ class GameView extends Component {
             message: '',
             username: 'Guest',
             usernameSet: false,
-            userTyping: false
+            userTyping: false,
+            img: '',
         })
         this.socket = io.connect(':7777')
         this.socket.on('room response', data => this.updateMessages(data))
@@ -62,7 +63,9 @@ class GameView extends Component {
         this.setState({
             messages: [...this.state.messages, {message: data.message, username: data.username}],
             userTyping: false,
+            img: data.img,
         })
+        console.log(data.img)
     }
 
     blast = () => {
@@ -71,17 +74,16 @@ class GameView extends Component {
             {
             message: this.state.message,
             username: this.state.username,
+            img: this.props.profile_img
             }
         )
         this.setState({
             message: '',
         })
-
     }
-
-
+    
         render() {
-
+        console.log(this.props)
         const messages = this.state.messages.map((message, i) => (
             <div
                 key={i}
@@ -89,11 +91,17 @@ class GameView extends Component {
                 message.username === this.state.username ? 'my-message' : 'message'
                 }
             >
-                <h5>{message.username}: </h5>
-                <p> &nbsp;&nbsp;{message.message}</p>
+                <div className="chat-prof-pic">
+                    <img className="portrait-small" src={`/assets/ProfilePics/${this.state.img}`} alt="" />
+                </div>
+                <div className="chat-username">
+                    <h5>{message.username}: </h5>
+                </div>
+                <div className="chat-message">
+                    <p> &nbsp;&nbsp;{message.message}&nbsp;&nbsp; </p>
+                </div>
             </div>
         ))
-
             return (
             <div className="game-view">
                 <header className="App-header">
