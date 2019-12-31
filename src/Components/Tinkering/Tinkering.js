@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Tinkering.css";
 import Loading from '../Loading/Loading'
+const chessCtrl = require('./ChessController')
 
 
 
@@ -28,13 +29,47 @@ export default class tinkering extends Component {
                         "wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR"], 
 
             twoClicks: [],
+            legalMoves: [],
                     }
         this.handleClick = this.handleClick.bind(this);
         }
     
     handleClick(id) {
-        
-
+        // note to self for tommorrow - include legal move logic here for each piece
+        // * WHITE PAWN * //
+        if (document.getElementById(id).childNodes[0]) {
+            let piece = document.getElementById(id).childNodes[0].id
+            console.log(piece)
+            if (this.state.legalMoves.length === 0 && piece === "wP") {
+                let thisIndex = this.state.chessGrid.indexOf(id)
+                let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex - 8])
+                let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex - 16])
+                if (legalMove1) {
+                    this.state.legalMoves.push(legalMove1.id)
+                }
+                if (legalMove2) {
+                    this.state.legalMoves.push(legalMove2.id)
+                }
+            }
+        }
+        // * BLACK PAWN * //
+        if (document.getElementById(id).childNodes[0]) {
+            let piece = document.getElementById(id).childNodes[0].id
+            console.log(piece)
+            if (this.state.legalMoves.length === 0 && piece === "bP") {
+                let thisIndex = this.state.chessGrid.indexOf(id)
+                let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex + 8])
+                let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex + 16])
+                if (legalMove1) {
+                    this.state.legalMoves.push(legalMove1.id)
+                }
+                if (legalMove2) {
+                    this.state.legalMoves.push(legalMove2.id)
+                }
+            }
+        }
+        // console.log(legalMove1)
+        // console.log(legalMove2.id)
         if (this.state.twoClicks.length === 0) {
             for (let i = 0; i < 64; i++) {
                 document.getElementById(this.state.chessGrid[i])
@@ -69,39 +104,41 @@ export default class tinkering extends Component {
         }
         let clickedSquare = document.getElementById(id)
         if (clickedSquare.children[0]) {
-            this.state.twoClicks.push(clickedSquare.children[0].id + id)
-            // console.log(this.state.twoClicks)
+            if (clickedSquare.children[0] && clickedSquare.children[0].className !== "y-dot" && this.state.twoClicks.length === 0) {
+                this.state.twoClicks.push(clickedSquare.children[0].id + id)
+            } else if ((this.state.twoClicks[0] && this.state.legalMoves.indexOf(clickedSquare.id) > -1) && (clickedSquare.children[0].className === "y-dot" || clickedSquare.children[1].className === "y-dot")) {
+                    this.state.twoClicks.push(this.state.twoClicks[0].substring(0, 2) + id)
+                    this.state.legalMoves.splice(0, 2)
+                    this.movePiece(id)
+                } else {
+                    this.state.twoClicks.splice(0, 2)
+                    this.state.legalMoves.splice(0, 2)   
+                }
         } else {
-            if (this.state.twoClicks[0]) {
-                this.state.twoClicks.push(this.state.twoClicks[0].substring(0, 2) + id)
-            }
-            // console.log(this.state.twoClicks)
+            this.state.twoClicks.splice(0, 2)
+            this.state.legalMoves.splice(0, 2) 
         }
-        this.movePiece(id)
     }
 
+
     async movePiece(id) {
-        // let thisIndex = this.state.chessGrid.indexOf(id)
-        // let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex - 8])
-        // let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex - 16])
-        // console.log(legalMove1)
-        // console.log(legalMove2)
-        console.log(this.state.twoClicks)
         if (this.state.twoClicks[1]) {
             let piece = this.state.twoClicks[0].substring(0, 2)
             let square1 = this.state.twoClicks[0].substring(2, 4)
             let square2 = this.state.twoClicks[1].substring(2, 4)
-            console.log(square2)
+            // console.log(this.state.twoClicks)
             for (let i = 0; i < 64; i++){
                 if (this.state.chessGrid[i] === square1) {
                     // console.log(this.state.chessGrid[i])
                     this.state.placement.splice(i, 1, "")
+                    // console.log(this.state.chessGrid[i])
+                    // console.log(square2)
                 }
                 if (this.state.chessGrid[i] === square2) {
                     this.state.placement.splice(i, 1, piece)
-                    console.log(this.state.placement)
                 }
             }
+            // await console.log(this.state.placement)
         await this.updateBoard(square2)
         }
     }
@@ -109,97 +146,7 @@ export default class tinkering extends Component {
     updateBoard(square2) {
         const chessGrid = this.state.chessGrid
         const placement = this.state.placement
-        for ( var i = 0; i < 64; i ++) {
-            // console.log(placement[i])
-            if (placement[i] === "") {
-                let piece = document.getElementById(chessGrid[i])
-                if (piece.childNodes[0]) {
-                    piece.removeChild(piece.childNodes[0])
-                }
-                // console.log(piece.childNodes)
-            }
-            if (chessGrid[i] === square2) {
-                let piece = document.getElementById(chessGrid[i])
-                if (piece.childNodes[0]) {
-                    piece.removeChild(piece.childNodes[0])
-                }
-                if (placement[i] === "bP") {
-                    let startingPiece = document.getElementById(chessGrid[i]).appendChild(document.createElement("img"))
-                    startingPiece.src = "/assets/Pieces/pawn-b.png"
-                    startingPiece.className = "piece"
-                    startingPiece.id = "bP"
-                }
-                if (placement[i] === "bR") {
-                    let startingPiece = document.getElementById(chessGrid[i]).appendChild(document.createElement("img"))
-                    startingPiece.src = "/assets/Pieces/rook-b.png"
-                    startingPiece.className = "piece"
-                    startingPiece.id = "bR"
-                }
-                if (placement[i] === "bN") {
-                    let startingPiece = document.getElementById(chessGrid[i]).appendChild(document.createElement("img"))
-                    startingPiece.src = "/assets/Pieces/knight-b.png"
-                    startingPiece.className = "piece"
-                    startingPiece.id = "bN"
-                }
-                if (placement[i] === "bB") {
-                    let startingPiece = document.getElementById(chessGrid[i]).appendChild(document.createElement("img"))
-                    startingPiece.src = "/assets/Pieces/bishop-b.png"
-                    startingPiece.className = "piece"
-                    startingPiece.id = "bB"
-                }
-                if (placement[i] === "bQ") {
-                    let startingPiece = document.getElementById(chessGrid[i]).appendChild(document.createElement("img"))
-                    startingPiece.src = "/assets/Pieces/queen-b.png"
-                    startingPiece.className = "piece"
-                    startingPiece.id = "bQ"
-                }
-                if (placement[i] === "bK") {
-                    let startingPiece = document.getElementById(chessGrid[i]).appendChild(document.createElement("img"))
-                    startingPiece.src = "/assets/Pieces/king-b.png"
-                    startingPiece.className = "piece"
-                    startingPiece.id = "bK"
-                }
-                if (placement[i] === "wP") {
-                    let startingPiece = document.getElementById(chessGrid[i]).appendChild(document.createElement("img"))
-                    startingPiece.src = "/assets/Pieces/pawn-w.png"
-                    startingPiece.className = "piece"
-                    startingPiece.id = "wP"
-                }
-                if (placement[i] === "wR") {
-                    let startingPiece = document.getElementById(chessGrid[i]).appendChild(document.createElement("img"))
-                    startingPiece.src = "/assets/Pieces/rook-w.png"
-                    startingPiece.className = "piece"
-                    startingPiece.id = "wR"
-                }
-                if (placement[i] === "wN") {
-                    let startingPiece = document.getElementById(chessGrid[i]).appendChild(document.createElement("img"))
-                    startingPiece.src = "/assets/Pieces/knight-w.png"
-                    startingPiece.className = "piece"
-                    startingPiece.id = "wN"
-                }
-                if (placement[i] === "wB") {
-                    let startingPiece = document.getElementById(chessGrid[i]).appendChild(document.createElement("img"))
-                    startingPiece.src = "/assets/Pieces/bishop-w.png"
-                    startingPiece.className = "piece"
-                    startingPiece.id = "wB"
-                }
-                if (placement[i] === "wK") {
-                    let startingPiece = document.getElementById(chessGrid[i]).appendChild(document.createElement("img"))
-                    startingPiece.src = "/assets/Pieces/king-w.png"
-                    startingPiece.className = "piece"
-                    startingPiece.id = "wK"
-                }
-                if (placement[i] === "wQ") {
-                    let startingPiece = document.getElementById(chessGrid[i]).appendChild(document.createElement("img"))
-                    startingPiece.src = "/assets/Pieces/queen-w.png"
-                    startingPiece.className = "piece"
-                    startingPiece.id = "wQ"
-                }
-                
-            } 
-        }
-        // console.log(square2)
-        // console.log(this.state.placement)
+        chessCtrl.updateBoard(square2, chessGrid, placement)
     }
 
     handleHover(id) {
@@ -211,6 +158,21 @@ export default class tinkering extends Component {
                         let thisIndex = this.state.chessGrid.indexOf(id)
                         let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex - 8])
                         let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex - 16])
+                        if (legalMove1) {
+                            legalMove1.appendChild(document.createElement("div")).className = "y-dot"
+                        }
+                        if (legalMove2) {
+                            legalMove2.appendChild(document.createElement("div")).className = "y-dot"
+                        }
+                    }
+                }
+            }
+            if (piece.childNodes[0].id === "bP") {
+                for (let i = 0; i < 64; i++) {
+                    if (this.state.chessGrid[i] === id && this.state.twoClicks.length !== 1) {
+                        let thisIndex = this.state.chessGrid.indexOf(id)
+                        let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex + 8])
+                        let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex + 16])
                         if (legalMove1) {
                             legalMove1.appendChild(document.createElement("div")).className = "y-dot"
                         }
@@ -240,6 +202,21 @@ export default class tinkering extends Component {
                     }
                 }
             }
+        if (piece.childNodes[0].id === "bP") {
+            for (let i = 0; i < 64; i++) {
+                if (this.state.chessGrid[i] === id) {
+                    let thisIndex = this.state.chessGrid.indexOf(id)
+                    let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex + 8])
+                        if (legalMove1 && this.state.twoClicks.length !== 1) {
+                            let yellowCircle = document.getElementsByClassName("y-dot")
+                            while(yellowCircle.length > 0) {
+                                yellowCircle[0].parentNode.removeChild(yellowCircle[0])
+                            }
+                        }
+                    }
+                }
+            }
+                
         }
     }
 
@@ -415,7 +392,6 @@ export default class tinkering extends Component {
             startingPiece.id = "w";
             }
         }, 800);
-           
     }
 
 
