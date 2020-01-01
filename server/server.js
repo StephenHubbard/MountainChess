@@ -23,13 +23,13 @@ let connectedUsers = {}
 
 io.on('connection', socket => {
 
-    // console.log('socket connected')
     
     // * GAME SOCKETS
 
     socket.on('new game', data => {
         socket.join(`${data.g_id}`)
         console.log(`User has joined game ${data.g_id}`)
+        
     })
 
     socket.on('new move', data => {
