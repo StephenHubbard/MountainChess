@@ -471,7 +471,30 @@ export class Sidebar extends Component {
                     </ul>
                   </div>
                 ) : (
-                  <h5>Login to see other online Users</h5>
+                  <div>
+                  <h5>Online Users</h5>
+                  <ul>
+                      {this.state.loggedInUsers.map(el => (
+                        <li className="friend-li" key={el.username}>
+                          <div className="friend">
+                            <div className="green" />
+                            <img
+                              className="portrait-small"
+                              src={`/assets/ProfilePics/${el.portrait}`}
+                              alt=""
+                            />
+                            <h5>{el.username}</h5>
+                            <button
+                              className="invite-btn"
+                              onClick={() => this.inviteFriend(el.username)}
+                            >
+                              Challenge
+                            </button>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                    </div>
                 )}
               </div>
               <div className="top-users" id="scroll-style">
@@ -497,7 +520,7 @@ export class Sidebar extends Component {
                     <i classname="fas fa-info-circle" id='sb-icon'></i>
                   </Link>
 
-                  <Link to="/tinkering">
+                  <Link to="/chess">
                     <i className="fas fa-chess" id='sb-icon'></i>
                   </Link>
             </div>
