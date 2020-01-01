@@ -1,6 +1,6 @@
 const initialState = {
     email: '',
-    username: 'Guest'
+    username: ''
 }
 
 // ACTION CONSTANTS

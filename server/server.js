@@ -128,6 +128,8 @@ app.use(session({
 app.post('/game/newMove', gameCtrl.newMove)
 app.post('/game/updateGameArray', gameCtrl.updateGameArray)
 app.get('/game/getLastGame', gameCtrl.getLastGame)
+app.post('/game/newGame', gameCtrl.newGame)
+app.post('/game/checkGameExists', gameCtrl.checkGame)
 
 
 // REGISTERING, LOGGING IN AND LOGGING OUT

@@ -162,18 +162,30 @@
     border: 1px solid black;
     border-radius: 5px;
     height: 50px;
-    width: 100px;
+    width: 200px;
 }
 
 .two-players {
-    min-width: 400px;
+    min-width: 500px;
     position: absolute;
     top: 0px;
-    left: 200px;
+    left: 100px;
     display: flex;
     align-items: center;
 }
 
 .two-players h1 {
-    min-width: 400px;
+    min-width: 500px;
+}
+
+.destroyed-piece {
+    height: 30px;
+    width: 30px;
+    position: absolute;
+}
+
+.destroyed-piece-container {
+    position: absolute;
+    bottom: 35px;
+    left: 5px;
 }
