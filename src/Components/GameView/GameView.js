@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { updateUserInfo } from "./../../ducks/reducer";
 import {withRouter} from 'react-router-dom'
 import io from 'socket.io-client'
-import Tinkering from "../Tinkering/Tinkering"
+import Chess from "../Chess/Chess"
 
 
 
@@ -109,7 +109,7 @@ class GameView extends Component {
                     <h1>User 1 vs User 2</h1>
                 </header>
                 <div className="game-row">
-                    <Tinkering />
+                    <Chess />
                     <div className="chat-cont">
                         <div className="messages">
                             {messages}

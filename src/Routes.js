@@ -5,7 +5,7 @@ import Profile from './Components/Profile/Profile';
 import AddFriend from './Components/AddFriend/AddFriend';
 import Home from './Components/Home/Home';
 import About from './Components/About/About'
-import Tinkering from './Components/Tinkering/Tinkering';
+import chess from './Components/Chess/Chess';
 
 export default(
     <Switch>
@@ -14,6 +14,6 @@ export default(
         <Route path={'/profile/:id'} component={Profile} />
         <Route path={'/users'} component={AddFriend} />
         <Route path={'/about'} component={About} />
-        <Route path={'/tinkering'} component={Tinkering} />
+        <Route path={'/chess'} component={chess} />
     </Switch>
 )

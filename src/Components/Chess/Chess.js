@@ -1,16 +1,16 @@
 import React, { Component } from "react";
-import "./Tinkering.css";
+import "./Chess.css";
 import Loading from '../Loading/Loading'
 import axios from 'axios'
 import { connect } from "react-redux";
-import { updateUserInfo } from "./../../ducks/reducer";
+import { updateUserInfo } from "../../ducks/reducer";
 import io from 'socket.io-client'
 
 const chessCtrl = require('./ChessController')
 
 
 
-class Tinkering extends Component {
+class Chess extends Component {
     constructor() {
         super()
         this.state = {
@@ -2270,4 +2270,4 @@ function mapStateToProps(reduxState) {
     return reduxState;
     }
     
-export default (connect(mapStateToProps, { updateUserInfo })(Tinkering));
+export default (connect(mapStateToProps, { updateUserInfo })(Chess));
