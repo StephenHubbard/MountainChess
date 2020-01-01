@@ -17,9 +17,9 @@ module.exports = {
     updateGameArray: (req, res) => {
         // console.log(req.body.fen)
         const db = req.app.get('db')
-        placement = req.body.placement
-        // console.log(placement)
-        db.update_game_array({ placement })
+        const placement = req.body.placement
+        const g_id = req.body.g_id
+        db.update_game_array({ placement, g_id })
         .then(result => {
             res.status(200).send(result)
         })
@@ -32,5 +32,24 @@ module.exports = {
             res.status(200).send(result)
         })
         .catch(err => console.log(err))
-    }
+    }, 
+    newGame: (req, res) => {
+        const db = req.app.get('db')
+        const g_id = req.body.g_id
+        db.new_game({ g_id })
+        .then(result => {
+            res.status(200).send(result)
+        })
+        .catch(err => console.log(err))
+    }, 
+    checkGame: (req, res) => {
+        const db = req.app.get('db')
+        const g_id = req.body.g_id
+        db.check_game({ g_id })
+        .then(result => {
+            console.log(result)
+            res.status(200).send(result)
+        })
+        .catch(err => console.log(err))
+    },
 }

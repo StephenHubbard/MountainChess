@@ -5,6 +5,8 @@ import axios from 'axios'
 import { connect } from "react-redux";
 import { updateUserInfo } from "../../ducks/reducer";
 import io from 'socket.io-client'
+import {withRouter} from 'react-router-dom'
+
 
 const chessCtrl = require('./ChessController')
 
@@ -38,6 +40,9 @@ class Chess extends Component {
             isWhiteTurn: true,
             userWhite: '',
             userBlack: '',
+            destroyedPiecesWhite: [],
+            destroyedPiecesBlack: [],
+            g_id: '',
                     }
         this.handleClick = this.handleClick.bind(this);
         this.socket = io.connect(':7777')
@@ -1049,7 +1054,7 @@ class Chess extends Component {
                     this.updateMovePostgres()
                     this.updateArrayPostgres()
                     this.socket.emit(
-                        'new move', {g_id: 1, state: this.state }
+                        'new move', {g_id: this.state.g_id, state: this.state }
                     )
                 } else {
                     this.state.twoClicks.splice(0, 2)
@@ -1072,8 +1077,10 @@ class Chess extends Component {
         })
         let chessGrid = this.state.chessGrid
         let placement = this.state.placement
-        let square2 = this.state.twoClicks[1].substring(2, 4)
-        await chessCtrl.updateBoard(square2, chessGrid, placement)
+        if (this.state.twoClicks[1]) {
+            let square2 = this.state.twoClicks[1].substring(2, 4)
+            await chessCtrl.updateBoard(square2, chessGrid, placement)
+        }
     }
 
     updateMovePostgres() {
@@ -1090,8 +1097,9 @@ class Chess extends Component {
 
     updateArrayPostgres() {
         let placement = this.state.placement
+        let g_id = this.state.g_id
         axios
-        .post('/game/updateGameArray', {placement: placement})
+        .post('/game/updateGameArray', {placement: placement, g_id: g_id})
         .then(res => {
             // console.log(res)
         })
@@ -1139,7 +1147,7 @@ class Chess extends Component {
     handleHover(id) {
         let piece = document.getElementById(id)
         if (piece.childNodes[0]) {
-            if (piece.childNodes[0].id === "wP" && this.state.isWhiteTurn === true) {
+            if (piece.childNodes[0].id === "wP" && this.state.isWhiteTurn === true && this.state.userWhite === this.state.thisUser) {
                 for (let i = 0; i < 64; i++) {
                     if (this.state.chessGrid[i] === id && this.state.twoClicks.length !== 1) {
                         let thisIndex = this.state.chessGrid.indexOf(id)
@@ -1172,7 +1180,7 @@ class Chess extends Component {
                     }
                 }
             }
-            if (piece.childNodes[0].id === "bP" && this.state.isWhiteTurn === false) {
+            if (piece.childNodes[0].id === "bP" && this.state.isWhiteTurn === false && this.state.userBlack === this.state.thisUser) {
                 for (let i = 0; i < 64; i++) {
                     if (this.state.chessGrid[i] === id && this.state.twoClicks.length !== 1) {
                         let thisIndex = this.state.chessGrid.indexOf(id)
@@ -1205,7 +1213,7 @@ class Chess extends Component {
                     }
                 }
             }
-            if (piece.childNodes[0].id === "wK" && this.state.isWhiteTurn === true) {
+            if (piece.childNodes[0].id === "wK" && this.state.isWhiteTurn === true && this.state.userWhite === this.state.thisUser) {
                 for (let i = 0; i < 64; i++) {
                     if (this.state.chessGrid[i] === id && this.state.twoClicks.length !== 1) {
                         let thisIndex = this.state.chessGrid.indexOf(id)
@@ -1244,7 +1252,7 @@ class Chess extends Component {
                     }
                 }
             }
-            if (piece.childNodes[0].id === "bK" && this.state.isWhiteTurn === false) {
+            if (piece.childNodes[0].id === "bK" && this.state.isWhiteTurn === false && this.state.userBlack === this.state.thisUser) {
                 for (let i = 0; i < 64; i++) {
                     if (this.state.chessGrid[i] === id && this.state.twoClicks.length !== 1) {
                         let thisIndex = this.state.chessGrid.indexOf(id)
@@ -1283,7 +1291,7 @@ class Chess extends Component {
                     }
                 }
             }
-            if (piece.childNodes[0].id === "wR" && this.state.isWhiteTurn === true) {
+            if (piece.childNodes[0].id === "wR" && this.state.isWhiteTurn === true && this.state.userWhite === this.state.thisUser) {
                 for (let i = 0; i < 64; i++) {
                     if (this.state.chessGrid[i] === id && this.state.twoClicks.length !== 1) {
                         let thisIndex = this.state.chessGrid.indexOf(id)
@@ -1360,7 +1368,7 @@ class Chess extends Component {
                     }
                 }
             }
-            if (piece.childNodes[0].id === "bR" && this.state.isWhiteTurn === false) {
+            if (piece.childNodes[0].id === "bR" && this.state.isWhiteTurn === false && this.state.userBlack === this.state.thisUser) {
                 for (let i = 0; i < 64; i++) {
                     if (this.state.chessGrid[i] === id && this.state.twoClicks.length !== 1) {
                         let thisIndex = this.state.chessGrid.indexOf(id)
@@ -1437,7 +1445,7 @@ class Chess extends Component {
                     }
                 }
             }
-            if (piece.childNodes[0].id === "wQ" && this.state.isWhiteTurn === true) {
+            if (piece.childNodes[0].id === "wQ" && this.state.isWhiteTurn === true && this.state.userWhite === this.state.thisUser) {
                 for (let i = 0; i < 64; i++) {
                     if (this.state.chessGrid[i] === id && this.state.twoClicks.length !== 1) {
                         let thisIndex = this.state.chessGrid.indexOf(id)
@@ -1566,7 +1574,7 @@ class Chess extends Component {
                     }
                 }
             }
-            if (piece.childNodes[0].id === "bQ" && this.state.isWhiteTurn === false) {
+            if (piece.childNodes[0].id === "bQ" && this.state.isWhiteTurn === false && this.state.userBlack === this.state.thisUser) {
                 for (let i = 0; i < 64; i++) {
                     if (this.state.chessGrid[i] === id && this.state.twoClicks.length !== 1) {
                         let thisIndex = this.state.chessGrid.indexOf(id)
@@ -1695,7 +1703,7 @@ class Chess extends Component {
                     }
                 }
             }
-            if (piece.childNodes[0].id === "wN" && this.state.isWhiteTurn === true) {
+            if (piece.childNodes[0].id === "wN" && this.state.isWhiteTurn === true && this.state.userWhite === this.state.thisUser) {
                 for (let i = 0; i < 64; i++) {
                     if (this.state.chessGrid[i] === id && this.state.twoClicks.length !== 1) {
                         let thisIndex = this.state.chessGrid.indexOf(id)
@@ -1733,7 +1741,7 @@ class Chess extends Component {
                     }
                 }
             }
-            if (piece.childNodes[0].id === "bN" && this.state.isWhiteTurn === false) {
+            if (piece.childNodes[0].id === "bN" && this.state.isWhiteTurn === false && this.state.userBlack === this.state.thisUser) {
                 for (let i = 0; i < 64; i++) {
                     if (this.state.chessGrid[i] === id && this.state.twoClicks.length !== 1) {
                         let thisIndex = this.state.chessGrid.indexOf(id)
@@ -1771,7 +1779,7 @@ class Chess extends Component {
                     }
                 }
             }
-            if (piece.childNodes[0].id === "wB" && this.state.isWhiteTurn === true) {
+            if (piece.childNodes[0].id === "wB" && this.state.isWhiteTurn === true && this.state.userWhite === this.state.thisUser) {
                 for (let i = 0; i < 64; i++) {
                     if (this.state.chessGrid[i] === id && this.state.twoClicks.length !== 1) {
                         let thisIndex = this.state.chessGrid.indexOf(id)
@@ -1847,7 +1855,7 @@ class Chess extends Component {
                     }
                 }
             }
-            if (piece.childNodes[0].id === "bB" && this.state.isWhiteTurn === false) {
+            if (piece.childNodes[0].id === "bB" && this.state.isWhiteTurn === false && this.state.userBlack === this.state.thisUser) {
                 for (let i = 0; i < 64; i++) {
                     if (this.state.chessGrid[i] === id && this.state.twoClicks.length !== 1) {
                         let thisIndex = this.state.chessGrid.indexOf(id)
@@ -2041,20 +2049,39 @@ class Chess extends Component {
     }
 
     async handleUserLogic() {
-        // console.log(this.props)
-        if (this.state.userWhite) {
+        if (this.props.username) {
             await this.setState({
-                userBlack: this.props.user
+                thisUser: this.props.username,
             })
         } else {
             await this.setState({
-                userWhite: this.props.user
+                thisUser: "Guest"
             })
         }
+        if (this.state.userWhite) {
+            if (this.props.user) {
+                await this.setState({
+                    userBlack: this.props.user
+                })
+            } else {
+                this.setState({
+                    userBlack: "Guest"
+                })
+            }
+        } else {
+            if (this.props.user) {
+                await this.setState({
+                    userWhite: this.props.user
+                })
+            } else {
+                this.setState({
+                    userWhite: "Guest"
+                })
+            }
+        }
         await this.socket.emit(
-            'update user', {g_id: 1, state: this.state }
+            'update user', {g_id: this.state.g_id, state: this.state }
         )
-        // await console.log(this.state)
     }
 
     async updateUserLogic(data) {
@@ -2068,15 +2095,30 @@ class Chess extends Component {
                 userWhite: data.state.userWhite
             })
         }
-        await console.log(this.state)
-        console.log(this.props)
     }
 
+    async handleGame() {
+        await this.setState({
+            g_id: this.props.match.params.id
+        })
+        axios
+        .post('/checkGameExists', {g_id: this.state.g_id})
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => console.log(err))
 
-    componentDidMount() {
-    console.log(this.props)
-    this.socket.emit('new game', {g_id: 1})
+        await this.socket.emit('new game', {g_id: this.state.g_id})
+        axios
+        .post('/game/newGame', {g_id: this.state.g_id})
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => console.log(err))
+    }
 
+    async componentDidMount() {
+    await this.handleGame()
     const chessGrid = this.state.chessGrid;
     const startingPlacement = this.state.placement;
     setTimeout(() => {
@@ -2266,7 +2308,7 @@ class Chess extends Component {
 
             <div className="border-letters">
                 <div className="two-players">
-                    <h1>{this.state.userWhite}(White) VS {this.state.userBlack}(Black)</h1>
+                    <h1>{this.state.userWhite}-white VS {this.state.userBlack}-black</h1>
                 </div>
                 <div className="bottom-letters">
                 <h1>A</h1>
@@ -2303,9 +2345,16 @@ class Chess extends Component {
                     null
                 ) : 
                 <div className="color-select">
-                <button onClick={() => this.handleUserLogic()}>Ready</button>
+                {this.state.userWhite ? (
+                    <button onClick={() => this.handleUserLogic()}>Ready - Select Black</button>
+                ) :
+                    <button onClick={() => this.handleUserLogic()}>Ready - Select White</button>
+                }
                 </div>
                 }
+                <div className="destroyed-piece-container">
+                    <img className="destroyed-piece" src="/assets/Pieces/bishop-b.png" alt=""/>
+                </div>
             </div>
 
         </div>
@@ -2317,4 +2366,4 @@ function mapStateToProps(reduxState) {
     return reduxState;
     }
     
-export default (connect(mapStateToProps, { updateUserInfo })(Chess));
+    export default withRouter(connect(mapStateToProps, { updateUserInfo })(Chess));

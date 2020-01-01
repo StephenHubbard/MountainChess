@@ -66,7 +66,6 @@ class GameView extends Component {
             userTyping: false,
             img: data.img,
         })
-        console.log(data.img)
     }
 
     blast = () => {
