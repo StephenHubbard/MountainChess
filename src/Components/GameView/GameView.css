@@ -12,10 +12,10 @@ h1 {
 
 .chat-cont {
     position: relative;
-    height: 500px;
+    height: 400px;
     width: 400px;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-    margin-top: -440px;
+    margin-top: -400px;
     margin-right: -200px;
     display: flex;
     align-items: center;
@@ -23,7 +23,7 @@ h1 {
     background-color: #eeeeee;
     justify-content: space-between;
     border-radius: 9px;
-    overflow: scroll;
+    overflow: auto;
     overflow-wrap: normal;
     overflow-x: hidden;
     padding-right: 10px;

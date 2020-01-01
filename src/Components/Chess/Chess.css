@@ -2,6 +2,7 @@
     /* can rotate this and .piece for blacks turn */
     /* transform: rotate(180deg); */
     position: relative;
+    margin-top: 50px;
 }
 
 #mainChessBoard
@@ -146,4 +147,33 @@
     top: 0px;
     width: 140px;
     margin-top: 40px;
+}
+
+.color-select {
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    position: absolute;
+    width: 100%;
+}
+
+.color-select button {
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 50px;
+    width: 100px;
+}
+
+.two-players {
+    min-width: 400px;
+    position: absolute;
+    top: 0px;
+    left: 200px;
+    display: flex;
+    align-items: center;
+}
+
+.two-players h1 {
+    min-width: 400px;
 }

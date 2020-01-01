@@ -84,7 +84,7 @@ class GameView extends Component {
     }
     
         render() {
-        console.log(this.props)
+        // console.log(this.props)
         const messages = this.state.messages.map((message, i) => (
             <div
                 key={i}
@@ -105,11 +105,11 @@ class GameView extends Component {
         ))
             return (
             <div className="game-view">
-                <header className="App-header">
-                    <h1>User 1 vs User 2</h1>
-                </header>
+                
                 <div className="game-row">
-                    <Chess />
+                    <Chess 
+                    user = {this.props.username}
+                    />
                     <div className="chat-cont">
                         <div className="messages">
                             {messages}

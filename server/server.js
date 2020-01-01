@@ -37,6 +37,10 @@ io.on('connection', socket => {
         io.to(data.g_id).emit('game response', data)
     })
 
+    socket.on('update user', data => {
+        io.to(data.g_id).emit('update user incoming', data)
+    })
+
     // USER PRESENCE SOCKETS 
 
     socket.on('online', data => {

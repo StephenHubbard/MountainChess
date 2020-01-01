@@ -36,10 +36,13 @@ class Chess extends Component {
             twoClicks: [],
             legalMoves: [],
             isWhiteTurn: true,
+            userWhite: '',
+            userBlack: '',
                     }
         this.handleClick = this.handleClick.bind(this);
         this.socket = io.connect(':7777')
         this.socket.on('game response', data => this.updateGame(data))
+        this.socket.on('update user incoming', data => this.updateUserLogic(data))
         }
     
     handleClick(id) {
@@ -2037,8 +2040,41 @@ class Chess extends Component {
         }
     }
 
+    async handleUserLogic() {
+        // console.log(this.props)
+        if (this.state.userWhite) {
+            await this.setState({
+                userBlack: this.props.user
+            })
+        } else {
+            await this.setState({
+                userWhite: this.props.user
+            })
+        }
+        await this.socket.emit(
+            'update user', {g_id: 1, state: this.state }
+        )
+        // await console.log(this.state)
+    }
+
+    async updateUserLogic(data) {
+        // console.log(data)
+        if (this.state.userWhite) {
+            await this.setState({
+                userBlack: data.state.userBlack
+            })
+        } else {
+            await this.setState({
+                userWhite: data.state.userWhite
+            })
+        }
+        await console.log(this.state)
+        console.log(this.props)
+    }
+
 
     componentDidMount() {
+    console.log(this.props)
     this.socket.emit('new game', {g_id: 1})
 
     const chessGrid = this.state.chessGrid;
@@ -2215,6 +2251,7 @@ class Chess extends Component {
 
 
     render() {
+        // console.log(this.props)
         return (
         <div className="whole-game">
             {this.state.loading && (
@@ -2228,6 +2265,9 @@ class Chess extends Component {
             <div id="mainChessBoard"></div>
 
             <div className="border-letters">
+                <div className="two-players">
+                    <h1>{this.state.userWhite}(White) VS {this.state.userBlack}(Black)</h1>
+                </div>
                 <div className="bottom-letters">
                 <h1>A</h1>
                 <h1>B</h1>
@@ -2259,6 +2299,13 @@ class Chess extends Component {
                 {this.state.twoClicks.length > 1 ? (
                     <h1 className="recent-moves">{this.state.twoClicks[0]} -> {this.state.twoClicks[1]}</h1>
                 ) : null }
+                {this.state.userWhite && this.state.userBlack ? (
+                    null
+                ) : 
+                <div className="color-select">
+                <button onClick={() => this.handleUserLogic()}>Ready</button>
+                </div>
+                }
             </div>
 
         </div>
