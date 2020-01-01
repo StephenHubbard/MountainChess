@@ -39,7 +39,7 @@ export default class tinkering extends Component {
         // * WHITE PAWN * //
         if (document.getElementById(id).childNodes[0]) {
             let piece = document.getElementById(id).childNodes[0].id
-            console.log(piece)
+            // console.log(piece)
             if (this.state.legalMoves.length === 0 && piece === "wP") {
                 let thisIndex = this.state.chessGrid.indexOf(id)
                 let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex - 8])
