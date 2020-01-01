@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import "./Tinkering.css";
 import Loading from '../Loading/Loading'
+import axios from 'axios'
+import { connect } from "react-redux";
+import { updateUserInfo } from "./../../ducks/reducer";
+
 const chessCtrl = require('./ChessController')
 
 
 
-export default class tinkering extends Component {
+class Tinkering extends Component {
     constructor() {
         super()
         this.state = {
@@ -30,6 +34,7 @@ export default class tinkering extends Component {
 
             twoClicks: [],
             legalMoves: [],
+            isWhiteTurn: true,
                     }
         this.handleClick = this.handleClick.bind(this);
         }
@@ -37,14 +42,9 @@ export default class tinkering extends Component {
     handleClick(id) {
         if (document.getElementById(id).childNodes[0]) {
             let piece = document.getElementById(id).childNodes[0].id
-<<<<<<< HEAD
-            // console.log(piece)
-=======
             let piece2 = document.getElementById(id)
-            console.log(piece2)
             // * WHITE PAWN * //
->>>>>>> master
-            if (this.state.legalMoves.length === 0 && piece === "wP") {
+            if (this.state.legalMoves.length === 0 && piece === "wP" && this.state.isWhiteTurn === true) {
                 let thisIndex = this.state.chessGrid.indexOf(id)
                     let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex - 8])
                     let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex - 16])
@@ -70,7 +70,7 @@ export default class tinkering extends Component {
                     }
             }
             // * BLACK PAWN * //
-            if (this.state.legalMoves.length === 0 && piece === "bP") {
+            if (this.state.legalMoves.length === 0 && piece === "bP" && this.state.isWhiteTurn === false) {
                 let thisIndex = this.state.chessGrid.indexOf(id)
                 let legalMove1 = document.getElementById(this.state.chessGrid[thisIndex + 8])
                 let legalMove2 = document.getElementById(this.state.chessGrid[thisIndex + 16])
@@ -548,7 +548,6 @@ export default class tinkering extends Component {
                     }
                 }
             }
-        console.log(this.state.legalMoves)
         }
         if (this.state.twoClicks.length === 0) {
             for (let i = 0; i < 64; i++) {
@@ -593,6 +592,8 @@ export default class tinkering extends Component {
                     this.movePiece(id)
                     console.log("hit2")
                     this.handlePostClick()
+                    this.updateMovePostgres()
+                    this.updateArrayPostgres()
                 } else {
                     this.state.twoClicks.splice(0, 2)
                     this.state.legalMoves.splice(0)  
@@ -604,6 +605,28 @@ export default class tinkering extends Component {
             this.state.legalMoves.splice(0) 
             console.log("hit4")
         }
+    }
+
+    updateMovePostgres() {
+        let move1 = this.state.twoClicks[0]
+        let move2 = this.state.twoClicks[1]
+        let user_id = this.props.user_id
+        axios
+        .post('/game/newMove', {move1, move2, user_id})
+        .then(res => {
+            // console.log(res)
+        })
+        .catch(err => console.log(err))
+    }
+
+    updateArrayPostgres() {
+        let placement = this.state.placement
+        axios
+        .post('/game/updateGameArray', {placement: placement})
+        .then(res => {
+            // console.log(res)
+        })
+        .catch(err => console.log(err))
     }
 
     async movePiece(id) {
@@ -644,7 +667,7 @@ export default class tinkering extends Component {
     handleHover(id) {
         let piece = document.getElementById(id)
         if (piece.childNodes[0]) {
-            if (piece.childNodes[0].id === "wP") {
+            if (piece.childNodes[0].id === "wP" && this.state.isWhiteTurn === true) {
                 for (let i = 0; i < 64; i++) {
                     if (this.state.chessGrid[i] === id && this.state.twoClicks.length !== 1) {
                         let thisIndex = this.state.chessGrid.indexOf(id)
@@ -677,7 +700,7 @@ export default class tinkering extends Component {
                     }
                 }
             }
-            if (piece.childNodes[0].id === "bP") {
+            if (piece.childNodes[0].id === "bP" && this.state.isWhiteTurn === false) {
                 for (let i = 0; i < 64; i++) {
                     if (this.state.chessGrid[i] === id && this.state.twoClicks.length !== 1) {
                         let thisIndex = this.state.chessGrid.indexOf(id)
@@ -1363,7 +1386,7 @@ export default class tinkering extends Component {
 
     render() {
         return (
-        <>
+        <div className="whole-game">
             {this.state.loading && (
             <>
                 <div className="loading">
@@ -1398,7 +1421,13 @@ export default class tinkering extends Component {
             </div>
             </div>)}
             
-        </>
+        </div>
         );
     }
 }
+
+function mapStateToProps(reduxState) {
+    return reduxState;
+    }
+    
+export default (connect(mapStateToProps, { updateUserInfo })(Tinkering));

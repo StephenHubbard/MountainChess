@@ -1,3 +1,8 @@
+.whole-game {
+    /* can rotate this and .piece for blacks turn */
+    /* transform: rotate(180deg); */
+}
+
 #mainChessBoard
 {
     width:650px;
@@ -93,6 +98,7 @@
     margin-top: 10px;
     z-index: 10;
     margin-left: -30px;
+
 }
 
 #w {

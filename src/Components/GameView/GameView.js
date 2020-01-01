@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 // import Chessboard from 'chessboardjsx';
 // import Chess from 'chess.js';
-import Demo from "../GameView/Chessboard/Demo";
+// import Demo from "../GameView/Chessboard/Demo";
 import "./GameView.css";
 import { connect } from "react-redux";
 import { updateUserInfo } from "./../../ducks/reducer";
 import {withRouter} from 'react-router-dom'
 import io from 'socket.io-client'
+import Tinkering from "../Tinkering/Tinkering"
 
 
 
@@ -108,7 +109,7 @@ class GameView extends Component {
                     <h1>Game View Page</h1>
                 </header>
                 <div className="game-row">
-                    <Demo />
+                    <Tinkering />
                     <div className="chat-cont">
                         <div className="messages">
                             {messages}

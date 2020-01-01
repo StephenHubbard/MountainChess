@@ -122,7 +122,7 @@ app.use(session({
 
 // GAME LOGIC
 app.post('/game/newMove', gameCtrl.newMove)
-app.post('/game/updateFen', gameCtrl.updateFen)
+app.post('/game/updateGameArray', gameCtrl.updateGameArray)
 app.get('/game/getLastGame', gameCtrl.getLastGame)
 
 
