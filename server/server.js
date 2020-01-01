@@ -33,7 +33,7 @@ io.on('connection', socket => {
     })
 
     socket.on('new move', data => {
-        console.log(`new move on game ${data.g_id}`)
+        // console.log(`new move on game ${data.g_id}`)
         io.to(data.g_id).emit('game response', data)
     })
 

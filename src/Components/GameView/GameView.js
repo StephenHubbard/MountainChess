@@ -106,7 +106,7 @@ class GameView extends Component {
             return (
             <div className="game-view">
                 <header className="App-header">
-                    <h1>Game View Page</h1>
+                    <h1>User 1 vs User 2</h1>
                 </header>
                 <div className="game-row">
                     <Tinkering />

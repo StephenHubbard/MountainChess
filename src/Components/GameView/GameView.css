@@ -12,10 +12,10 @@ h1 {
 
 .chat-cont {
     position: relative;
-    height: 65vh;
-    width: 25vw;
+    height: 500px;
+    width: 400px;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-    margin-top: 0px;
+    margin-top: -440px;
     margin-right: -200px;
     display: flex;
     align-items: center;
@@ -30,6 +30,7 @@ h1 {
 }
 
 .game-row {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -43,22 +44,20 @@ h1 {
 
 .input-btn-div {
     position: absolute;
-    bottom: 10%;
+    bottom: 0px;
     display: flex;
-    width: 22%;
+    width: 100%;
     justify-content: space-between;
-    position: fixed;
 }
 
 .send-btn {
     position: absolute;
-    width: 7%;
-    bottom: 10%;
-    right: 12%;
+    width: 20%;
+    bottom: 0px;
+    right: 0px;
     border: 1px solid rgb(122, 122, 122);
     border-left: none;
     height: 30px;
-    position: fixed;
     border-radius: 4px;
 }
 
