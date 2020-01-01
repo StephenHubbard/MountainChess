@@ -33,8 +33,12 @@ io.on('connection', socket => {
     })
 
     socket.on('new move', data => {
-        console.log(`new move on game ${data.g_id}`)
+        // console.log(`new move on game ${data.g_id}`)
         io.to(data.g_id).emit('game response', data)
+    })
+
+    socket.on('update user', data => {
+        io.to(data.g_id).emit('update user incoming', data)
     })
 
     // USER PRESENCE SOCKETS 
@@ -122,8 +126,10 @@ app.use(session({
 
 // GAME LOGIC
 app.post('/game/newMove', gameCtrl.newMove)
-app.post('/game/updateFen', gameCtrl.updateFen)
+app.post('/game/updateGameArray', gameCtrl.updateGameArray)
 app.get('/game/getLastGame', gameCtrl.getLastGame)
+app.post('/game/newGame', gameCtrl.newGame)
+app.post('/game/checkGameExists', gameCtrl.checkGame)
 
 
 // REGISTERING, LOGGING IN AND LOGGING OUT

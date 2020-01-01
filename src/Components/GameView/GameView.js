@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 // import Chessboard from 'chessboardjsx';
 // import Chess from 'chess.js';
-import Demo from "../GameView/Chessboard/Demo";
+// import Demo from "../GameView/Chessboard/Demo";
 import "./GameView.css";
 import { connect } from "react-redux";
 import { updateUserInfo } from "./../../ducks/reducer";
 import {withRouter} from 'react-router-dom'
 import io from 'socket.io-client'
+import Chess from "../Chess/Chess"
 
 
 
@@ -65,7 +66,6 @@ class GameView extends Component {
             userTyping: false,
             img: data.img,
         })
-        console.log(data.img)
     }
 
     blast = () => {
@@ -83,7 +83,7 @@ class GameView extends Component {
     }
     
         render() {
-        console.log(this.props)
+        // console.log(this.props)
         const messages = this.state.messages.map((message, i) => (
             <div
                 key={i}
@@ -104,11 +104,11 @@ class GameView extends Component {
         ))
             return (
             <div className="game-view">
-                <header className="App-header">
-                    <h1>Game View Page</h1>
-                </header>
+                
                 <div className="game-row">
-                    <Demo />
+                    <Chess 
+                    user = {this.props.username}
+                    />
                     <div className="chat-cont">
                         <div className="messages">
                             {messages}

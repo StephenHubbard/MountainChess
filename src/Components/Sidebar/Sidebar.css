@@ -118,6 +118,7 @@ button {
   top: 0px;
   left: 0px;
   position: absolute;
+  cursor: pointer;
 }
 
 .hamburger-open {
@@ -126,6 +127,8 @@ button {
   top: 0px;
   right: 8px;
   position: absolute;
+  cursor: pointer;
+
 }
 
 .profile-div {

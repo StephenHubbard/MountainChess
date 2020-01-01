@@ -1,7 +1,5 @@
 module.exports = {
     updateBoard: (square2, chessGrid, placement) => {
-        // const chessGrid = this.state.chessGrid
-        // const placement = this.state.placement
         for ( var i = 0; i < 64; i ++) {
             // console.log(placement[i])
             if (placement[i] === "") {
