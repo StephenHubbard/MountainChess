@@ -36,7 +36,8 @@ module.exports = {
     newGame: (req, res) => {
         const db = req.app.get('db')
         const g_id = req.body.g_id
-        db.new_game({ g_id })
+        const placement = req.body.placement
+        db.new_game({ g_id, placement })
         .then(result => {
             res.status(200).send(result)
         })
@@ -47,9 +48,17 @@ module.exports = {
         const g_id = req.body.g_id
         db.check_game({ g_id })
         .then(result => {
-            console.log(result)
             res.status(200).send(result)
         })
         .catch(err => console.log(err))
     },
+    updateUsersPlaying: (req, res) => {
+        const db = req.app.get('db')
+        const {g_id, userWhite, userBlack } = req.body
+        db.update_users_playing({g_id, userWhite, userBlack})
+        .then(result => {
+            res.status(200).send(result)
+        })
+        .catch(err => console.log(err))
+    }
 }

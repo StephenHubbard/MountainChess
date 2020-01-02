@@ -1,11 +1,11 @@
 .big-profile h1 {
-    font-size: 50px;
+    font-size: 30px;
     color: ghostwhite;
 }
 
 .chart-row {
     height: 50vh;
-    width: 60vw;
+    width: 40vw;
     position: absolute;
     display: flex;
     flex-direction: column;

@@ -61,10 +61,7 @@ io.on('connection', socket => {
     })
 
     socket.on('challenge user', data => {
-        // connectedUsers[data.challengee].join(1337)
-        // console.log(connectedUsers[data.challengee].socket.id)
-        // console.log(connectedUsers)
-        // console.log(connectedUsers[data.challengee])
+        
         console.log(`user ${data.challenger} has challenged ${data.challengee} to a new game`)
         socket.broadcast.emit('new game challenge', {challenger: data.challenger, challengee: data.challengee}, connectedUsers[data.challengee])
     })
@@ -130,6 +127,7 @@ app.post('/game/updateGameArray', gameCtrl.updateGameArray)
 app.get('/game/getLastGame', gameCtrl.getLastGame)
 app.post('/game/newGame', gameCtrl.newGame)
 app.post('/game/checkGameExists', gameCtrl.checkGame)
+app.post('/game/updateUsersPlaying', gameCtrl.updateUsersPlaying)
 
 
 // REGISTERING, LOGGING IN AND LOGGING OUT
