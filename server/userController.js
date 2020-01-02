@@ -102,5 +102,15 @@ module.exports = {
       .then(result => {
         res.status(200).send(result)
       })
+  }, 
+
+  getMyGames: (req, res) => {
+    const db = req.app.get("db")
+    const username = req.body.username
+    db.get_my_games({ username })
+    .then(result => {
+      res.status(200).send(result)
+    })
+    .catch(err => console.log(err))
   }
 }

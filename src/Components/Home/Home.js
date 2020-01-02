@@ -5,8 +5,7 @@ import { updateUserInfo } from "../../ducks/reducer";
 import { withRouter } from "react-router-dom";
 import axios from 'axios';
 import "./Home.css";
-import RandomVsRandom from "../GameView/RandomVsRandom";
-
+import Profile from '../Profile/Profile'
 
 
 
@@ -15,7 +14,7 @@ class Home extends Component {
         super();
 
         this.state = {
-            spectateGameToggle: false,
+            lastGame: 0,
         };
         this.socket = io.connect(":7777");
     }
@@ -44,16 +43,12 @@ class Home extends Component {
         return (
             <div className="home-cont">
                 <div className="two-btns">
-                    <button onClick={() => this.spectateGame()}>Spectate Current Games</button>
                     <button onClick={() => this.findGame()}>Start a Game</button>
                 </div>
+                {this.props.username ? (
+                    <Profile />
+                ) : <h1 className="current-games-h1">Login to see your current games!</h1> }
                 
-                {this.state.spectateGameToggle ? (
-                <div className="spectate-cont">
-                    <RandomVsRandom />
-                    <RandomVsRandom />
-                </div>
-                ) : null }
             </div>
         );
     }

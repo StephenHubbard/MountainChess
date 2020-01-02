@@ -33,8 +33,12 @@ io.on('connection', socket => {
     })
 
     socket.on('new move', data => {
-        console.log(`new move on game ${data.g_id}`)
+        // console.log(`new move on game ${data.g_id}`)
         io.to(data.g_id).emit('game response', data)
+    })
+
+    socket.on('update user', data => {
+        io.to(data.g_id).emit('update user incoming', data)
     })
 
     // USER PRESENCE SOCKETS 
@@ -57,10 +61,7 @@ io.on('connection', socket => {
     })
 
     socket.on('challenge user', data => {
-        // connectedUsers[data.challengee].join(1337)
-        // console.log(connectedUsers[data.challengee].socket.id)
-        // console.log(connectedUsers)
-        // console.log(connectedUsers[data.challengee])
+        
         console.log(`user ${data.challenger} has challenged ${data.challengee} to a new game`)
         socket.broadcast.emit('new game challenge', {challenger: data.challenger, challengee: data.challengee}, connectedUsers[data.challengee])
     })
@@ -122,9 +123,11 @@ app.use(session({
 
 // GAME LOGIC
 app.post('/game/newMove', gameCtrl.newMove)
-app.post('/game/updateFen', gameCtrl.updateFen)
+app.post('/game/updateGameArray', gameCtrl.updateGameArray)
 app.get('/game/getLastGame', gameCtrl.getLastGame)
-
+app.post('/game/newGame', gameCtrl.newGame)
+app.post('/game/checkGameExists', gameCtrl.checkGame)
+app.post('/game/updateUsersPlaying', gameCtrl.updateUsersPlaying)
 
 // REGISTERING, LOGGING IN AND LOGGING OUT
 app.post('/auth/register', authCtrl.register)
@@ -144,8 +147,9 @@ app.post('/api/users/user/:user_id_display', userCtrl.checkFriend)
 app.post('/api/getUserFriends', userCtrl.getUserFriends)
 app.get(`/api/users/:user_id_display`, userCtrl.checkIfSame)
 
-// GETTING TOP RANKED PLAYERs
+// GETTING TOP RANKED PLAYERs & PROFILE DATA
 app.get('/api/elo', userCtrl.getTopUsers)
+app.post('/api/getGames', userCtrl.getMyGames)
 
 // MASSIVE
 massive(CONNECTION_STRING)

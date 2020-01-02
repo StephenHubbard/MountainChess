@@ -1,3 +1,10 @@
+.whole-game {
+    /* can rotate this and .piece for blacks turn */
+    /* transform: rotate(180deg); */
+    position: relative;
+    margin-top: 50px;
+}
+
 #mainChessBoard
 {
     width:650px;
@@ -93,6 +100,7 @@
     margin-top: 10px;
     z-index: 10;
     margin-left: -30px;
+
 }
 
 #w {
@@ -101,4 +109,83 @@
 
 #b {
     filter: drop-shadow(0mm 0mm .1rem rgb(0, 0, 0));
+}
+
+.game-info {
+    position: absolute;
+    right: -200px;
+    top: 0px;
+    height: 200px;
+    min-width: 400px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    margin-top: 50px;
+    margin-right: -200px;
+    display: flex;
+    flex-direction: row;
+    background-color: #eeeeee;
+    justify-content: space-between;
+    border-radius: 9px;
+    /* overflow: scroll; */
+    overflow-wrap: normal;
+    overflow-x: hidden;
+    padding-right: 10px;
+}
+
+.player-turn {
+    font-size: 1.5rem;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 150px;
+    margin-top: 10px;
+}
+
+.recent-moves {
+    font-size: 1.2rem;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 140px;
+    margin-top: 40px;
+}
+
+.color-select {
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    position: absolute;
+    width: 100%;
+}
+
+.color-select button {
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 50px;
+    width: 200px;
+}
+
+.two-players {
+    min-width: 500px;
+    position: absolute;
+    top: 0px;
+    left: 100px;
+    display: flex;
+    align-items: center;
+}
+
+.two-players h1 {
+    min-width: 500px;
+}
+
+.destroyed-piece {
+    height: 30px;
+    width: 30px;
+    position: absolute;
+}
+
+.destroyed-piece-container {
+    position: absolute;
+    bottom: 35px;
+    left: 5px;
 }

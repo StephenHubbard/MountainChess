@@ -1,47 +1,35 @@
 import React, { Component } from "react";
 // import { connect } from "react-redux";
-// import axios from "axios";
-import { Line } from "react-chartjs-2";
+import axios from "axios";
 import "./Profile.css";
 import Loading from '../Loading/Loading'
-//import redux functions
+import { connect } from "react-redux";
+import { updateUserInfo } from "../../ducks/reducer";
+import { withRouter, Link } from 'react-router-dom'
 
-export default class Profile extends Component {
+class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      email: "",
       loading: true,
-      profile_img: "",
-      //this will be the placeholder empty data state object to be filled by a database call
-    //   data: {
-    //     labels: [],
-    //     datasets: [
-    //       {
-    //         label: `Value ($USD)`,
-    //         data: [],
-    //         borderColor: ["rgb(106, 226, 160)"]
-    //       }
-    //     ]
-    //   }
-      data: {
-        labels: [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019],
-        datasets: [
-          {
-            data: [889, 830, 799, 899, 943, 1003, 1377, 1421, 1855, 2478],
-            label: "DUMMY ELO DATA",
-            borderColor: "#38738f",
-            fill: false
-          }
-        ]
-      }
+      myGames: [],
     };
   }
 
   componentDidMount() {
+    
     setTimeout(() => {
       this.setState({ loading: false });
+      if (this.props.username) {
+        axios
+        .post('/api/getGames', {username: this.props.username})
+        .then(res => {
+          this.setState({
+            myGames: res.data
+          })
+        })
+        .catch(err => console.log(err))
+      }
     }, 800);
   }  
 
@@ -56,26 +44,28 @@ export default class Profile extends Component {
         </>
       )}
       {!this.state.loading && (<div className="big-profile">
-          <h1> Your Profile </h1>
         <div className="chart">
+            <h1 className="current-games-h1"> Your Current Games </h1>
+            <div className="white-black">
+              <h1>White</h1>
+              <h1>Black</h1>
+            </div>
           <div className="chart-row">
-            <Line
-              data={this.state.data}
-              options={{
-                maintainAspectRatio: false,
-                title: {
-                  display: true,
-                  text: `Recent Game History`
-                },
-                scales: {
-                  yAxes: [
-                    {
-                      ticks: { beginAtZero: false }
-                    }
-                  ]
+            {this.state.myGames.map(el => (
+              <Link to={`/game/${el.g_id}`} >
+              <div className="game-cont">
+                <h1>{el.white_user}</h1>
+                <h1>VS</h1>
+                <h1>{el.black_user}</h1>
+                <h1>{el.g_id}</h1>
+                {el.is_white_turn ? (
+                  <h1>White</h1>
+                ) : 
+                  <h1>Black</h1>
                 }
-              }}
-            />
+              </div>
+            </Link>
+            ))}
           </div>
         </div>
       </div>)}
@@ -84,3 +74,12 @@ export default class Profile extends Component {
     );
   }
 }
+
+function mapStateToProps(reduxState) {
+  return reduxState;
+}
+
+export default withRouter(
+  connect(mapStateToProps, { updateUserInfo })(Profile)
+);
+

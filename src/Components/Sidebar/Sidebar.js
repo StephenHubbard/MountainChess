@@ -201,6 +201,12 @@ export class Sidebar extends Component {
   }
 
   challengeAlert(data) {
+    let lastGame = 0
+    axios
+    .get('/game/getLastGame') 
+    .then(res => {
+        lastGame = res.data[0].max + 1
+    })
     if (this.props.username === data.challengee) {
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
@@ -223,7 +229,7 @@ export class Sidebar extends Component {
       }).then(result => {
         if (result.value) {
           Swal.fire(
-            this.props.history.push("/game/7"),
+            this.props.history.push(`/game/${lastGame}`),
             `<strong>Good Luck!</strong>`,
             "success"
           );
@@ -245,9 +251,15 @@ export class Sidebar extends Component {
     }
   }
 
-  challengeAccepted(data) {
+  async challengeAccepted(data) {
+    let lastGame = 0
+    await axios
+    .get('/game/getLastGame') 
+    .then(res => {
+        lastGame = res.data[0].max + 1
+    })
     if (this.props.username === data.challenger) {
-      this.props.history.push("/game/7");
+      await this.props.history.push(`/game/${lastGame}`);
       Swal.fire({
         title: `<strong>${data.challengee} has accepted your challenge`,
         icon: "success"
@@ -464,14 +476,37 @@ export class Sidebar extends Component {
                               alt=""
                             />
                             <h5>{el.username.substring(0, 8)}</h5>
-                            <button className="invite-btn">Offline</button>
+                            <button className="offline-btn">Offline</button>
                           </div>
                         </li>
                       ))}
                     </ul>
                   </div>
                 ) : (
-                  <h5>Login to see other online Users</h5>
+                  <div>
+                  <h5 className="online-users-h1">Online Users</h5>
+                  <ul>
+                      {this.state.loggedInUsers.map(el => (
+                        <li className="friend-li" key={el.username}>
+                          <div className="friend">
+                            <div className="green" />
+                            <img
+                              className="portrait-small"
+                              src={`/assets/ProfilePics/${el.portrait}`}
+                              alt=""
+                            />
+                            <h5>{el.username}</h5>
+                            <button
+                              className="invite-btn"
+                              onClick={() => this.inviteFriend(el.username)}
+                            >
+                              Challenge
+                            </button>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                    </div>
                 )}
               </div>
               <div className="top-users" id="scroll-style">
@@ -484,20 +519,15 @@ export class Sidebar extends Component {
                   <Link to="/">
                     <i className="fas fa-home" id='sb-icon'></i>
                   </Link>
-
-                  <Link to="/profile/1">
-                    <i className="fas fa-user-circle" id='sb-icon'></i>
-                  </Link>
-
                   <Link to="/users">
                     <i className="fas fa-users" id='sb-icon'></i>
                   </Link>
 
                   <Link to="/about">
-                    <i classname="fas fa-info-circle" id='sb-icon'></i>
+                    <i class="fas fa-info-circle" id='sb-icon'></i>
                   </Link>
 
-                  <Link to="/tinkering">
+                  <Link to="/chess">
                     <i className="fas fa-chess" id='sb-icon'></i>
                   </Link>
             </div>

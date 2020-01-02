@@ -58,7 +58,7 @@ button {
   flex-direction: column;
   justify-content: evenly;
   align-items: center;
-  background-color: rgb(24, 24, 24)
+  background-color: rgb(24, 24, 24);
 }
 
 .icon-bar i {
@@ -118,6 +118,7 @@ button {
   top: 0px;
   left: 0px;
   position: absolute;
+  cursor: pointer;
 }
 
 .hamburger-open {
@@ -126,6 +127,8 @@ button {
   top: 0px;
   right: 8px;
   position: absolute;
+  cursor: pointer;
+
 }
 
 .profile-div {
@@ -596,4 +599,8 @@ align-items: center;
 
 .invite-btn {
   min-width: 90px;
+}
+
+.offline-btn {
+  cursor: not-allowed !important;
 }
