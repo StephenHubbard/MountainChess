@@ -31,9 +31,16 @@ class Profile extends Component {
         .catch(err => console.log(err))
       }
     }, 800);
+    this.isUserTurn()
   }  
 
+  isUserTurn() {
+    // do you algorythm
+    // set state to an array
+  }
+
   render() {
+    // const gameArray = this.state.arr.map()
     return (
       <>
       {this.state.loading && (
@@ -69,7 +76,6 @@ class Profile extends Component {
           </div>
         </div>
       </div>)}
-      
       </>
     );
   }
