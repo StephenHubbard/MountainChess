@@ -598,3 +598,7 @@ align-items: center;
 .invite-btn {
   min-width: 90px;
 }
+
+.offline-btn {
+  cursor: not-allowed !important;
+}

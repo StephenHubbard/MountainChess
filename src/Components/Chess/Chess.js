@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./Chess.css";
-import Loading from '../Loading/Loading'
 import axios from 'axios'
 import { connect } from "react-redux";
 import { updateUserInfo } from "../../ducks/reducer";
@@ -52,8 +51,8 @@ class Chess extends Component {
         }
     
     handleClick(id, className) {
+        // eslint-disable-next-line
         let startColor = document.getElementsByClassName(className)[0].className
-
         if (document.getElementById(id).childNodes[0]) {
             let piece = document.getElementById(id).childNodes[0].id
             let piece2 = document.getElementById(id)
@@ -1367,7 +1366,6 @@ class Chess extends Component {
                                 let subStr2 = piece.id.substr(1, 2)
                                 let subStr3 = test.id.substr(0, 1) 
                                 let subStr4 = piece.id.substr(0, 1)
-                                console.log(subStr1, subStr2, subStr3, subStr4)
                                 if (test && (subStr1 === subStr2 || subStr3 === subStr4)) {
                                     (test.appendChild(document.createElement("div")).className = "y-dot")
                                 }
@@ -1570,13 +1568,14 @@ class Chess extends Component {
                             // eslint-disable-next-line
                             let test = eval(`legalMove${i}`)
                             if (test) {
-                                // let subStr1 = test.id.substr(1, 2)
-                                // let subStr2 = piece.id.substr(1, 2)
-                                // let subStr3 = test.id.substr(0, 1) 
-                                // let subStr4 = piece.id.substr(0, 1)
-                                // if (test && (subStr1 === subStr2 || subStr3 === subStr4)) {
+                                let subStr1 = test.id.substr(1, 2)
+                                let subStr2 = piece.id.substr(1, 2)
+                                let subStr3 = test.id.substr(0, 1) 
+                                let subStr4 = piece.id.substr(0, 1)
+                                let color = test.className
+                                if ((test && (subStr1 === subStr2 || subStr3 === subStr4)) || (color === startColor || color === "yellow" || color === "yellow2")) {
                                     (test.appendChild(document.createElement("div")).className = "y-dot")
-                                // }
+                                }
                             }
                         }
                     }
@@ -1699,13 +1698,14 @@ class Chess extends Component {
                             // eslint-disable-next-line
                             let test = eval(`legalMove${i}`)
                             if (test) {
-                                // let subStr1 = test.id.substr(1, 2)
-                                // let subStr2 = piece.id.substr(1, 2)
-                                // let subStr3 = test.id.substr(0, 1) 
-                                // let subStr4 = piece.id.substr(0, 1)
-                                // if (test && (subStr1 === subStr2 || subStr3 === subStr4)) {
+                                let subStr1 = test.id.substr(1, 2)
+                                let subStr2 = piece.id.substr(1, 2)
+                                let subStr3 = test.id.substr(0, 1) 
+                                let subStr4 = piece.id.substr(0, 1)
+                                let color = test.className
+                                if ((test && (subStr1 === subStr2 || subStr3 === subStr4)) || (color === startColor || color === "yellow" || color === "yellow2")) {
                                     (test.appendChild(document.createElement("div")).className = "y-dot")
-                                // }
+                                }
                             }
                         }
                     }
@@ -1768,6 +1768,7 @@ class Chess extends Component {
                                         (test.appendChild(document.createElement("div")).className = "y-dot")
                                     } else if (startRow ==='8' && i !== 3 && i !== 4 && i !== 1 && i !== 2 && startColumn === 'g' && i !== 5 && i !== 2) {
                                         (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    // eslint-disable-next-line
                                     } else if (startColumn === 'g' && startRow === '3' && startRow === '4' || startRow === '5' || startRow === '6' && i !== 5 && i !== 2) {
                                         (test.appendChild(document.createElement("div")).className = "y-dot")
                                     }
@@ -1898,7 +1899,7 @@ class Chess extends Component {
                                 // let subStr3 = test.id.substr(0, 1) 
                                 // let subStr4 = piece.id.substr(0, 1)
                                 // if (test && (subStr1 === subStr2 || subStr3 === subStr4)) {
-                                    if(color===startColor)
+                                    if(color===startColor || color === "yellow" || color === "yellow2")
                                     (test.appendChild(document.createElement("div")).className = "y-dot")
                             }
                         }
@@ -1976,7 +1977,7 @@ class Chess extends Component {
                                 // let subStr3 = test.id.substr(0, 1) 
                                 // let subStr4 = piece.id.substr(0, 1)
                                 // if (test && (subStr1 === subStr2 || subStr3 === subStr4)) {
-                                    if(color===startColor)
+                                    if(color===startColor || color === "yellow" || color === "yellow2")
                                     (test.appendChild(document.createElement("div")).className = "y-dot")
                             }
                         }
@@ -2115,7 +2116,15 @@ class Chess extends Component {
                 await this.setState({
                     userBlack: this.props.user
                 })
-            axios
+            if (this.state.newGame === true) {
+                await axios
+                .post('/game/newGame', {g_id: this.state.g_id, placement: this.state.placement, isWhiteTurn: true})
+                .then(res => {
+                    // console.log(res)
+                })
+                .catch(err => console.log(err))
+            }
+            await axios
             .post('/game/updateUsersPlaying', {g_id: this.state.g_id, userWhite: this.state.userWhite, userBlack: this.state.userBlack})
             .then(res => {
             console.log(res)
@@ -2177,16 +2186,7 @@ class Chess extends Component {
         })
         .catch(err => console.log(err))
         
-
-        if (this.state.newGame === true) {
-
-            await axios
-            .post('/game/newGame', {g_id: this.state.g_id, placement: this.state.placement, isWhiteTurn: true})
-            .then(res => {
-                // console.log(res)
-            })
-            .catch(err => console.log(err))
-        }
+        
         await this.socket.emit('new game', {g_id: this.state.g_id})
         }
     

@@ -47,7 +47,7 @@ class Home extends Component {
                 </div>
                 {this.props.username ? (
                     <Profile />
-                ) : null }
+                ) : <h1 className="current-games-h1">Login to see your current games!</h1> }
                 
             </div>
         );
