@@ -15,7 +15,7 @@ button {
 
 .sidebar {
   height: 100%;
-  width: 340px;
+  width: 350px;
   /* border: 1px solid yellow; */
   position: fixed;
   left: -300px; 
@@ -32,7 +32,7 @@ button {
 
 .sidebar.open {
   height: 100%;
-  width: 340px;
+  width: 350px;
   /* border: 1px solid yellow; */
   position: fixed;
   top: 0;
@@ -52,7 +52,7 @@ button {
 }
 
 .icon-bar {
-  width: 40px;
+  width: 50px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -64,7 +64,8 @@ button {
 .icon-bar i {
   margin-top: 25px;
   margin-bottom: 25px;
-  margin-left: 2px;
+  margin-left: 5px;
+  margin-right: 5px;
   color: rgb(226, 226, 226);
 }
 
@@ -113,7 +114,7 @@ button {
 } */
 
 .hamburger-closed {
-  margin-left: 2px;
+  margin-right: 2px;
   margin-top: 7px;
   top: 0px;
   left: 0px;
@@ -122,7 +123,7 @@ button {
 }
 
 .hamburger-open {
-  margin-left: 2px;
+  margin-right: 2px;
   margin-top: 7px;
   top: 0px;
   right: 8px;
@@ -292,7 +293,15 @@ h4 {
 .login-modal-content {
   display: flex;
   position: fixed;
-  width: 30vw;
+  background: #15171b;
+  width: 40vw;
+  height: 30vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
+  /* align-self: center; */
+  /* width: 30vw;
   height: 50vh;
   display: flex;
   flex-direction: row-reverse;
@@ -300,20 +309,22 @@ h4 {
   justify-content: center;
   align-items: center;
   /* this will make sure it's always in the center of the screen */
+  /*
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   overflow: hidden;
+  */
   background-color: #15171b;
   -webkit-animation: fadein 1s;
-  animation: fadein 1s;
+  animation: fadein 1s; 
   border-radius: 10px;
-  z-index: 666 !important;
+  z-index: 666 !important; 
 }
 
 /* Modal Body */
 .login-modal-body {
-  position: relative;
+  display: flex;
   height: 50vh;
   width: 100%;
   padding: 0px;
@@ -326,14 +337,7 @@ h4 {
   /* border: 3px green solid; */
 }
 
-/* Modal Header */
-.login-modal-header {
-  padding: 2px 16px;
-  /* background-color: black; */
-  color: ghostwhite;
 
-  /* border: 3px yellow solid; */
-}
 
 .login-modal-header h2 {
   display: flex;
@@ -342,22 +346,29 @@ h4 {
   font-size: 40px;
 }
 
+.centerThis {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
 /* REGISTER MODAL */
 .register-modal-content {
-  position: absolute;
+  position: fixed;
   width: 40vw;
   /* height: 63vh; */
-  left: 270%;
-  top: 50vh;
+  /* left: 270%;
+  top: 50vh; */
   display: flex;
   flex-direction: row-reverse;
   flex-wrap: nowrap;
   justify-content: space-around;
   align-items: center;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   overflow-y: auto;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+  background: #15171b;
   -webkit-animation: fadein 1s;
   animation: fadein 1s;
   border-radius: 10px;
@@ -368,14 +379,11 @@ h4 {
 .register-modal-body {
   position: relative;
   overflow-y: auto;
-  /* height: 450px; */
   width: 100%;
   padding: 0px;
-  background-color: black;
+  background: #15171b;
   color: ghostwhite;
   margin-top: 0px;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-  /* border: 1px green solid; */
 }
 
 /* Modal Header */
@@ -403,18 +411,18 @@ h4 {
 
 .portrait-modal-content {
   display: flex;
-  position: absolute;
+  position: fixed;
   width: 55vw;
   height: 63vh;
-  left: 270%;
-  /* left: 750px; */
-  top: 50vh;
+  /* left: 270%;
+  top: 50vh; */
   display: flex;
   flex-direction: row-reverse;
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
-  /* margin-top: 500px; */
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   overflow: auto;
   background-color: rgb(0,0,0);

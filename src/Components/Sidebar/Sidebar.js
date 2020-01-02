@@ -285,7 +285,7 @@ export class Sidebar extends Component {
     });
     return (
       <>
-        {this.state.open ? null : (
+        {/* {this.state.open ? null : (
           <div className="hamburger-closed">
             <i
               className="fas fa-bars"
@@ -295,7 +295,7 @@ export class Sidebar extends Component {
               }}
             />
           </div>
-        )}
+        )} */}
 
         {/* <div className={`sidebar-${open ? 'open' : ''}`}>
                 <h1>sidebarrrr</h1>
@@ -377,7 +377,7 @@ export class Sidebar extends Component {
                           </span>
                           {/* <h2>Please enter your login information.</h2> */}
                         </div>
-                        <div className="modal-loginInfo">
+                        <div className="centerThis">
                           <Login loginModalActivateFn={this.loginModalToggle} />
                         </div>
                       </div>

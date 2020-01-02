@@ -1,20 +1,20 @@
 .small-profile img {
-    height: 150px;
-    width: 150px;
-    border-radius: 50%;
-    
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;   
 }
 
 .small-profile {
-    color: rgb(184, 184, 184)
+    color: rgb(184, 184, 184);
 }
 
 .profile {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    flex-direction: flex;
     box-sizing: border-box;
+    
 }
 
 .profile h2 {
@@ -28,9 +28,10 @@
     align-items: center;
     margin-top: 10px;
     background: rgb(64, 70, 82);
-    width: 425px;
-    height: 225px;
+    width: 275px;
+    height: 125px;
     border-radius: 8px;
+    margin: 10px 25px;
 }
 
 .left-box i {
@@ -44,9 +45,7 @@
     align-items: center;
     justify-content: center;
     background: ghostwhite;
-    border: 5px #30BCED;
-    height: 150px;
-    width: 150px;
+    border-radius: 50%;
     border-radius: 50%;
     margin-left: 30px;
 }
@@ -56,14 +55,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    
-    height: 200px;
+    height: 100px;
     width: 300px;
     border-radius: 8px;
 }
 
 .profile button {
-     color: rgb(159, 206, 159);
+     color: rgb(160, 194, 160);
       margin: 0 5px;
       background: rgb(84, 84, 95);
       border-radius: 5px;
@@ -80,7 +78,12 @@
 }
 
 .profile .profile-btn {
-    color: rgb(89, 106, 139)
+    color: rgb(89, 106, 139);
+    
+}
+
+.profile button {
+    font-size: 14px;
 }
 
 .profile h4 {
