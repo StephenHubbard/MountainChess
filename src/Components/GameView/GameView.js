@@ -116,7 +116,7 @@ class GameView extends Component {
             </div>
           </>
         )}
-         {!this.state.loading && (
+        {!this.state.loading && (
         <div className="game-view">
           <div className="game-row">
             <Chess user={this.props.username} />

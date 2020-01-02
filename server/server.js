@@ -129,7 +129,6 @@ app.post('/game/newGame', gameCtrl.newGame)
 app.post('/game/checkGameExists', gameCtrl.checkGame)
 app.post('/game/updateUsersPlaying', gameCtrl.updateUsersPlaying)
 
-
 // REGISTERING, LOGGING IN AND LOGGING OUT
 app.post('/auth/register', authCtrl.register)
 app.post('/auth/login', authCtrl.login)
@@ -148,8 +147,9 @@ app.post('/api/users/user/:user_id_display', userCtrl.checkFriend)
 app.post('/api/getUserFriends', userCtrl.getUserFriends)
 app.get(`/api/users/:user_id_display`, userCtrl.checkIfSame)
 
-// GETTING TOP RANKED PLAYERs
+// GETTING TOP RANKED PLAYERs & PROFILE DATA
 app.get('/api/elo', userCtrl.getTopUsers)
+app.post('/api/getGames', userCtrl.getMyGames)
 
 // MASSIVE
 massive(CONNECTION_STRING)
