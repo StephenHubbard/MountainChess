@@ -285,7 +285,7 @@ export class Sidebar extends Component {
     });
     return (
       <>
-        {this.state.open ? null : (
+        {/* {this.state.open ? null : (
           <div className="hamburger-closed">
             <i
               className="fas fa-bars"
@@ -295,7 +295,7 @@ export class Sidebar extends Component {
               }}
             />
           </div>
-        )}
+        )} */}
 
         {/* <div className={`sidebar-${open ? 'open' : ''}`}>
                 <h1>sidebarrrr</h1>
@@ -519,9 +519,6 @@ export class Sidebar extends Component {
                   <Link to="/">
                     <i className="fas fa-home" id='sb-icon'></i>
                   </Link>
-
-                  
-
                   <Link to="/users">
                     <i className="fas fa-users" id='sb-icon'></i>
                   </Link>
