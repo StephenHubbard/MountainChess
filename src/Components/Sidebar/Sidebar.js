@@ -476,7 +476,7 @@ export class Sidebar extends Component {
                               alt=""
                             />
                             <h5>{el.username.substring(0, 8)}</h5>
-                            <button className="invite-btn">Offline</button>
+                            <button className="offline-btn">Offline</button>
                           </div>
                         </li>
                       ))}
@@ -484,7 +484,7 @@ export class Sidebar extends Component {
                   </div>
                 ) : (
                   <div>
-                  <h5>Online Users</h5>
+                  <h5 className="online-users-h1">Online Users</h5>
                   <ul>
                       {this.state.loggedInUsers.map(el => (
                         <li className="friend-li" key={el.username}>

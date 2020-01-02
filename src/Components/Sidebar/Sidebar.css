@@ -345,16 +345,18 @@ h4 {
 
 /* REGISTER MODAL */
 .register-modal-content {
-  position: absolute;
+  position: fixed;
   width: 40vw;
   /* height: 63vh; */
-  left: 270%;
-  top: 50vh;
+  /* left: 270%;
+  top: 50vh; */
   display: flex;
   flex-direction: row-reverse;
   flex-wrap: nowrap;
   justify-content: space-around;
   align-items: center;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   overflow-y: auto;
   background-color: rgb(0,0,0);
@@ -404,18 +406,18 @@ h4 {
 
 .portrait-modal-content {
   display: flex;
-  position: absolute;
+  position: fixed;
   width: 55vw;
   height: 63vh;
-  left: 270%;
-  /* left: 750px; */
-  top: 50vh;
+  /* left: 270%;
+  top: 50vh; */
   display: flex;
   flex-direction: row-reverse;
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
-  /* margin-top: 500px; */
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   overflow: auto;
   background-color: rgb(0,0,0);
@@ -598,4 +600,8 @@ align-items: center;
 
 .invite-btn {
   min-width: 90px;
+}
+
+.offline-btn {
+  cursor: not-allowed !important;
 }
