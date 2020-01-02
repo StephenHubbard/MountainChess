@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { updateUserInfo } from "../../ducks/reducer";
 import { withRouter, Link } from 'react-router-dom'
 
-class Profile extends Component {
+export class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -57,6 +57,7 @@ class Profile extends Component {
               <h1>White</h1>
               <h1>Black</h1>
             </div>
+              <h1>Current Turn</h1>
           <div className="chart-row">
             {this.state.myGames.map(el => (
               <Link to={`/game/${el.g_id}`} >

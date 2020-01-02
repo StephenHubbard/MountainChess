@@ -9,7 +9,7 @@ import Profile from '../Profile/Profile'
 
 
 
-class Home extends Component {
+export class Home extends Component {
     constructor() {
         super();
 
