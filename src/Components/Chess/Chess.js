@@ -1573,7 +1573,7 @@ class Chess extends Component {
                                 let subStr3 = test.id.substr(0, 1) 
                                 let subStr4 = piece.id.substr(0, 1)
                                 let color = test.className
-                                if ((test && (subStr1 === subStr2 || subStr3 === subStr4)) || (color === startColor || color === "yellow" || color === "yellow2")) {
+                                if ((test && (subStr1 === subStr2 || subStr3 === subStr4)) || (color === startColor || color === "yellow" || color === "yellow2") && i !== 5 && i !== 19) {
                                     (test.appendChild(document.createElement("div")).className = "y-dot")
                                 }
                             }
