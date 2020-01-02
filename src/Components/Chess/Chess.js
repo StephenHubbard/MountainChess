@@ -1768,8 +1768,23 @@ class Chess extends Component {
                                         (test.appendChild(document.createElement("div")).className = "y-dot")
                                     } else if (startRow ==='8' && i !== 3 && i !== 4 && i !== 1 && i !== 2 && startColumn === 'g' && i !== 5 && i !== 2) {
                                         (test.appendChild(document.createElement("div")).className = "y-dot")
-                                    // eslint-disable-next-line
-                                    } else if (startColumn === 'g' && startRow === '3' && startRow === '4' || startRow === '5' || startRow === '6' && i !== 5 && i !== 2) {
+                                    } else if (startColumn === 'g' && (startRow === '3' || startRow === '4' || startRow === '5' || startRow === '6') && i !== 5 && i !== 2) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startColumn === 'h' && (startRow === '3' || startRow === '4' || startRow === '5' || startRow === '6') && i !== 5 && i !== 2 && i !== 4 && i !== 8) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startColumn === 'a' && (startRow === '3' || startRow === '4' || startRow === '5' || startRow === '6') && i !== 3 && i !== 7 && i !== 1 && i !== 6) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startColumn === 'b' && (startRow === '3' || startRow === '4' || startRow === '5' || startRow === '6') && i !== 1 && i !== 6) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startRow === '7' && (startColumn === 'c' || startColumn === 'd' || startColumn === 'e' || startColumn === 'f') && i !== 3 && i !== 4) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startRow === '8' && (startColumn === 'c' || startColumn === 'd' || startColumn === 'e' || startColumn === 'f') && i !== 3 && i !== 4 && i !== 1 && i !== 2) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if ((startColumn === 'c' || startColumn === 'd' || startColumn === 'e' || startColumn === 'f') && (startRow === '3' || startRow === '4' || startRow === '5' || startRow === '6')) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startRow === '2' && (startColumn === 'c' || startColumn === 'd' || startColumn === 'e' || startColumn === 'f') && i !== 7 && i !== 8) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startRow === '1' && (startColumn === 'c' || startColumn === 'd' || startColumn === 'e' || startColumn === 'f') && i !== 7 && i !== 8 && i !== 6 && i !== 5) {
                                         (test.appendChild(document.createElement("div")).className = "y-dot")
                                     }
 
@@ -1820,8 +1835,49 @@ class Chess extends Component {
                                 // let subStr3 = test.id.substr(0, 1) 
                                 // let subStr4 = piece.id.substr(0, 1)
                                 if (test) {
-                                // if (test && (subStr1 === subStr2 || subStr3 === subStr4)) {
-                                    (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    if(startColumn === 'g' && i !== 5 && i !== 2) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if(startColumn ==='b' && i !== 1 && i !== 6) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if(startColumn === 'h' && i !== 5 && i !== 2 && i !== 4 && i !== 8) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if(startColumn === 'a' && i !== 3 && i !== 7 && i !== 1 && i !== 6) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startRow === '7' && i !== 3 && i !== 4 && startColumn === 'h' && i !== 5 && i !== 2 && i !== 4 && i !== 8) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startRow === '7' && i !== 3 && i !== 4 && startColumn === 'a' && i !== 3 && i !== 7 && i !== 1 && i !== 6) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startRow === '7' && i !== 3 && i !== 4 && startColumn ==='b' && i !== 1 && i !== 6) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startRow === '7' && i !== 3 && i !== 4 && startColumn === 'g' && i !== 5 && i !== 2) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startRow ==='8' && i !== 3 && i !== 4 && i !== 1 && i !== 2 && startColumn === 'h' && i !== 5 && i !== 2 && i !== 4 && i !== 8) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startRow ==='8' && i !== 3 && i !== 4 && i !== 1 && i !== 2 && startColumn === 'a' && i !== 3 && i !== 7 && i !== 1 && i !== 6) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startRow ==='8' && i !== 3 && i !== 4 && i !== 1 && i !== 2 && startColumn ==='b' && i !== 1 && i !== 6) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startRow ==='8' && i !== 3 && i !== 4 && i !== 1 && i !== 2 && startColumn === 'g' && i !== 5 && i !== 2) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startColumn === 'g' && (startRow === '3' || startRow === '4' || startRow === '5' || startRow === '6') && i !== 5 && i !== 2) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startColumn === 'h' && (startRow === '3' || startRow === '4' || startRow === '5' || startRow === '6') && i !== 5 && i !== 2 && i !== 4 && i !== 8) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startColumn === 'a' && (startRow === '3' || startRow === '4' || startRow === '5' || startRow === '6') && i !== 3 && i !== 7 && i !== 1 && i !== 6) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startColumn === 'b' && (startRow === '3' || startRow === '4' || startRow === '5' || startRow === '6') && i !== 1 && i !== 6) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startRow === '7' && (startColumn === 'c' || startColumn === 'd' || startColumn === 'e' || startColumn === 'f') && i !== 3 && i !== 4) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startRow === '8' && (startColumn === 'c' || startColumn === 'd' || startColumn === 'e' || startColumn === 'f') && i !== 3 && i !== 4 && i !== 1 && i !== 2) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if ((startColumn === 'c' || startColumn === 'd' || startColumn === 'e' || startColumn === 'f') && (startRow === '3' || startRow === '4' || startRow === '5' || startRow === '6')) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startRow === '2' && (startColumn === 'c' || startColumn === 'd' || startColumn === 'e' || startColumn === 'f') && i !== 7 && i !== 8) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startRow === '1' && (startColumn === 'c' || startColumn === 'd' || startColumn === 'e' || startColumn === 'f') && i !== 7 && i !== 8 && i !== 6 && i !== 5) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    }
                                 }
                             }
                         }
