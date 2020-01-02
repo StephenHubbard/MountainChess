@@ -5,8 +5,8 @@
 
 
 import React from 'react'
-import {shallow} from './enzyme'
-import {App} from '../src/App'
+import {shallow} from '../enzyme'
+import {App} from '../App'
 import renderer from 'react-test-renderer'
 import {render} from '@testing-library/react'
 

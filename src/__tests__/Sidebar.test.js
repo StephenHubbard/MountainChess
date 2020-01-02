@@ -35,9 +35,9 @@ describe ('sidebar.js', () => {
         const wrapper = shallow(<Sidebar/>)
         expect(wrapper.exists()).toBe(true)
     })
-    it('renders 5 sidebar icons', () => {
+    it('renders 4 sidebar icons', () => {
         const wrapper = shallow(<Sidebar/>)
-        expect(wrapper.find('#sb-icon').length).toBe(5)
+        expect(wrapper.find('#sb-icon').length).toBe(4)
         // console.log(wrapper.find('i.fas fa-users').length)
     })
     // test('recieves username via props', () => {

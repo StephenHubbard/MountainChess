@@ -10,7 +10,7 @@ import io from "socket.io-client";
 import Chess from "../Chess/Chess";
 import Loading from "../Loading/Loading";
 
-class GameView extends Component {
+export class GameView extends Component {
   constructor() {
     super();
 
