@@ -16,7 +16,7 @@ class Chess extends Component {
     constructor() {
         super()
         this.state = {
-            loading: true,
+            
             chessGrid:[ "a8", "b8", "c8", "d8", "e8", "f8", "g8", "h8", 
                         "a7", "b7", "c7", "d7", "e7", "f7", "g7", "h7",
                         "a6", "b6", "c6", "d6", "e6", "f6", "g6", "h6",
@@ -51,7 +51,9 @@ class Chess extends Component {
         this.socket.on('update user incoming', data => this.updateUserLogic(data))
         }
     
-    handleClick(id) {
+    handleClick(id, className) {
+        let startColor = document.getElementsByClassName(className)[0].className
+
         if (document.getElementById(id).childNodes[0]) {
             let piece = document.getElementById(id).childNodes[0].id
             let piece2 = document.getElementById(id)
@@ -1145,8 +1147,11 @@ class Chess extends Component {
         chessCtrl.updateBoard(square2, chessGrid, placement)
     }
 
-    handleHover(id) {
+    handleHover(id, className) {
         let piece = document.getElementById(id)
+        let startColor = document.getElementsByClassName(className)[0].className
+        let startColumn = document.getElementById(id).id.substr(0,1)
+        let startRow = document.getElementById(id).id.substr(1,1)
         if (piece.childNodes[0]) {
             if (piece.childNodes[0].id === "wP" && this.state.isWhiteTurn === true && this.state.userWhite === this.state.thisUser) {
                 for (let i = 0; i < 64; i++) {
@@ -1361,6 +1366,7 @@ class Chess extends Component {
                                 let subStr2 = piece.id.substr(1, 2)
                                 let subStr3 = test.id.substr(0, 1) 
                                 let subStr4 = piece.id.substr(0, 1)
+                                console.log(subStr1, subStr2, subStr3, subStr4)
                                 if (test && (subStr1 === subStr2 || subStr3 === subStr4)) {
                                     (test.appendChild(document.createElement("div")).className = "y-dot")
                                 }
@@ -1735,7 +1741,47 @@ class Chess extends Component {
                                 // let subStr4 = piece.id.substr(0, 1)
                                 if (test) {
                                 // if (test && (subStr1 === subStr2 || subStr3 === subStr4)) {
-                                    (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    // if(startColumn === 'c' || startColumn === 'd' || startColumn === 'e' || startColumn === 'f' && startRow === '3' || startRow === '4' || startRow === '5' || startRow === '6') {
+                                    //     (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    if(startColumn === 'g' && i !== 5 && i !== 2) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if(startColumn ==='b' && i !== 1 && i !== 6) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if(startColumn === 'h' && i !== 5 && i !== 2 && i !== 4 && i !== 8) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if(startColumn === 'a' && i !== 3 && i !== 7 && i !== 1 && i !== 6) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startRow === '7' && i !== 3 && i !== 4 && startColumn === 'h' && i !== 5 && i !== 2 && i !== 4 && i !== 8) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startRow === '7' && i !== 3 && i !== 4 && startColumn === 'a' && i !== 3 && i !== 7 && i !== 1 && i !== 6) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startRow === '7' && i !== 3 && i !== 4 && startColumn ==='b' && i !== 1 && i !== 6) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startRow === '7' && i !== 3 && i !== 4 && startColumn === 'g' && i !== 5 && i !== 2) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startRow ==='8' && i !== 3 && i !== 4 && i !== 1 && i !== 2 && startColumn === 'h' && i !== 5 && i !== 2 && i !== 4 && i !== 8) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startRow ==='8' && i !== 3 && i !== 4 && i !== 1 && i !== 2 && startColumn === 'a' && i !== 3 && i !== 7 && i !== 1 && i !== 6) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startRow ==='8' && i !== 3 && i !== 4 && i !== 1 && i !== 2 && startColumn ==='b' && i !== 1 && i !== 6) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startRow ==='8' && i !== 3 && i !== 4 && i !== 1 && i !== 2 && startColumn === 'g' && i !== 5 && i !== 2) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    } else if (startColumn === 'g' && startRow === '3' && startRow === '4' || startRow === '5' || startRow === '6' && i !== 5 && i !== 2) {
+                                        (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    }
+
+                                    //you need to get the middle of board movements down!!!! close but not there yet.  start work above ^^^^    
+
+                                    // } else if(startColumn === 'c' || startColumn === 'd' || startColumn === 'e' || startColumn === 'f') {
+                                    //     (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    // } else if(startRow === '3' || startRow === '4' || startRow === '5' || startRow === '6') {
+                                    //     (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    // }
+                                    // else if(startColumn === 'c' || startColumn === 'd' || startColumn === 'e' || startColumn === 'f' && startRow === '3' || startRow === '4' || startRow === '5' || startRow === '6') {
+                                    //     (test.appendChild(document.createElement("div")).className = "y-dot")
+                                    // }
+                                   
                                 }
                             }
                         }
@@ -1845,11 +1891,13 @@ class Chess extends Component {
                             // eslint-disable-next-line
                             let test = eval(`legalMove${i}`)
                             if (test) {
+                                let color = test.className
                                 // let subStr1 = test.id.substr(1, 2)
                                 // let subStr2 = piece.id.substr(1, 2)
                                 // let subStr3 = test.id.substr(0, 1) 
                                 // let subStr4 = piece.id.substr(0, 1)
                                 // if (test && (subStr1 === subStr2 || subStr3 === subStr4)) {
+                                    if(color===startColor)
                                     (test.appendChild(document.createElement("div")).className = "y-dot")
                             }
                         }
@@ -1921,11 +1969,13 @@ class Chess extends Component {
                             // eslint-disable-next-line
                             let test = eval(`legalMove${i}`)
                             if (test) {
+                                let color = test.className
                                 // let subStr1 = test.id.substr(1, 2)
                                 // let subStr2 = piece.id.substr(1, 2)
                                 // let subStr3 = test.id.substr(0, 1) 
                                 // let subStr4 = piece.id.substr(0, 1)
                                 // if (test && (subStr1 === subStr2 || subStr3 === subStr4)) {
+                                    if(color===startColor)
                                     (test.appendChild(document.createElement("div")).className = "y-dot")
                             }
                         }
@@ -2154,8 +2204,8 @@ class Chess extends Component {
             let newCell = document.getElementById("mainChessBoard").appendChild(document.createElement("div"))
             newCell.className = (parseInt((j / 8) + j) % 2 === 0 ? 'white' : 'black')
             newCell.id = `${chessGrid[j]}`
-            newCell.addEventListener('click', () => this.handleClick(newCell.id))
-            newCell.addEventListener('mouseover', () => this.handleHover(newCell.id))
+            newCell.addEventListener('click', () => this.handleClick(newCell.id, newCell.className))
+            newCell.addEventListener('mouseover', () => this.handleHover(newCell.id, newCell.className))
             newCell.addEventListener('mouseout', () => this.handleHoverOut(newCell.id))
 
         }
@@ -2322,14 +2372,8 @@ class Chess extends Component {
         // console.log(this.props)
         return (
         <div className="whole-game">
-            {this.state.loading && (
-            <>
-                <div className="loading">
-                <Loading />
-                </div>
-            </>
-            )}
-            {!this.state.loading && (<div className="tinkering">
+            
+           <div className="tinkering">
             <div id="mainChessBoard"></div>
 
             <div className="border-letters">
@@ -2357,7 +2401,7 @@ class Chess extends Component {
                 <h1>1</h1>
                 </div>
             </div>
-            </div>)}
+            </div>
             <div className="game-info">
                 {this.state.isWhiteTurn ? (
                     <h1 className="player-turn">White's Turn</h1>
