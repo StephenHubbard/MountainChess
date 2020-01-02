@@ -201,6 +201,12 @@ export class Sidebar extends Component {
   }
 
   challengeAlert(data) {
+    let lastGame = 0
+    axios
+    .get('/game/getLastGame') 
+    .then(res => {
+        lastGame = res.data[0].max + 1
+    })
     if (this.props.username === data.challengee) {
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
@@ -223,7 +229,7 @@ export class Sidebar extends Component {
       }).then(result => {
         if (result.value) {
           Swal.fire(
-            this.props.history.push("/game/7"),
+            this.props.history.push(`/game/${lastGame}`),
             `<strong>Good Luck!</strong>`,
             "success"
           );
@@ -245,9 +251,15 @@ export class Sidebar extends Component {
     }
   }
 
-  challengeAccepted(data) {
+  async challengeAccepted(data) {
+    let lastGame = 0
+    await axios
+    .get('/game/getLastGame') 
+    .then(res => {
+        lastGame = res.data[0].max + 1
+    })
     if (this.props.username === data.challenger) {
-      this.props.history.push("/game/7");
+      await this.props.history.push(`/game/${lastGame}`);
       Swal.fire({
         title: `<strong>${data.challengee} has accepted your challenge`,
         icon: "success"

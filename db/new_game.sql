@@ -1,2 +1,2 @@
-INSERT INTO games (g_id)
-VALUES (${g_id})
+INSERT INTO games (g_id, game_array)
+VALUES (${g_id}, ${placement})

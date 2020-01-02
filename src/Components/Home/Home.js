@@ -16,6 +16,7 @@ class Home extends Component {
 
         this.state = {
             spectateGameToggle: false,
+            lastGame: 0,
         };
         this.socket = io.connect(":7777");
     }

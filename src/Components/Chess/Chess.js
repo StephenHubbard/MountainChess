@@ -34,12 +34,13 @@ class Chess extends Component {
                         "", "", "", "", "", "", "", "",
                         "wP", "wP", "wP", "wP", "wP", "wP", "wP", "wP",
                         "wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR"], 
-
+            newGame: true,
             twoClicks: [],
             legalMoves: [],
             isWhiteTurn: true,
             userWhite: '',
             userBlack: '',
+            thisUser: '',
             destroyedPiecesWhite: [],
             destroyedPiecesBlack: [],
             g_id: '',
@@ -2113,6 +2114,12 @@ class Chess extends Component {
                 await this.setState({
                     userBlack: this.props.user
                 })
+            axios
+            .post('/game/updateUsersPlaying', {g_id: this.state.g_id, userWhite: this.state.userWhite, userBlack: this.state.userBlack})
+            .then(res => {
+            console.log(res)
+            })
+            .catch(err => console.log(err))
             } else {
                 this.setState({
                     userBlack: "Guest"
@@ -2132,6 +2139,7 @@ class Chess extends Component {
         await this.socket.emit(
             'update user', {g_id: this.state.g_id, state: this.state }
         )
+        
     }
 
     async updateUserLogic(data) {
@@ -2151,21 +2159,39 @@ class Chess extends Component {
         await this.setState({
             g_id: this.props.match.params.id
         })
-        axios
-        .post('/checkGameExists', {g_id: this.state.g_id})
-        .then(res => {
-            console.log(res)
-        })
-        .catch(err => console.log(err))
 
-        await this.socket.emit('new game', {g_id: this.state.g_id})
-        axios
-        .post('/game/newGame', {g_id: this.state.g_id})
+        await axios
+        .post('/game/checkGameExists', {g_id: this.state.g_id})
         .then(res => {
-            console.log(res)
+            if (res.data[0]) {
+                console.log(res.data)
+                this.setState({
+                    placement: res.data[0].game_array,
+                    newGame: false,
+                    userBlack: res.data[0].black_user,
+                    userWhite: res.data[0].white_user,
+                    thisUser: this.props.username,
+                })
+            }
         })
         .catch(err => console.log(err))
-    }
+        
+
+        if (this.state.newGame === true) {
+
+            console.log("new game")
+    
+            await axios
+            .post('/game/newGame', {g_id: this.state.g_id, placement: this.state.placement})
+            .then(res => {
+                // console.log(res)
+            })
+            .catch(err => console.log(err))
+        }
+        await this.socket.emit('new game', {g_id: this.state.g_id})
+        console.log(this.state)
+        }
+    
 
     async componentDidMount() {
     await this.handleGame()
@@ -2257,8 +2283,8 @@ class Chess extends Component {
                 startingPiece.className = "piece"
                 startingPiece.id = "wQ"
             }
-        }
-        if (startingPlacement[i] === "bN") {
+            }
+            if (startingPlacement[i] === "bN") {
             let startingPiece = document
                 .getElementById(chessGrid[i])
                 .appendChild(document.createElement("img"));
@@ -2397,7 +2423,7 @@ class Chess extends Component {
                 </div>
                 }
                 <div className="destroyed-piece-container">
-                    <img className="destroyed-piece" src="/assets/Pieces/bishop-b.png" alt=""/>
+                    {/* <img className="destroyed-piece" src="/assets/Pieces/bishop-b.png" alt=""/> */}
                 </div>
             </div>
 
