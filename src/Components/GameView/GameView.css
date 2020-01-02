@@ -15,7 +15,7 @@ h1 {
     height: 400px;
     width: 400px;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-    margin-top: -400px;
+    margin-top: -340px;
     margin-right: -200px;
     display: flex;
     align-items: center;
@@ -119,3 +119,8 @@ h1 {
 .chat-prof-pic {
     margin-right: 5px;
 }
+
+.online-users-h1 {
+    margin-top: 10px;
+}
+
