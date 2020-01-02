@@ -84,6 +84,7 @@ io.on('connection', socket => {
 
     socket.on('blast to game room', data => {
         io.to('game room').emit('room response', data)
+        console.log(data)
     })
 
     socket.on('typing', data => {

@@ -31,12 +31,12 @@ class GameView extends Component {
     this.socket.on("stopped typing", () => this.stopTyping());
   }
 
-  componentDidMount = () => {
+  componentDidMount = async() => {
     setTimeout(() => {
       this.setState({ loading: false });
     }, 800);
     if (this.props.username) {
-      this.setState({
+      await this.setState({
         username: this.props.username
       });
     }
@@ -65,11 +65,11 @@ class GameView extends Component {
     this.setState({
       messages: [
         ...this.state.messages,
-        { message: data.message, username: data.username }
+        { message: data.message, username: data.username, img: data.img }
       ],
       userTyping: false,
-      img: data.img
     });
+    console.log(this.state.messages)
   };
 
   blast = () => {
@@ -84,7 +84,6 @@ class GameView extends Component {
   };
 
   render() {
-    // console.log(this.props)
     const messages = this.state.messages.map((message, i) => (
       <div
         key={i}
@@ -95,7 +94,7 @@ class GameView extends Component {
         <div className="chat-prof-pic">
           <img
             className="portrait-small"
-            src={`/assets/ProfilePics/${this.state.img}`}
+            src={`/assets/ProfilePics/${message.img}`}
             alt=""
           />
         </div>
