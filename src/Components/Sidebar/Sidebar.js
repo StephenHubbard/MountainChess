@@ -517,7 +517,7 @@ export class Sidebar extends Component {
                   </Link>
 
                   <Link to="/about">
-                    <i classname="fas fa-info-circle" id='sb-icon'></i>
+                    <i class="fas fa-info-circle" id='sb-icon'></i>
                   </Link>
 
                   <Link to="/chess">
