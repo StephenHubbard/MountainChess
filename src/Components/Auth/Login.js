@@ -40,7 +40,7 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="login-page">
+            <>
                 <div className="login-box" alt=''>
                     <h1>Enter your login information here.</h1>
                     <input id="username"
@@ -57,7 +57,7 @@ class Login extends Component {
                     />
                     <button className="login-submit" onClick={this.login}>Login!</button>
                 </div>
-            </div>
+            </>
         )
     }
 }

@@ -17,7 +17,7 @@
     margin-bottom: 10px;
 }
 
-.all ul {
-
+.friend-list {
+    display: flex;
+    flex-wrap: wrap;
 }
-

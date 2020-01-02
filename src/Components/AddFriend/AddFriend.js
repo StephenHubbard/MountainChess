@@ -95,7 +95,7 @@ class AddFriend extends Component {
                   />
                 </div>
                 <div className="all">
-                <ul>
+                <ul className = "friend-list">
                   {!this.state.search
                     ? this.state.users.map(el => (
                         <SmallProfile
