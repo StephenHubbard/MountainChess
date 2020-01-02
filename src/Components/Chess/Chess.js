@@ -1101,8 +1101,9 @@ class Chess extends Component {
     updateArrayPostgres() {
         let placement = this.state.placement
         let g_id = this.state.g_id
+        let isWhiteTurn = this.state.isWhiteTurn
         axios
-        .post('/game/updateGameArray', {placement: placement, g_id: g_id})
+        .post('/game/updateGameArray', {placement: placement, g_id: g_id, isWhiteTurn: isWhiteTurn})
         .then(res => {
             // console.log(res)
         })
@@ -2164,13 +2165,13 @@ class Chess extends Component {
         .post('/game/checkGameExists', {g_id: this.state.g_id})
         .then(res => {
             if (res.data[0]) {
-                console.log(res.data)
                 this.setState({
                     placement: res.data[0].game_array,
                     newGame: false,
                     userBlack: res.data[0].black_user,
                     userWhite: res.data[0].white_user,
                     thisUser: this.props.username,
+                    isWhiteTurn: res.data[0].is_white_turn,
                 })
             }
         })
@@ -2179,17 +2180,14 @@ class Chess extends Component {
 
         if (this.state.newGame === true) {
 
-            console.log("new game")
-    
             await axios
-            .post('/game/newGame', {g_id: this.state.g_id, placement: this.state.placement})
+            .post('/game/newGame', {g_id: this.state.g_id, placement: this.state.placement, isWhiteTurn: true})
             .then(res => {
                 // console.log(res)
             })
             .catch(err => console.log(err))
         }
         await this.socket.emit('new game', {g_id: this.state.g_id})
-        console.log(this.state)
         }
     
 
@@ -2373,7 +2371,7 @@ class Chess extends Component {
         return (
         <div className="whole-game">
             
-           <div className="tinkering">
+            <div className="tinkering">
             <div id="mainChessBoard"></div>
 
             <div className="border-letters">

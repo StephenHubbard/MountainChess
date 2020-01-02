@@ -1,24 +1,62 @@
 .big-profile h1 {
     font-size: 30px;
     color: ghostwhite;
+    margin: 0px;
+}
+
+.chart {
+    position: relative;
 }
 
 .chart-row {
-    height: 50vh;
-    width: 40vw;
+    height: 500px;
+    width: 800px;
     position: absolute;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     z-index: 5;
-    border: 1px solid black;
     background: #3a4046; 
     border-radius: 10px;
-    top: 50%;
-    left: 50%;
+    top: 300px;
+    left: -50px;
     transform: translate(-50%, -50%);
     padding: 20px;
     margin-top: 50px;
+    margin-left: 50px;
+    overflow: auto;
 }
 
+.game-cont {
+    display: flex;
+    position: relative;
+    width: 100%;
+    background-color: #24292e;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(1, 1, 1, 0)
+}
 
+.game-cont:hover {
+    border: 1px solid white;
+}
+
+.current-games-h1 {
+    position: absolute;
+    top: 10px;
+    left: -150px;
+}
+
+.white-black {
+    position: absolute;
+    top: 60px;
+    justify-content: space-between;
+    width: 300px;
+    display: flex;
+    right: 50px;
+}
+
+.white-black h1 {
+    width: 0px;
+}

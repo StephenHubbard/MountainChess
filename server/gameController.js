@@ -6,7 +6,6 @@ module.exports = {
         const before = req.body.move1
         const after = req.body.move2
         const user_id = req.body.user_id
-
         const db = req.app.get('db')
         db.new_move({ before, after, user_id })
         .then(result => {
@@ -19,7 +18,8 @@ module.exports = {
         const db = req.app.get('db')
         const placement = req.body.placement
         const g_id = req.body.g_id
-        db.update_game_array({ placement, g_id })
+        const isWhiteTurn = req.body.isWhiteTurn
+        db.update_game_array({ placement, g_id, isWhiteTurn })
         .then(result => {
             res.status(200).send(result)
         })
@@ -37,7 +37,8 @@ module.exports = {
         const db = req.app.get('db')
         const g_id = req.body.g_id
         const placement = req.body.placement
-        db.new_game({ g_id, placement })
+        const isWhiteTurn = req.body.isWhiteTurn
+        db.new_game({ g_id, placement, isWhiteTurn })
         .then(result => {
             res.status(200).send(result)
         })
