@@ -39,7 +39,10 @@ export default class About extends Component {
               features that are all integrated into a fully-functional user
               interface. Players can add friends, see when those friends are
               online, chat with other users and view a leaderboard that displays
-              the top-performing users on the website. If you would like to
+              the top-performing users on the website. 
+              <br />
+              <br />
+              If you would like to
               learn more about the project, you can contact any of us by using
               the links below.
             </h3>
