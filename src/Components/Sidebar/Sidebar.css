@@ -293,7 +293,15 @@ h4 {
 .login-modal-content {
   display: flex;
   position: fixed;
-  width: 30vw;
+  background: #15171b;
+  width: 40vw;
+  height: 30vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
+  /* align-self: center; */
+  /* width: 30vw;
   height: 50vh;
   display: flex;
   flex-direction: row-reverse;
@@ -301,6 +309,7 @@ h4 {
   justify-content: center;
   align-items: center;
   /* this will make sure it's always in the center of the screen */
+  /*
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -309,12 +318,12 @@ h4 {
   -webkit-animation: fadein 1s;
   animation: fadein 1s;
   border-radius: 10px;
-  z-index: 666 !important;
+  z-index: 666 !important; */
 }
 
 /* Modal Body */
 .login-modal-body {
-  position: relative;
+  display: flex;
   height: 50vh;
   width: 100%;
   padding: 0px;
@@ -327,20 +336,19 @@ h4 {
   /* border: 3px green solid; */
 }
 
-/* Modal Header */
-.login-modal-header {
-  padding: 2px 16px;
-  /* background-color: black; */
-  color: ghostwhite;
 
-  /* border: 3px yellow solid; */
-}
 
 .login-modal-header h2 {
   display: flex;
   justify-content: center;
   align-content: center;
   font-size: 40px;
+}
+
+.centerThis {
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 
 /* REGISTER MODAL */

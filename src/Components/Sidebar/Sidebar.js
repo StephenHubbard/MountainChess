@@ -377,7 +377,7 @@ export class Sidebar extends Component {
                           </span>
                           {/* <h2>Please enter your login information.</h2> */}
                         </div>
-                        <div className="modal-loginInfo">
+                        <div className="centerThis">
                           <Login loginModalActivateFn={this.loginModalToggle} />
                         </div>
                       </div>
