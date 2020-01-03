@@ -10,4 +10,5 @@ describe('About.js', () => {
         expect(wrapper.find('.loading').length).toBe(1);
         // console.log(wrapper.find('.loading').length)
     })
+    
 });

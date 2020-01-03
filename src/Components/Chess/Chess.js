@@ -11,7 +11,7 @@ const chessCtrl = require('./ChessController')
 
 
 
-class Chess extends Component {
+export class Chess extends Component {
     constructor() {
         super()
         this.state = {

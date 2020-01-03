@@ -8,7 +8,7 @@ import UserPresence from "../Sidebar/UserPresence";
 
 
 
-class Dashboard extends Component {
+export class Dashboard extends Component {
 
   render() {
     return (
