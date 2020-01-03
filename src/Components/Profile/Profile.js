@@ -57,7 +57,7 @@ export class Profile extends Component {
               <h1>White</h1>
               <h1>Black</h1>
             </div>
-              <h1>Current Turn</h1>
+              <h1 className="current-turn-h1">Current Turn</h1>
           <div className="chart-row">
             {this.state.myGames.map(el => (
               <Link to={`/game/${el.g_id}`} >
