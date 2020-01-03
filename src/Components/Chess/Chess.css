@@ -169,13 +169,13 @@
     min-width: 500px;
     position: absolute;
     top: 0px;
-    left: 100px;
+    left: 50px;
     display: flex;
     align-items: center;
 }
 
 .two-players h1 {
-    min-width: 500px;
+    min-width: 600px;
 }
 
 .destroyed-piece {
