@@ -47,7 +47,7 @@ export class Home extends Component {
                 </div>
                 {this.props.username ? (
                     <Profile />
-                ) : <h1 className="current-games-h1">Login to see your current games!</h1> }
+                ) : null }
                 
             </div>
         );

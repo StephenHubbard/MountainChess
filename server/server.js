@@ -1,3 +1,5 @@
+const path = require('path');
+
 require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
@@ -11,6 +13,8 @@ const socket = require('socket.io')
 const {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env;
 
 const app = express()
+
+app.use( express.static( `${__dirname}/../build` ));
 
 const server = app.listen(SERVER_PORT, () => console.log(`Server is listening on port ${SERVER_PORT}.`))
 
