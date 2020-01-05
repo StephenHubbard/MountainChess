@@ -20,11 +20,11 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-const server = app.listen(SERVER_PORT, () => console.log(`Server is listening on port ${SERVER_PORT}.`))
+const server = require('http').Server(app)
 
 
 // SOCKETS
-const io = socket(server)
+const io =  require('socket.io')(server); server.listen(SERVER_PORT, () => console.log(`Server is listening on port ${SERVER_PORT}.`))
 
 let loggedInUsers = []
 let limitUsers = []

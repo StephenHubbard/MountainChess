@@ -16,7 +16,7 @@ class Login extends Component {
         this.setState({ [key]: value });
     };
 
-     login = () => {
+    login = () => {
         // console.log(this.state.username, this.state.password)
         const { username, password } = this.state
         axios

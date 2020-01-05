@@ -17,10 +17,6 @@ class UserPresence extends Component {
     // this.socket.on('online', data => this.updateStatus(data))
   }
 
-  // async componentDidMount() {
-  //   await this.statusUpdate()
-  //   await console.log('hit2')
-  // }
 
   async componentDidMount () {
     if (await this.props.username) {
