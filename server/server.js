@@ -14,9 +14,14 @@ const {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env;
 
 const app = express()
 
-app.use( express.static( `${__dirname}/../build` ));
+app.use( express.static( `${__dirname}/../build` ) );
+
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 const server = app.listen(SERVER_PORT, () => console.log(`Server is listening on port ${SERVER_PORT}.`))
+
 
 // SOCKETS
 const io = socket(server)
@@ -154,6 +159,9 @@ app.get(`/api/users/:user_id_display`, userCtrl.checkIfSame)
 // GETTING TOP RANKED PLAYERs & PROFILE DATA
 app.get('/api/elo', userCtrl.getTopUsers)
 app.post('/api/getGames', userCtrl.getMyGames)
+
+
+
 
 // MASSIVE
 massive(CONNECTION_STRING)

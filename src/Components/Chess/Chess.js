@@ -1800,7 +1800,6 @@ export class Chess extends Component {
                                     // else if(startColumn === 'c' || startColumn === 'd' || startColumn === 'e' || startColumn === 'f' && startRow === '3' || startRow === '4' || startRow === '5' || startRow === '6') {
                                     //     (test.appendChild(document.createElement("div")).className = "y-dot")
                                     // }
-                                   
                                 }
                             }
                         }
