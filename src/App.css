@@ -54,6 +54,12 @@ table {
 	margin-left: 100px;
 }
 
+@media (max-width: 425px) {
+	.App {
+		margin-left: 70px;
+	}
+}
+
 .App-logo {
 	height: 40vmin;
 	pointer-events: none;

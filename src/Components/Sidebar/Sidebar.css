@@ -42,6 +42,7 @@ button {
   /* left: 0; */
 }
 
+
 .left-sidebar {
   width: 300px;
   height: 100%;
@@ -337,6 +338,13 @@ h4 {
   /* border: 3px green solid; */
 }
 
+@media (max-width: 425px) {
+  .login-modal-content {
+    width: 300px;
+  }
+
+}
+
 
 
 .login-modal-header h2 {
@@ -374,6 +382,35 @@ h4 {
   border-radius: 10px;
   /* border: 1px salmon solid; */
 }
+
+@media (max-width: 425px) {
+  .register-modal-content {
+    position: fixed;
+    width: 360px;
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow-y: auto;
+    background: #15171b;
+    -webkit-animation: fadein 1s;
+    animation: fadein 1s;
+    border-radius: 10px;
+    /* border: 1px salmon solid; */
+  }
+
+  .register-modal-header {
+    /* background-color: black; */
+    color: ghostwhite;
+    /* border: 1px yellow solid; */
+  }
+
+}
+
 
 /* Modal Body */
 .register-modal-body {

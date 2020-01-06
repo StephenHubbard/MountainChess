@@ -71,3 +71,23 @@
     display: flex;
     left: 250px;
 }
+
+@media (max-width: 425px) {
+
+    .chart-row {
+        width: 250px;
+        margin: 0px;
+        position: absolute;
+        overflow: auto;
+        transform: translate(-35%, -50%);
+    }
+
+    .game-cont {
+        width: 200px;
+        
+    }
+
+    .game-cont h1 {
+        font-size: 12px;
+    }
+}

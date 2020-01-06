@@ -45,3 +45,15 @@
     margin-top: 200px;
     left: 500px;
 }
+
+@media (max-width: 425px) {
+    .logo {
+        width: 300px;
+    }
+
+    .two-btns button {
+        height: 80px;
+        width: 200px;
+        font-size: 20px;
+    }
+}

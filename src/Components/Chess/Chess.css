@@ -189,3 +189,74 @@
     bottom: 35px;
     left: 5px;
 }
+
+@media (max-width: 425px) {
+    #mainChessBoard
+    {
+        width:250px;
+        height:250px;
+        margin-top: 50px;
+        border: 5px solid black;
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: 0px;
+    }
+
+    #mainChessBoard div {
+        position: relative;
+        width:30px;
+        height:30px;
+        z-index: 15;
+    }
+
+    .piece {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        margin-top: 5px;
+        z-index: 10;
+        margin-left: -10px;
+    }
+
+    .y-dot {
+        display: none;
+    }
+
+    .game-info {
+        position: absolute;
+        right: 60px;
+        top: -110px;
+        height: 100px;
+        min-width: 200px;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        margin-top: 50px;
+        margin-right: 0px;
+        display: flex;
+        flex-direction: row;
+        background-color: #eeeeee;
+        justify-content: space-between;
+        border-radius: 9px;
+        /* overflow: scroll; */
+        overflow-wrap: normal;
+        overflow-x: hidden;
+        padding-right: 10px;
+    }
+
+    
+    .border-letters {
+        display: none;
+    }
+
+    .left-numbers h1 {
+        margin: 0px;
+        font-size: 13px;
+    }
+
+    .bottom-letters h1 {
+        font-size: 13px;
+    }
+
+    .two-players {
+        display: none;
+    }
+}
