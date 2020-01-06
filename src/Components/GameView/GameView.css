@@ -124,28 +124,53 @@ h1 {
     margin-top: 10px;
 }
 
-@media (max-width: 425px) {
-    
-.chat-cont {
-    position: absolute;
-    height: 200px;
-    width: 280px;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-    margin-top: 0px;
-    margin-right: 0px;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    background-color: #eeeeee;
-    justify-content: space-between;
-    border-radius: 9px;
-    overflow: auto;
-    overflow-wrap: normal;
-    overflow-x: hidden;
-    padding-right: 10px;
-    top: 400px;
-    left: -20px;
+.mobile-h1 {
+    /* display: none; */
+    color: white;
+    font-size: 2rem;
+    width: 600px;
+
 }
+
+@media (max-width: 425px) {
+        
+    .chat-cont {
+        position: absolute;
+        height: 200px;
+        width: 280px;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        margin-top: 0px;
+        margin-right: 0px;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        background-color: #eeeeee;
+        justify-content: space-between;
+        border-radius: 9px;
+        overflow: auto;
+        overflow-wrap: normal;
+        overflow-x: hidden;
+        padding-right: 10px;
+        top: 370px;
+        left: -40px;
+    }
+    .send-btn {
+        position: absolute;
+        width: 20%;
+        bottom: 0px;
+        right: 0px;
+        border: 1px solid rgb(122, 122, 122);
+        border-left: none;
+        height: 30px;
+        border-radius: 4px;
+    }
+
+    .mobile-h1 {
+        display: inline-block;
+        color: white;
+        font-size: 1rem;
+        width: 200px;
+    }
 }
 
 

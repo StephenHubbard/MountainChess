@@ -199,7 +199,7 @@
         border: 5px solid black;
         display: flex;
         flex-wrap: wrap;
-        margin-left: 0px;
+        margin-left: -25px;
     }
 
     #mainChessBoard div {
@@ -224,13 +224,13 @@
 
     .game-info {
         position: absolute;
-        right: 60px;
+        right: 30px;
         top: -110px;
         height: 100px;
         min-width: 200px;
         box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
         margin-top: 50px;
-        margin-right: 0px;
+        margin-right: -10px;
         display: flex;
         flex-direction: row;
         background-color: #eeeeee;
@@ -257,6 +257,11 @@
     }
 
     .two-players {
-        display: none;
+        display: inline-block !important;
+    }
+
+    .color-select {
+        position: absolute;
+        top: -50px;
     }
 }

@@ -74,7 +74,7 @@
 
     .about-page {
         width: 280px;
-        height: 2500px;
+        height: 1500px;
     }
 
     .name {
@@ -82,5 +82,15 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        height: 300px;
+        justify-content: space-around;
+    }
+
+    .names-cont {
+        height: 1000px;
+    }
+
+    .about-page-cont {
+        height: 1000px;
     }
 }

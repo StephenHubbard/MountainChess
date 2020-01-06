@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "main": "server/server.js",
-  "proxy": "http://localhost:7777",
+  "proxy": "process.env.REACT_APP_LOGIN",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/user-event": "^7.1.2",
@@ -29,7 +29,8 @@
     "roughjs": "^3.1.0",
     "socket.io": "^2.3.0",
     "styled-components": "^3.4.3",
-    "sweetalert2": "^9.5.3"
+    "sweetalert2": "^9.5.3",
+    "yarn": "^1.21.1"
   },
   "scripts": {
     "start": "react-scripts start",

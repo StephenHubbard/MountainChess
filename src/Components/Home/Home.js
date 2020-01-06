@@ -47,7 +47,7 @@ export class Home extends Component {
                 </div>
                 {this.props.username ? (
                     <Profile />
-                ) : null }
+                ) : <h1 className="mobile-h1">If you'd like to browse as a logged in user you can use - <br /><br />username: test password: test </h1> }
                 
             </div>
         );

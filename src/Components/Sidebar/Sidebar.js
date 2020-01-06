@@ -522,13 +522,8 @@ export class Sidebar extends Component {
                   <Link to="/users">
                     <i className="fas fa-users" id='sb-icon'></i>
                   </Link>
-
                   <Link to="/about">
                     <i class="fas fa-info-circle" id='sb-icon'></i>
-                  </Link>
-
-                  <Link to="/chess">
-                    <i className="fas fa-chess" id='sb-icon'></i>
                   </Link>
             </div>
             <LoggedInUser logout={this.logout} />

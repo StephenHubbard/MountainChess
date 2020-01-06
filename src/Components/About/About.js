@@ -18,7 +18,7 @@ export default class About extends Component {
 
   render() {
     return (
-      <>
+      <div className="about-page-cont">
         {this.state.loading && (
           <>
             <div className="loading">
@@ -125,7 +125,7 @@ export default class About extends Component {
             </div>
           </div>
         )}
-      </>
+      </div>
     );
   }
 }
