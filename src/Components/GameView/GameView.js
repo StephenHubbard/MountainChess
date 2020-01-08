@@ -69,7 +69,6 @@ export class GameView extends Component {
       ],
       userTyping: false,
     });
-    console.log(this.state.messages)
   };
 
   blast = () => {

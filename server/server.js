@@ -9,22 +9,29 @@ const userCtrl = require('./userController')
 const gameCtrl = require('./gameController');
 const massive = require('massive');
 const socket = require('socket.io')
+const proxy = require('http-proxy-middleware');
 
 const {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env;
 
 const app = express()
 
+// TOP-LEVEL MIDDLEWARE
+app.use(express.json());
+
 app.use( express.static( `${__dirname}/../build` ) );
 
-app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+app.use(proxy('ws://localhost:7777'))
 
 const server = require('http').Server(app)
 
-
 // SOCKETS
 const io =  require('socket.io')(server); server.listen(SERVER_PORT, () => console.log(`Server is listening on port ${SERVER_PORT}.`))
+
+app.enable('trust proxy')
+app.get('trust proxy')
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 let loggedInUsers = []
 let limitUsers = []
@@ -115,8 +122,7 @@ io.on('connection', socket => {
 
 app.use(require("body-parser").text())
 
-// TOP-LEVEL MIDDLEWARE
-app.use(express.json());
+
 
 app.use(session({
     resave: true,
