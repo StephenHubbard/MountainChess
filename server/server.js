@@ -34,13 +34,11 @@ app.use(express.json());
 
 app.use('/', express.static( `${__dirname}/../build` ) );
 app.use(wsProxy)
-const staticServer = app.listen(3000)
+const staticServer = app.listen(7777)
 staticServer.on('upgrade', wsProxy.upgrade);
 
-console.log('[DEMO] Server: listening on port 3000');
-console.log('[DEMO] Opening: http://localhost:3000');
 
-require('open')('http://localhost:3000');
+require('open')('http://localhost:7777');
     
 
 // app.get('/', function(req, res) {
@@ -52,7 +50,7 @@ const server = require('http').Server(app)
 // server.listen(SERVER_PORT, () => console.log(`Server is listening on port ${SERVER_PORT}.`))
 
 
-app.use(proxy('ws://localhost:7778'))
+// app.use(proxy('ws://localhost:7777'))
 
 
 // SOCKETS
