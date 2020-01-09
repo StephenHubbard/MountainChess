@@ -13,22 +13,47 @@ const proxy = require('http-proxy-middleware');
 
 const {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env;
 
+
+var wsProxy = proxy('/', {
+    target: 'http://www.mountain-chess.com',
+    // pathRewrite: {
+        //  '^/websocket' : '/socket',        // rewrite path.
+        //  '^/removepath' : ''               // remove path.
+        // },
+        changeOrigin: true, // for vhosted sites, changes host header to match to target's host
+        ws: true, // enable websocket proxy
+        logLevel: 'debug'
+    });
+    
+    
 const app = express()
+
 
 // TOP-LEVEL MIDDLEWARE
 app.use(express.json());
 
-app.use( express.static( `${__dirname}/../build` ) );
+app.use('/', express.static( `${__dirname}/../build` ) );
+app.use(wsProxy)
+const staticServer = app.listen(3000)
+staticServer.on('upgrade', wsProxy.upgrade);
 
-app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+console.log('[DEMO] Server: listening on port 3000');
+console.log('[DEMO] Opening: http://localhost:3000');
 
-app.use(proxy('ws://localhost:7777'))
+require('open')('http://localhost:3000');
+    
+
+// app.get('/', function(req, res) {
+//     res.sendFile(path.join(__dirname, 'build', 'index.html'));
+// });
 
 const server = require('http').Server(app)
 
-server.listen(SERVER_PORT, () => console.log(`Server is listening on port ${SERVER_PORT}.`))
+// server.listen(SERVER_PORT, () => console.log(`Server is listening on port ${SERVER_PORT}.`))
+
+
+app.use(proxy('ws://localhost:7778'))
+
 
 // SOCKETS
 const io =  require('socket.io')(server)
